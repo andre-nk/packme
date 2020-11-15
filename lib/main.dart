@@ -3,7 +3,11 @@ import 'package:pack_me/services/loginCh.dart';
 import 'package:pack_me/ui/app/userHome.dart';
 import 'package:pack_me/ui/app/withdraw.dart';
 import 'package:pack_me/ui/app/order.dart';
+import 'package:pack_me/ui/authentication/login.dart';
+import 'package:pack_me/ui/authentication/splashscr.dart';
 import 'package:hexcolor/hexcolor.dart';
+// ignore: unused_import
+import 'package:cloud_firestore/cloud_firestore.dart';
 // ignore: unused_import
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // ignore: unused_import
@@ -17,8 +21,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
- 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -31,11 +33,10 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.poppinsTextTheme(textTheme),
           appBarTheme: AppBarTheme(textTheme: GoogleFonts.poppinsTextTheme(textTheme)),
         ),
-
         //porting to LoginChecker
-        home: LoginChecker(),
+        home: SplashScreen(),
         routes: {
-          
+          '/login': (context) => Login(),
           '/userHomeQR': (context) => UserHome(),
           '/withdraw': (context) => Withdraw(),
           '/order': (context) => Order()

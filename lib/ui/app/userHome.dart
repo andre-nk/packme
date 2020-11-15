@@ -26,7 +26,7 @@ class _UserHomeState extends State<UserHome> {
   @override
   Widget build(BuildContext context) {
 
-    void navSetter(int input){
+    void navSetter(int input) async{
       if(input == 0){
         Navigator.popAndPushNamed(context, '/userHomeQR');
       }else if(input == 1){
@@ -37,8 +37,8 @@ class _UserHomeState extends State<UserHome> {
         print('Request outbound');
       }
     }
-    
-    return Scaffold(
+
+      return Scaffold(
       backgroundColor: Colors.white,
       
       //DRAWER
