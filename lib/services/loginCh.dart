@@ -1,13 +1,14 @@
 //EQUAL TO AUTH.DART
 
 import 'package:flutter/material.dart';
+import 'package:pack_me/ui/app/userHome.dart';
 import 'package:pack_me/ui/authentication/landing.dart';
 // ignore: unused_import
 import 'package:pack_me/ui/authentication/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pack_me/ui/models/user.dart';
 
-class LoginChecker extends StatelessWidget {
+class LoginChecker{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -22,27 +23,20 @@ class LoginChecker extends StatelessWidget {
       // .map(_userFromFirebaseUser);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    
-    //SAMPLE ROUTING
-    return Landing();
-
-    //sign in (email)
     Future signInWithEmailAndPassword(String email, String password) async {
-    try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
-      User user = result.user;
-      return user;
+      try {
+        UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+        User user = result.user;
+        return user;
       } catch (error) {
-      print(error.toString());
-      return null;
+        print(error.toString());
+        return null;
       } 
     }
 
     //register (email)
     Future registerWithEmailAndPassword(String email, String password) async {
-    try {
+      try {
         UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
         User user = result.user;
         return _userFromFirebaseUser(user);
@@ -54,14 +48,11 @@ class LoginChecker extends StatelessWidget {
 
     //sign out
     Future signOut() async {
-    try {
+      try {
       return await _auth.signOut();
-    } catch (error) {
+      } catch (error) {
       print(error.toString());
       return null;
-    }
-  }
-
-
-  }
+      }
+   } 
 }

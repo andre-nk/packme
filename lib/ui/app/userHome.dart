@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: unused_import
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pack_me/services/loginCh.dart';
 
 
 //THEMES
@@ -18,6 +19,8 @@ class UserHome extends StatefulWidget {
 }
 
 class _UserHomeState extends State<UserHome> {
+
+  final LoginChecker _auth = LoginChecker();
 
   // ignore: unused_field
   int _page = 0;
@@ -195,7 +198,10 @@ class _UserHomeState extends State<UserHome> {
                     )
                   ),
                 ],
-              ),      
+              ),  
+              onTap:() async {
+                await _auth.signOut();
+              },
             ),            
           ],
         ),

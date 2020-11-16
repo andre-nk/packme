@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pack_me/ui/app/userHome.dart';
-import 'package:pack_me/ui/authentication/landing.dart';
+import 'package:pack_me/ui/authentication/login.dart';
 import 'package:pack_me/ui/models/user.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,7 @@ class LoginDecider extends StatelessWidget {
     
     // return either the Home or Authenticate widget
     if (user == null){
-      return Landing();
+      return Login();  
     } else {
       return UserHome();
     }

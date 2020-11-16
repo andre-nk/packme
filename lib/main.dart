@@ -4,6 +4,7 @@ import 'package:pack_me/ui/app/userHome.dart';
 import 'package:pack_me/ui/app/withdraw.dart';
 import 'package:pack_me/ui/app/order.dart';
 import 'package:pack_me/ui/authentication/login.dart';
+import 'package:pack_me/ui/authentication/signup.dart';
 import 'package:pack_me/ui/authentication/splashscr.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pack_me/ui/models/user.dart';
@@ -43,8 +44,9 @@ class MyApp extends StatelessWidget {
                 appBarTheme: AppBarTheme(textTheme: GoogleFonts.poppinsTextTheme(textTheme)),
               ),
               //porting to LoginChecker
-              home: SplashScreen(),
+              home: SplasScreen(),
               routes: {
+                '/signup' : (context) => SignUp(),
                 '/login': (context) => Login(),
                 '/userHomeQR': (context) => UserHome(),
                 '/withdraw': (context) => Withdraw(),

@@ -14,7 +14,8 @@ class _LandingState extends State<Landing> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+
+    Navigator.of(context).pushNamedAndRemoveUntil('/signup', (Route<dynamic> route) => false);
 
     // Navigator.of(context).push(
     //   MaterialPageRoute(builder: (_) => Login()),
