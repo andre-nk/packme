@@ -22,6 +22,7 @@ class _LandingState extends State<Landing> {
     // );
   }
 
+  // ignore: unused_element
   Widget _buildImage(String assetName) {
     return Align(
       child: Image.asset('assets/$assetName.jpg', width: 350.0),

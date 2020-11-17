@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: unused_import
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pack_me/services/loginCh.dart';
 
 
 class Order extends StatefulWidget {
@@ -18,6 +19,8 @@ class Order extends StatefulWidget {
 
 class _OrderState extends State<Order> {
 
+  final LoginChecker _auth = LoginChecker();
+
   GlobalKey _bottomNavigationKey = GlobalKey();
 
   @override
@@ -25,11 +28,11 @@ class _OrderState extends State<Order> {
 
     void navSetter(int input){
       if(input == 0){
-        Navigator.popAndPushNamed(context, '/userHomeQR');
+        Navigator.popAndPushNamed(context, '/userHome');
       }else if(input == 1){
-        Navigator.popAndPushNamed(context, '/withdraw');
+        Navigator.popAndPushNamed(context, '/userWithdraw');
       }else if(input == 2){
-        Navigator.popAndPushNamed(context, '/order');
+        Navigator.popAndPushNamed(context, '/userOrder');
       }else{
         print('Request outbound');
       }
@@ -191,7 +194,10 @@ class _OrderState extends State<Order> {
                     )
                   ),
                 ],
-              ),      
+              ),  
+              onTap:() async {
+                await _auth.signOut();
+              },    
             ),            
           ],
         ),
@@ -270,7 +276,7 @@ class _OrderState extends State<Order> {
                     ),
                   ),
                   Positioned(
-                    bottom: 60,
+                    bottom: 55,
                     left: 5,
                     child: 
                     Container(
@@ -297,14 +303,18 @@ class _OrderState extends State<Order> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Text('10 packs',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w900, fontSize: 28
-                                  ),
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 28, 
+                                    ),
+                                  )
                                 ),
                                 Text('yang dapat dikembalikan',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 16
-                                  ),
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                    fontWeight: FontWeight.w400, fontSize: 16, 
+                                    ),
+                                  )
                                 ),
                               ],
                             ),

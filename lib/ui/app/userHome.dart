@@ -11,7 +11,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me/services/loginCh.dart';
 
-
 //THEMES
 class UserHome extends StatefulWidget {
   @override
@@ -31,11 +30,11 @@ class _UserHomeState extends State<UserHome> {
 
     void navSetter(int input) async{
       if(input == 0){
-        Navigator.popAndPushNamed(context, '/userHomeQR');
+        Navigator.popAndPushNamed(context, '/userHome');
       }else if(input == 1){
-        Navigator.popAndPushNamed(context, '/withdraw');
+        Navigator.popAndPushNamed(context, '/userWithdraw');
       }else if(input == 2){
-        Navigator.popAndPushNamed(context, '/order');
+        Navigator.popAndPushNamed(context, '/userOrder');
       }else{
         print('Request outbound');
       }
@@ -280,7 +279,7 @@ class _UserHomeState extends State<UserHome> {
                     ),
                   ),
                   Positioned(
-                    bottom: 60,
+                    bottom: 50,
                     left: 5,
                     child: 
                     Container(
@@ -289,7 +288,8 @@ class _UserHomeState extends State<UserHome> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          
+
+                          SizedBox(height: 20,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -307,19 +307,25 @@ class _UserHomeState extends State<UserHome> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Text('Scan QR',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w900, fontSize: 28
-                                  ),
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 28, 
+                                    ),
+                                  )
                                 ),
                                 Text('di restoran / driver',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 16
-                                  ),
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                    fontWeight: FontWeight.w400, fontSize: 16, 
+                                    ),
+                                  )
                                 ),
                                 Text('untuk mulai meminjam',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 16
-                                  ),
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                    fontWeight: FontWeight.w400, fontSize: 16, 
+                                    ),
+                                  )
                                 ),
                               ],
                             ),

@@ -11,6 +11,7 @@ import 'package:pack_me/ui/models/user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:page_transition/page_transition.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +20,8 @@ void main() {
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+
     final textTheme = Theme.of(context).textTheme;
 
     return FutureBuilder(
@@ -44,24 +46,45 @@ class MyApp extends StatelessWidget {
                 appBarTheme: AppBarTheme(textTheme: GoogleFonts.poppinsTextTheme(textTheme)),
               ),
               //porting to LoginChecker
-              home: SplasScreen(),
+              home: SplashScreen(),
               routes: {
                 '/signup' : (context) => SignUp(),
                 '/login': (context) => Login(),
-                '/userHomeQR': (context) => UserHome(),
-                '/withdraw': (context) => Withdraw(),
-                '/order': (context) => Order()
+              },
+              onGenerateRoute: (settings) {
+              switch (settings.name) {
+                case '/userWithdraw':
+                  return PageTransition(
+                    child: Withdraw(),
+                    type: PageTransitionType.bottomToTop,
+                    settings: settings,
+                  );
+                  break;
+                case '/userHome':
+                  return PageTransition(
+                    child: UserHome(),
+                    type: PageTransitionType.bottomToTop,
+                    settings: settings,
+                  );
+                  break;
+                case '/userOrder':
+                  return PageTransition(
+                    child: Order(),
+                    type: PageTransitionType.bottomToTop,
+                    settings: settings,
+                  );
+                  break;
+                default:
+                  return null;
               }
+            },
             ),
           );  
         }
-
         // Otherwise, show something whilst waiting for initialization to complete
-        return null; //TBA
+        return UserHome(); //TBA
       },
     );
-
-    
   }
 }
 

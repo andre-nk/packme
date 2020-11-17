@@ -57,6 +57,7 @@ class _SignUpState extends State<SignUp> {
 
   String email = '';
   String password = '';
+  String userName = '';
   String error = '';
 
   @override
@@ -215,7 +216,7 @@ class _SignUpState extends State<SignUp> {
                                                   heroTag: "new1",
                                                   onPressed: () async {
                                                     if(_formKey.currentState.validate()){
-                                                      dynamic result = await serviceAuth.registerWithEmailAndPassword(email, password);
+                                                      dynamic result = await serviceAuth.registerWithEmailAndPassword(email, password, userName);
                                                       if(result == null) {
                                                         setState(() {
                                                           error = 'Could not sign in with those credentials';
