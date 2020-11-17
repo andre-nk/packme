@@ -7,6 +7,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pack_me/services/loginCh.dart';
+import 'package:pack_me/ui/models/loader.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -58,14 +59,12 @@ class _LoginState extends State<Login> {
   String password = '';
   String error = '';
 
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
 
-    setState(() {
-      
-    });
-
-    return Scaffold(
+    return loading? Loader() : Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
             child: Column(
@@ -219,10 +218,14 @@ class _LoginState extends State<Login> {
                                                   heroTag: "new1",
                                                   onPressed: () async {
                                                    if(_formKey.currentState.validate()){
-                                                      dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                                                    setState(() {
+                                                      loading = true;
+                                                    }); 
+                                                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                                                       if(result == null) {
                                                         setState(() {
                                                           error = 'Could not sign in with those credentials';
+                                                          loading = false;
                                                         });
                                                       }
                                                     }

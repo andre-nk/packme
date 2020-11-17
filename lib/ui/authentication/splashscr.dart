@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:pack_me/ui/app/userHome.dart';
-import 'package:pack_me/ui/authentication/landing.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:pack_me/services/loggedDecider.dart';
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -11,6 +8,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+
+  /* CURRENTLY NOT WORKING
   Future langsungan() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool firstTime = prefs.getBool('first_time');
@@ -18,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (firstTime != null && !firstTime) {// Not first time
       return AnimatedSplashScreen(
       splash: Text('a'), //TBA Images
-      nextScreen: UserHome(),
+      nextScreen: LoginDecider(),
       splashTransition: SplashTransition.rotationTransition,
       );
     } else {// First time
@@ -30,12 +29,13 @@ class _SplashScreenState extends State<SplashScreen> {
       );
     }
   }
+  */
 
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: Text('a'), //TBA Images
-      nextScreen: UserHome(),
+      nextScreen: LoginDecider(), //langsungan() is supposed to be in here
       splashTransition: SplashTransition.rotationTransition,
     );
   }

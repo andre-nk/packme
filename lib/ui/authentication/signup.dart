@@ -7,6 +7,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pack_me/services/loginCh.dart';
+import 'package:pack_me/ui/models/loader.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 
 class SignUp extends StatefulWidget {
@@ -59,10 +61,13 @@ class _SignUpState extends State<SignUp> {
   String password = '';
   String userName = '';
   String error = '';
+  dynamic phoneNumber = '';
+
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loader() : Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
             child: Column(
@@ -98,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                       )
                     ),
                     Positioned(
-                      top: 140,
+                      top: 75,
                       left: 30,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +132,7 @@ class _SignUpState extends State<SignUp> {
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        height: 320,
+                        height: 470,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           color: HexColor('#ECFBF4'),
@@ -178,6 +183,39 @@ class _SignUpState extends State<SignUp> {
                                                   TextFormField(
                                                     decoration: InputDecoration(
                                                       border: InputBorder.none,
+                                                      hintText: "Nama lengkap",
+                                                      hintStyle: GoogleFonts.poppins(color: Colors.grey[500], fontSize: 18
+                                                      )
+                                                    ),
+                                                    validator: (val) => val.isEmpty ? 'Masukkan nama yang benar' : null,
+                                                    onChanged: (val) {
+                                                      setState(() => userName = val);
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                    
+                                                  ),
+                                                  IntlPhoneField(
+                                                      decoration: InputDecoration(
+                                                          labelText: 'Phone Number',
+                                                          labelStyle: GoogleFonts.poppins(color: Colors.grey[500], fontSize: 18),
+                                                          border: InputBorder.none                     
+                                                      ),
+                                                      initialCountryCode: 'ID',
+                                                      
+                                                      
+                                                      onChanged: (phone) {
+                                                        setState(() => phoneNumber =  phone.number.toString());
+                                                      },
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                    
+                                                  ),
+                                                  TextFormField(
+                                                    decoration: InputDecoration(
+                                                      border: InputBorder.none,
                                                       hintText: "E-mail",
                                                       hintStyle: GoogleFonts.poppins(color: Colors.grey[500], fontSize: 18
                                                       )
@@ -216,9 +254,13 @@ class _SignUpState extends State<SignUp> {
                                                   heroTag: "new1",
                                                   onPressed: () async {
                                                     if(_formKey.currentState.validate()){
-                                                      dynamic result = await serviceAuth.registerWithEmailAndPassword(email, password);
+                                                      setState(() {
+                                                        loading = true;
+                                                      });
+                                                      dynamic result = await serviceAuth.registerWithEmailAndPassword(email, password, userName, phoneNumber);
                                                       if(result == null) {
                                                         setState(() {
+                                                          loading = false;
                                                           error = 'Could not sign in with those credentials';
                                                         });
                                                       }
