@@ -13,28 +13,17 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:page_transition/page_transition.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context){
 
     final textTheme = Theme.of(context).textTheme;
-
-    return FutureBuilder(
-      // Initialize FlutterFire
-      future: Firebase.initializeApp(),
-      builder: (context, snapshot) {
-        // Check for errors
-        if (snapshot.hasError) {
-          return null; //TBA
-        }
-
-        // Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
           return StreamProvider<Pengguna>.value(
             value: LoginChecker().user,
             child: MaterialApp(
@@ -75,16 +64,12 @@ class MyApp extends StatelessWidget {
                   );
                   break;
                 default:
-                  return null;
+              return null;
               }
             },
             ),
           );  
         }
         // Otherwise, show something whilst waiting for initialization to complete
-        return UserHome(); //TBA
-      },
-    );
-  }
 }
 

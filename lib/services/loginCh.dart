@@ -32,7 +32,7 @@ class LoginChecker{
     }
 
     //register (email)
-    Future registerWithEmailAndPassword(String email, String password, String username) async {
+    Future registerWithEmailAndPassword(String email, String password) async {
       try {
         UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
         User user = result.user;

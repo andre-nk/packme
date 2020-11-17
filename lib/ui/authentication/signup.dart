@@ -216,7 +216,7 @@ class _SignUpState extends State<SignUp> {
                                                   heroTag: "new1",
                                                   onPressed: () async {
                                                     if(_formKey.currentState.validate()){
-                                                      dynamic result = await serviceAuth.registerWithEmailAndPassword(email, password, userName);
+                                                      dynamic result = await serviceAuth.registerWithEmailAndPassword(email, password);
                                                       if(result == null) {
                                                         setState(() {
                                                           error = 'Could not sign in with those credentials';
