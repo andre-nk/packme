@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import "package:hexcolor/hexcolor.dart";
 import "package:google_fonts/google_fonts.dart";
@@ -37,7 +38,7 @@ class _HistoryPageState extends State<HistoryPage> {
               child: 
               IconButton(
                       icon: new Icon(Feather.arrow_left),
-                      onPressed: () => Scaffold.of(context).openDrawer(),
+                      onPressed: () => Navigator.pop(context),
               ),
             ),
         ),
@@ -55,51 +56,143 @@ class _HistoryPageState extends State<HistoryPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: [
-          Slidable(
-            actionPane: SlidableDrawerActionPane(),
-            actionExtentRatio: 0.25,
-            child: Container(
-              color: Colors.white,
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.indigoAccent,
-                  child: Text('a'),
-                  foregroundColor: Colors.white,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(0),
+                child: Slidable(
+                  actionPane: SlidableDrawerActionPane(),
+                  actionExtentRatio: 0.20,
+                  child: Container(
+                    color: Colors.white,
+                    child: ListTile(
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 1.5,
+                            width: 500,
+                            color: HexColor('#C7F1E4')
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 18, 10, 18),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Tarik Saldo (TBA)', style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                        fontWeight: FontWeight.w600, fontSize: 16, 
+                                      ),
+                                    )),
+                                    Text('OVO / Method', style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                        fontWeight: FontWeight.w400, fontSize: 14, 
+                                      ),
+                                    )),
+                                    Text('11/11/2020 (Date)', style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                        fontWeight: FontWeight.w400, fontSize: 14, 
+                                      ),
+                                    )),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0,0,0,0),
+                                  child: Text('-50.000 (saldo)', style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontWeight: FontWeight.w600, fontSize: 16, 
+                                        ),
+                                  )),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 1.5,
+                            width: 500,
+                            color: HexColor('#C7F1E4')
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  secondaryActions: <Widget>[
+                    IconSlideAction(
+                      color: HexColor('#FF8787'),
+                      icon: FlutterIcons.delete_outline_mco,
+                      onTap: () => _showSnackBar(context, 'Delete'),
+                    ),
+                  ],
                 ),
-                title: Text('Tile nb'),
-                subtitle: Text('SlidableDrawerDelegate'),
               ),
-            ),
-            actions: <Widget>[
-              IconSlideAction(
-                caption: 'Archive',
-                color: Colors.blue,
-                icon: Icons.archive,
-                onTap: () => _showSnackBar(context, 'Archive'),
-              ),
-              IconSlideAction(
-                caption: 'Share',
-                color: Colors.indigo,
-                icon: Icons.share,
-                onTap: () => _showSnackBar(context, 'Share'),
-              ),
-            ],
-            secondaryActions: <Widget>[
-              IconSlideAction(
-                caption: 'More',
-                color: Colors.black45,
-                icon: Icons.more_horiz,
-                onTap: () => _showSnackBar(context, 'More'),
-              ),
-              IconSlideAction(
-                caption: 'Delete',
-                color: Colors.red,
-                icon: Icons.delete,
-                onTap: () => _showSnackBar(context, 'Delete'),
+              Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                actionExtentRatio: 0.20,
+                child: Container(
+                  color: Colors.white,
+                  child: ListTile(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 12, 10, 18),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Tarik Saldo (TBA)', style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w600, fontSize: 16, 
+                                    ),
+                                  )),
+                                  Text('OVO / Method', style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w400, fontSize: 14, 
+                                    ),
+                                  )),
+                                  Text('11/11/2020 (Date)', style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w400, fontSize: 14, 
+                                    ),
+                                  )),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0,0,0,0),
+                                child: Text('-50.000 (saldo)', style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                        fontWeight: FontWeight.w600, fontSize: 16, 
+                                      ),
+                                )),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 1.5,
+                          width: 500,
+                          color: HexColor('#C7F1E4')
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                secondaryActions: <Widget>[
+                  IconSlideAction(
+                    color: HexColor('#FF8787'),
+                    icon: FlutterIcons.delete_outline_mco,
+                    onTap: () => _showSnackBar(context, 'Delete'),
+                  ),
+                ],
               ),
             ],
           ),

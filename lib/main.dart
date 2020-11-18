@@ -63,6 +63,13 @@ class MyApp extends StatelessWidget {
                     settings: settings,
                   );
                   break;
+                case '/userHomeFromBar':
+                  return PageTransition(
+                    child: UserHome(),
+                    type: PageTransitionType.fade,
+                    settings: settings,
+                  );
+                  break;
                 default:
               return null;
               }

@@ -13,6 +13,9 @@ import 'package:pack_me/services/loginCh.dart';
 import 'package:pack_me/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:page_transition/page_transition.dart';
+import 'history.dart';
+
 
 class Withdraw extends StatefulWidget {
   @override
@@ -65,7 +68,6 @@ class _WithdrawState extends State<Withdraw> {
                           CircleAvatar(
                             child: Image(image: NetworkImage('')),
                           ),
-                          SizedBox(height: 20),
                           
                           Text('TBA', 
                             style: TextStyle(
@@ -117,7 +119,10 @@ class _WithdrawState extends State<Withdraw> {
                       )
                     ),
                   ],
-                ),      
+                ),
+                onTap: (){
+                  Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: HistoryPage()));
+                },     
               ),
               ListTile(
                 leading: Padding(
@@ -202,10 +207,10 @@ class _WithdrawState extends State<Withdraw> {
                       )
                     ),
                   ],
-                ),
+                ),  
                 onTap:() async {
                   await _auth.signOut();
-                },      
+                },
               ),            
             ],
           ),

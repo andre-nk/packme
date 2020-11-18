@@ -13,6 +13,8 @@ import 'package:pack_me/services/loginCh.dart';
 import 'package:pack_me/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:page_transition/page_transition.dart';
+import 'history.dart';
 
 
 class Order extends StatefulWidget {
@@ -40,8 +42,6 @@ class _OrderState extends State<Order> {
         print('Request outbound');
       }
     }
-
-   
 
     return StreamProvider<QuerySnapshot>.value(
         value: DatabaseService().currentUserInfo,
@@ -76,7 +76,7 @@ class _OrderState extends State<Order> {
                             fontWeight: FontWeight.w600, fontSize: 14
                             ),
                           ),
-                        ]
+                        ],
                       )
                     ),
                   ),
@@ -116,7 +116,10 @@ class _OrderState extends State<Order> {
                       )
                     ),
                   ],
-                ),      
+                ),
+                onTap: (){
+                  Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: HistoryPage()));
+                },     
               ),
               ListTile(
                 leading: Padding(
@@ -204,11 +207,12 @@ class _OrderState extends State<Order> {
                 ),  
                 onTap:() async {
                   await _auth.signOut();
-                },    
+                },
               ),            
             ],
           ),
         ),
+
 
         //APPBAR
         appBar: new AppBar(
