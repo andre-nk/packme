@@ -13,6 +13,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me/services/loginCh.dart';
 import 'package:pack_me/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:page_transition/page_transition.dart';
+import 'history.dart';
 
 //THEMES
 class UserHome extends StatefulWidget {
@@ -118,7 +120,10 @@ class _UserHomeState extends State<UserHome> {
                       )
                     ),
                   ],
-                ),      
+                ),
+                onTap: (){
+                  Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: HistoryPage()));
+                },     
               ),
               ListTile(
                 leading: Padding(
