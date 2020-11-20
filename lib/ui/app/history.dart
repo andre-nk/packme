@@ -48,8 +48,13 @@ class _HistoryPageState extends State<HistoryPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildListTileHead('Tarik Saldo', 'OVO', '19/11/2020', -50000, context),
-              buildListTileNormal('Tarik Saldo', 'OVO', '19/11/2020', 50000, context)
+              buildListTileHead('Tarik Saldo', 'OVO', '19/11/2020', -100000, context),
+              buildListTileNormal('Terima Saldo', 'OVO', '19/11/2020', 50000, context),
+              buildListTileNormal('Pengembalian', 'Pick-Up', '19/11/2020', -15, context),
+              buildListTileNormal('Peminjaman', 'Pick-Up', '19/11/2020', 15, context),
+              buildListTileNormal('Terima Saldo', 'OVO', '19/11/2020', 50000, context),
+              buildListTileNormal('Pengembalian', 'Pick-Up', '19/11/2020', -15, context),
+              buildListTileNormal('Peminjaman', 'Pick-Up', '19/11/2020', 15, context)
             ],
           ),
         ],

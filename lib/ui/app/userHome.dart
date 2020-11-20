@@ -15,6 +15,7 @@ import 'package:pack_me/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'history.dart';
+import 'package:pack_me/ui/models/homeModel.dart';
 
 //THEMES
 class UserHome extends StatefulWidget {
@@ -32,20 +33,6 @@ class _UserHomeState extends State<UserHome> {
 
   @override
   Widget build(BuildContext context) {
-
-    void navSetter(int input) async{
-      if(input == 0){
-        Navigator.popAndPushNamed(context, '/userHome');
-      }else if(input == 1){
-        Navigator.popAndPushNamed(context, '/userWithdraw');
-      }else if(input == 2){
-        Navigator.popAndPushNamed(context, '/userOrder');
-      }else{
-        print('Request outbound');
-      }
-    }
-
-   
 
       return StreamProvider<QuerySnapshot>.value(
         value: DatabaseService().currentUserInfo,
@@ -234,125 +221,11 @@ class _UserHomeState extends State<UserHome> {
         ),
 
         //BODY
-        body: 
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-              height: 280,
-              width: MediaQuery.of(context).size.width,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                        height: 220,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: HexColor('#ECFBF4'),
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(30),
-                            topLeft: Radius.circular(30),
-                          )
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 25,
-                      right: 90,
-                      child: Container(
-                        height: 70,
-                        child: FittedBox(
-                            child: FloatingActionButton(
-                              elevation: 5,
-                              heroTag: "new1",
-                              onPressed: (){},
-                              child: Icon(Feather.box),
-                              backgroundColor: HexColor('#43D1A5'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 25,
-                      left: 90,
-                      child: Container(
-                        height: 70,
-                        child: FittedBox(
-                            child: FloatingActionButton(
-                              elevation: 5,
-                              heroTag: "new2",
-                              onPressed: (){},
-                              child: Icon( Icons.qr_code_scanner),
-                              backgroundColor: HexColor('#FF8787'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 50,
-                      left: 5,
-                      child: 
-                      Container(
-                        width: 400,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-
-                            SizedBox(height: 20,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0,0,280,0),
-                                  child: Icon(LineIcons.clock_o, size: 30),
-                                ),
-                                Icon(LineIcons.question_circle, size: 30),
-                              ],
-                            ),
-                            
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text('Scan QR',
-                                    style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                      fontWeight: FontWeight.w700, fontSize: 28, 
-                                      ),
-                                    )
-                                  ),
-                                  Text('di restoran / driver',
-                                    style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                      fontWeight: FontWeight.w400, fontSize: 16, 
-                                      ),
-                                    )
-                                  ),
-                                  Text('untuk mulai meminjam',
-                                    style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                      fontWeight: FontWeight.w400, fontSize: 16, 
-                                      ),
-                                    )
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
+        body: homeGenerator(_page, context),
+      
         bottomNavigationBar: CurvedNavigationBar(
             key: _bottomNavigationKey,
-            index: 0,
+            index: _page,
             height: 60.0,
             items: <Widget>[
               Icon(Icons.qr_code_rounded, size: 30, color: HexColor('#030835')),
@@ -366,14 +239,14 @@ class _UserHomeState extends State<UserHome> {
             buttonBackgroundColor: HexColor('#ECFBF4'),
             backgroundColor: HexColor('#ECFBF4'),
             animationCurve: Curves.easeInOut,
-            animationDuration: Duration(milliseconds: 600),
+            animationDuration: Duration(milliseconds: 300),
             onTap: (index) {
               setState(() {
-                navSetter(index);
+                _page = index;
               });
             },
           )
-    ),
+        ),
       );
   }
 }

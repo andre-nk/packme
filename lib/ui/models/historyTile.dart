@@ -11,7 +11,21 @@ Widget buildListTileNormal(String transactionType, String transactionMethod, Str
     Scaffold.of(context).showSnackBar(SnackBar(content: Text(text)));
   }
 
-  amount.toString();
+  String amountString = amount.toString();
+  String asu = amountString.substring(0,1);
+  String asu2 = amountString.substring(1, amountString.length);
+ 
+  transactionType.indexOf('minjam') > 0 || transactionType.indexOf('bali') > 0 ?
+    amount > 0 ? 
+      amountString = '+ ' + amountString + ' pack(s)'
+    :
+      amountString = amountString + ' pack(s)'
+  : 
+    amount > 0 ? 
+      amountString = '+ ' + 'Rp' +  amountString
+    :
+      amountString = asu + ' Rp' + asu2;
+
 
   return Slidable(
   actionPane: SlidableDrawerActionPane(),
@@ -30,17 +44,17 @@ Widget buildListTileNormal(String transactionType, String transactionMethod, Str
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Tarik Saldo (TBA)', style: GoogleFonts.poppins(
+                                  Text('$transactionType', style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
                                       fontWeight: FontWeight.w600, fontSize: 16, 
                                     ),
                                   )),
-                                  Text('OVO / Gopay', style: GoogleFonts.poppins(
+                                  Text('$transactionMethod', style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
                                       fontWeight: FontWeight.w400, fontSize: 14, 
                                     ),
                                   )),
-                                  Text('11/11/2020 (Date)', style: GoogleFonts.poppins(
+                                  Text('$date', style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
                                       fontWeight: FontWeight.w400, fontSize: 14, 
                                     ),
@@ -49,7 +63,7 @@ Widget buildListTileNormal(String transactionType, String transactionMethod, Str
                               ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                                child: Text('$amount', style: GoogleFonts.poppins(
+                                child: Text('$amountString', style: GoogleFonts.poppins(
                                       textStyle: TextStyle(
                                         fontWeight: FontWeight.w600, fontSize: 16, 
                                       ),
@@ -83,7 +97,20 @@ Widget buildListTileHead(String transactionType, String transactionMethod, Strin
   }
 
   String amountString = amount.toString();
-  // ignore: unrelated_type_equality_checks
+  String asu = amountString.substring(0,1);
+  String asu2 = amountString.substring(1, amountString.length);
+ 
+  transactionType.indexOf('Peminjaman') > 0 ||  transactionType.indexOf('Pengembalian') > 0 ?
+    amount > 0 ? 
+      amountString = '+ ' + amountString + 'pack(s)'
+    :
+      amountString = amountString + 'pack(s)'
+  : 
+    amount > 0 ? 
+      amountString = '+ ' + 'Rp' +  amountString
+    :
+      amountString = asu + ' Rp' + asu2;
+
 
   return Padding(
                 padding: const EdgeInsets.all(0),
