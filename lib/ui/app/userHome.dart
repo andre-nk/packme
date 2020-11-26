@@ -12,6 +12,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me/services/loginCh.dart';
 import 'package:pack_me/services/database.dart';
+import 'package:pack_me/ui/app/app-info.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'history.dart';
@@ -72,6 +73,7 @@ class _UserHomeState extends State<UserHome> {
                     ),
                   ),
                 ),
+              SizedBox(height: 8),
               ListTile(
                 leading: Padding(
                   padding: const EdgeInsets.fromLTRB(0,0,0,5),
@@ -161,7 +163,10 @@ class _UserHomeState extends State<UserHome> {
                       )
                     ),
                   ],
-                ),      
+                ),
+                onTap: (){
+                  Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: AppInfo()));
+                }      
               ),
               ListTile(
                 leading: Padding(
@@ -211,13 +216,56 @@ class _UserHomeState extends State<UserHome> {
           elevation: 0,
           leading: Builder(
             builder: (context) => Padding(
-              padding: const EdgeInsets.fromLTRB(18,0,0,0),
-              child: IconButton(
-                  icon: new Icon(Feather.menu),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                ),
+              padding: const EdgeInsets.fromLTRB(18,16,0,0),
+              child: Column(
+                children: [
+                  IconButton(
+                      icon: new Icon(Feather.menu),
+                      onPressed: () => Scaffold.of(context).openDrawer(),
+                  ),
+                ],
+              ), 
             ),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20,22,20,20),
+              // child: ToggleSwitch(
+              //   minWidth: 50,
+              //   minHeight: 20,
+              //   cornerRadius: 20,
+              //   initialLabelIndex: 0,
+              //   labels: ['America', ''],
+              //   onToggle: (index) {
+              //     print('switched to: $index');
+              //   },
+              // ),
+              child: Container(
+                child: RaisedButton(
+                  onPressed: (){
+                    //f changeType();
+                  },
+                  child: Text('Mode User'),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                  color: HexColor('#CDF0E0'),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,0,18,0),
+              child: GestureDetector(
+                onTap: (){
+                  //add profile nav
+                },
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(''),
+                  backgroundColor: Colors.red,
+                ),
+              ),
+            )
+          ],
         ),
 
         //BODY

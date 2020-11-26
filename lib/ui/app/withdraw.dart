@@ -72,6 +72,7 @@ class _WithdrawState extends State<Withdraw> {
                     ),
                   ),
                 ),
+              SizedBox(height: 8),
               ListTile(
                 leading: Padding(
                   padding: const EdgeInsets.fromLTRB(0,0,0,5),

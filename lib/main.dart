@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pack_me/services/loginCh.dart';
+import 'package:pack_me/ui/app/history.dart';
 import 'package:pack_me/ui/app/userHome.dart';
-import 'package:pack_me/ui/app/withdraw.dart';
 import 'package:pack_me/ui/app/order.dart';
 import 'package:pack_me/ui/authentication/login.dart';
 import 'package:pack_me/ui/authentication/signup.dart';
@@ -42,9 +42,9 @@ class MyApp extends StatelessWidget {
               },
               onGenerateRoute: (settings) {
               switch (settings.name) {
-                case '/userWithdraw':
+                case '/history':
                   return PageTransition(
-                    child: Withdraw(),
+                    child: HistoryPage(),
                     type: PageTransitionType.bottomToTop,
                     settings: settings,
                   );
