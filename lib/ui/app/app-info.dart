@@ -14,6 +14,7 @@ class AppInfo extends StatefulWidget {
 class _AppInfoState extends State<AppInfo> {
   @override
   Widget build(BuildContext context) {
+    dynamic test = MediaQuery.of(context).size.width * 0.22;
     return Scaffold(
       appBar: AppBar(
         leading: Builder(
@@ -31,7 +32,7 @@ class _AppInfoState extends State<AppInfo> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(0,5,95,0),
+                padding: EdgeInsets.fromLTRB(0,5,test,0),
                 child: Text('Informasi', style: GoogleFonts.poppins(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,

@@ -13,6 +13,9 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me/services/loginCh.dart';
 import 'package:pack_me/services/database.dart';
 import 'package:pack_me/ui/app/app-info.dart';
+import 'package:pack_me/ui/app/joinUs.dart';
+import 'package:pack_me/ui/app/profilePage.dart';
+import 'package:pack_me/ui/app/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'history.dart';
@@ -35,177 +38,179 @@ class _UserHomeState extends State<UserHome> {
   @override
   Widget build(BuildContext context) {
 
+      
+
       return StreamProvider<QuerySnapshot>.value(
         value: DatabaseService().currentUserInfo,
         child: Scaffold(
         backgroundColor: Colors.white,
         //DRAWER
+        
         drawer: new Drawer(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+          child: Container(
+            color: HexColor('#CDF0E0'),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
                 Container(
-                  color: HexColor('#CDF0E0'),
-                  height: 200,
-                  child: DrawerHeader(
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            child: Image(image: NetworkImage('')),
-                          ),
-                          
-                          Text('TBA', 
-                            style: TextStyle(
-                            fontWeight: FontWeight.w900, fontSize: 18
+                    color: HexColor('#CDF0E0'),
+                    height: 200,
+                    child: DrawerHeader(
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              child: Image(image: NetworkImage('')),
                             ),
-                          ),
-                          Text('TBA', 
-                            style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14
+                            
+                            Text('TBA', 
+                              style: TextStyle(
+                              fontWeight: FontWeight.w900, fontSize: 18
+                              ),
                             ),
-                          ),
-                        ],
-                      )
+                            Text('TBA', 
+                              style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 14
+                              ),
+                            ),
+                          ],
+                        )
+                      ),
                     ),
                   ),
+                SizedBox(height: 8),
+                ListTile(
+                  
+                  tileColor: HexColor('#CDF0E0'),
+                  leading: Padding(
+                    padding: const EdgeInsets.fromLTRB(5,0,0,5),
+                    child: Icon(Feather.user, color: HexColor('#030835')),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Profil',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500
+                        )
+                      ),
+                    ],
+                  ),
+                  onTap: (){
+                    Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: ProfilePage() ));
+                  },      
                 ),
-              SizedBox(height: 8),
-              ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,0,0,5),
-                  child: Icon(Feather.user),
+                ListTile(
+                  tileColor: HexColor('#CDF0E0'),
+                  leading: Padding(
+                    padding: const EdgeInsets.fromLTRB(5,0,0,5),
+                    child: Icon(Feather.clock, color: HexColor('#030835')),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Riwayat',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500
+                        )
+                      ),
+                    ],
+                  ),
+                  onTap: (){
+                    Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: HistoryPage()));
+                  },     
                 ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Profil',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600
-                      )
-                    ),
-                  ],
+                ListTile(
+                  tileColor: HexColor('#CDF0E0'),
+                  leading: Padding(
+                    padding: const EdgeInsets.fromLTRB(5,0,0,5),
+                    child: Icon(Feather.users, color: HexColor('#030835')),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Gabung kami',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500
+                        )
+                      ),
+                    ],
+                  ),
+                  onTap: (){
+                    Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: JoinUs() ));
+                  },      
                 ),
-                onTap: (){
-                  print('a');
-                },      
-              ),
-              ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,0,0,5),
-                  child: Icon(Feather.clock),
+                ListTile(
+                  tileColor: HexColor('#CDF0E0'),
+                  leading: Padding(
+                    padding: const EdgeInsets.fromLTRB(5,0,0,5),
+                    child: Icon(Feather.info, color: HexColor('#030835')),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Informasi',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500
+                        )
+                      ),
+                    ],
+                  ),
+                  onTap: (){
+                    Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: AppInfo()));
+                  }      
                 ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Riwayat',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600
-                      )
-                    ),
-                  ],
+                ListTile(
+                  tileColor: HexColor('#CDF0E0'),
+                  leading: Padding(
+                    padding: const EdgeInsets.fromLTRB(5,0,0,5),
+                    child: Icon(Feather.settings, color: HexColor('#030835')),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Pengaturan',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500
+                        )
+                      ),
+                    ],
+                  ),
+                  onTap: (){
+                     Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: SettingsPage() ));
+                  },     
                 ),
-                onTap: (){
-                  Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: HistoryPage()));
-                },     
-              ),
-              ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,0,0,5),
-                  child: Icon(Feather.moon),
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Mode gelap',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600
-                      )
-                    ),
-                  ],
-                ),      
-              ),
-              ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,0,0,5),
-                  child: Icon(Feather.users),
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Gabung kami',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600
-                      )
-                    ),
-                  ],
-                ),      
-              ),
-              ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,0,0,5),
-                  child: Icon(Feather.info),
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Informasi',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600
-                      )
-                    ),
-                  ],
-                ),
-                onTap: (){
-                  Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: AppInfo()));
-                }      
-              ),
-              ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,0,0,5),
-                  child: Icon(Feather.settings),
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Pengaturan',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600
-                      )
-                    ),
-                  ],
-                ),      
-              ),
-              ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,0,0,5),
-                  child: Icon(Feather.log_out),
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Log out',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600
-                      )
-                    ),
-                  ],
-                ),  
-                onTap:() async {
-                  await _auth.signOut();
-                },
-              ),            
-            ],
+                ListTile(
+                  tileColor: HexColor('#CDF0E0'),
+                  leading: Padding(
+                    padding: const EdgeInsets.fromLTRB(5,0,0,5),
+                    child: Icon(Feather.log_out, color: HexColor('#030835')),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Log out',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500
+                        )
+                      ),
+                    ],
+                  ),  
+                  onTap:() async {
+                    await _auth.signOut();
+                  },
+                ),            
+              ],
+            ),
           ),
         ),
 
@@ -257,7 +262,7 @@ class _UserHomeState extends State<UserHome> {
               padding: const EdgeInsets.fromLTRB(0,0,18,0),
               child: GestureDetector(
                 onTap: (){
-                  //add profile nav
+                  Navigator.push(context, PageTransition(type: PageTransitionType.topToBottom, child: ProfilePage() ));
                 },
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(''),

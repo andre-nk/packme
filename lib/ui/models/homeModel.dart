@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: unused_import
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pack_me/ui/app/app-info.dart';
 import 'package:pack_me/ui/app/history.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -21,10 +22,10 @@ Widget homeGenerator(int index, context){
   switch(index){
     case 0:
       button1 = Positioned(
-                      top: 20,
-                      right: 95,
+                      top:  MediaQuery.of(context).size.height * 0.09,
+                      right: MediaQuery.of(context).size.width * 0.25,
                       child: Container(
-                        height: 80,
+                        height: MediaQuery.of(context).size.height * 0.09,
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
@@ -37,10 +38,10 @@ Widget homeGenerator(int index, context){
                       ),
       );
       button2 = Positioned(
-                      top: 20,
-                      left: 95,
+                      top:  MediaQuery.of(context).size.height * 0.09,
+                      left: MediaQuery.of(context).size.width * 0.25,
                       child: Container(
-                        height: 80,
+                        height: MediaQuery.of(context).size.height * 0.09,
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
@@ -87,10 +88,10 @@ Widget homeGenerator(int index, context){
       break;
     case 1:
       button1 = Positioned(
-                      top: 20,
-                      left: 162,
+                      top:  MediaQuery.of(context).size.height * 0.09,
+                      left: MediaQuery.of(context).size.width * 0.39,
                       child: Container(
-                        height: 80,
+                        height: MediaQuery.of(context).size.height * 0.1,
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
@@ -133,10 +134,10 @@ Widget homeGenerator(int index, context){
     break;
     case 2:
       button1 = Positioned(
-                      top: 20,
-                      left: 162,
+                      top:  MediaQuery.of(context).size.height * 0.09,
+                      left: MediaQuery.of(context).size.width * 0.39,
                       child: Container(
-                        height: 80,
+                        height: MediaQuery.of(context).size.height * 0.1,
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
@@ -177,17 +178,19 @@ Widget homeGenerator(int index, context){
   }
 
   return Column(
+
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              
               Container(
-              height: 280,
+              height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        height: 220,
+                        height:  MediaQuery.of(context).size.height * 0.27,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           color: HexColor('#ECFBF4'),
@@ -201,11 +204,11 @@ Widget homeGenerator(int index, context){
                     button1,
                     button2,
                     Positioned(
-                      bottom: 50,
-                      left: 5,
+                      bottom: MediaQuery.of(context).size.height * 0.06,
+                      left: 0,
                       child: 
                       Container(
-                        width: 400,
+                        width:MediaQuery.of(context).size.width * 1,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -215,7 +218,7 @@ Widget homeGenerator(int index, context){
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(0,0,280,0),
+                                  padding: const EdgeInsets.fromLTRB(0,0,240,0),
                                   child: IconButton(
                                     onPressed:() => {
                                        Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: HistoryPage()))
@@ -223,7 +226,12 @@ Widget homeGenerator(int index, context){
                                     icon: Icon(LineIcons.clock_o, size: 30)
                                   ),
                                 ),
-                                Icon(LineIcons.question_circle, size: 30),
+                                IconButton(
+                                  icon: Icon(LineIcons.question_circle, size: 30),
+                                  onPressed: () => {
+                                    Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: AppInfo()))
+                                  },
+                                ),
                               ],
                             ),
                             texts,  

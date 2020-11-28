@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
           return StreamProvider<Pengguna>.value(
             value: LoginChecker().user,
             child: MaterialApp(
+              title: 'PackMe',
               theme: ThemeData(
                 brightness: Brightness.light,
                 primaryColor: HexColor('#FF8787'),

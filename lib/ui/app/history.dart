@@ -13,9 +13,12 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
 
-
   @override
   Widget build(BuildContext context) {
+    
+    dynamic test = MediaQuery.of(context).size.width * 0.36;
+    dynamic test2 = MediaQuery.of(context).size.height * 0.03;
+
     return Scaffold(
       appBar: AppBar(
         leading: Builder(
@@ -30,7 +33,7 @@ class _HistoryPageState extends State<HistoryPage> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(0,26,153,0),
+            padding: EdgeInsets.fromLTRB(0,test2,test,0),
             child: Text('Riwayat', style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,

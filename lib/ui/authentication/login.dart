@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-              height: 680,
+              height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
@@ -100,7 +100,7 @@ class _LoginState extends State<Login> {
                       )
                     ),
                     Positioned(
-                      top: 140,
+                      top: MediaQuery.of(context).size.height * 0.2,
                       left: 30,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +129,7 @@ class _LoginState extends State<Login> {
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        height: 320,
+                        height: MediaQuery.of(context).size.height * 0.3,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           color: HexColor('#ECFBF4'),
@@ -141,11 +141,11 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     Positioned(
-                      bottom: 0,
-                      left: 5,
+                      bottom: MediaQuery.of(context).size.width * 0.025,
+                      left: MediaQuery.of(context).size.width * 0.025,//#ECFBF4,
                       child: 
                       Container(
-                        width: 400,
+                        width: MediaQuery.of(context).size.width * 0.95,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,7 +209,7 @@ class _LoginState extends State<Login> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(height: 20),
+                                            SizedBox(height: MediaQuery.of(context).size.height * 0.030),
                                             Container(
                                               height: 70,
                                               child: FittedBox(
@@ -238,7 +238,7 @@ class _LoginState extends State<Login> {
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(height: 10),
+                                            SizedBox(height: MediaQuery.of(context).size.height * 0.020),
                                             SizedBox(
                                               child: _textDecider(error),
                                             )

@@ -74,7 +74,7 @@ class _SignUpState extends State<SignUp> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-              height: 680,
+              height: MediaQuery.of(context).size.height *1,
               width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
@@ -103,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                       )
                     ),
                     Positioned(
-                      top: 75,
+                      top: MediaQuery.of(context).size.height * 0.12,
                       left: 30,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,7 +132,7 @@ class _SignUpState extends State<SignUp> {
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        height: 470,
+                        height: MediaQuery.of(context).size.height * 0.4,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           color: HexColor('#ECFBF4'),
@@ -144,11 +144,11 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     Positioned(
-                      bottom: -5,
-                      left: 5,
+                      bottom: MediaQuery.of(context).size.height * 0.01,
+                      left: MediaQuery.of(context).size.width * 0.015,
                       child: 
                       Container(
-                        width: 400,
+                        width: MediaQuery.of(context).size.width * 0.97,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,14 +167,13 @@ class _SignUpState extends State<SignUp> {
                                             Container(
                                               padding: EdgeInsets.fromLTRB(20,5,20,5),
                                               decoration: BoxDecoration(
-                                                color: HexColor('#ECFBF4'),
+                                                color: HexColor('#ECFBF4'), //#ECFBF4
                                                 borderRadius: BorderRadius.circular(10),
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: Color.fromRGBO(67, 209, 165, 0.1),
                                                     spreadRadius: 5,
-                                                    blurRadius: 50,
-                                                    
+                                                    blurRadius: 50,           
                                                   )
                                                 ]
                                               ),
@@ -245,7 +244,7 @@ class _SignUpState extends State<SignUp> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(height: 20),
+                                            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                                             Container(
                                               height: 70,
                                               child: FittedBox(
@@ -275,7 +274,7 @@ class _SignUpState extends State<SignUp> {
                                               ),
                                             ),
                                             SizedBox(
-                                              height: 10,
+                                              height: MediaQuery.of(context).size.height * 0.02,
                                             ),
                                             SizedBox(
                                               child: _textDecider(error),
