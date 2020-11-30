@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 // ignore: unused_import
@@ -16,10 +15,12 @@ import 'package:pack_me/ui/app/app-info.dart';
 import 'package:pack_me/ui/app/joinUs.dart';
 import 'package:pack_me/ui/app/profilePage.dart';
 import 'package:pack_me/ui/app/settings.dart';
+import 'package:pack_me/ui/app/userProfile.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'history.dart';
 import 'package:pack_me/ui/models/homeModel.dart';
+import 'package:pack_me/ui/models/userProfileModel.dart';
 
 //THEMES
 class UserHome extends StatefulWidget {
@@ -37,15 +38,11 @@ class _UserHomeState extends State<UserHome> {
 
   @override
   Widget build(BuildContext context) {
-
-      
-
-      return StreamProvider<QuerySnapshot>.value(
-        value: DatabaseService().currentUserInfo,
+      return StreamProvider<List<UserProfileModel>>.value(
+        value: DatabaseService().userProfile,
         child: Scaffold(
         backgroundColor: Colors.white,
         //DRAWER
-        
         drawer: new Drawer(
           child: Container(
             color: HexColor('#CDF0E0'),
@@ -53,37 +50,18 @@ class _UserHomeState extends State<UserHome> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 Container(
                     color: HexColor('#CDF0E0'),
-                    height: 200,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     child: DrawerHeader(
                       child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              child: Image(image: NetworkImage('')),
-                            ),
-                            
-                            Text('TBA', 
-                              style: TextStyle(
-                              fontWeight: FontWeight.w900, fontSize: 18
-                              ),
-                            ),
-                            Text('TBA', 
-                              style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 14
-                              ),
-                            ),
-                          ],
-                        )
+                        child: UserProfile(),
                       ),
                     ),
                   ),
-                SizedBox(height: 8),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.025),
                 ListTile(
-                  
                   tileColor: HexColor('#CDF0E0'),
                   leading: Padding(
                     padding: const EdgeInsets.fromLTRB(5,0,0,5),
@@ -275,7 +253,7 @@ class _UserHomeState extends State<UserHome> {
 
         //BODY
         body: homeGenerator(_page, context),
-      
+  
         bottomNavigationBar: CurvedNavigationBar(
             key: _bottomNavigationKey,
             index: _page,

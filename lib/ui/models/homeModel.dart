@@ -12,6 +12,9 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me/ui/app/app-info.dart';
 import 'package:pack_me/ui/app/history.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pack_me/services/database.dart';
 
 Widget homeGenerator(int index, context){
 
@@ -22,10 +25,10 @@ Widget homeGenerator(int index, context){
   switch(index){
     case 0:
       button1 = Positioned(
-                      top:  MediaQuery.of(context).size.height * 0.09,
+                      top:  MediaQuery.of(context).size.height * 0.08,
                       right: MediaQuery.of(context).size.width * 0.25,
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.09,
+                        height: MediaQuery.of(context).size.height * 0.1,
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
@@ -38,10 +41,10 @@ Widget homeGenerator(int index, context){
                       ),
       );
       button2 = Positioned(
-                      top:  MediaQuery.of(context).size.height * 0.09,
+                      top:  MediaQuery.of(context).size.height * 0.08,
                       left: MediaQuery.of(context).size.width * 0.25,
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.09,
+                        height: MediaQuery.of(context).size.height * 0.1,
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
@@ -89,7 +92,7 @@ Widget homeGenerator(int index, context){
     case 1:
       button1 = Positioned(
                       top:  MediaQuery.of(context).size.height * 0.09,
-                      left: MediaQuery.of(context).size.width * 0.39,
+                      left: MediaQuery.of(context).size.width * 0.41,
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.1,
                         child: FittedBox(
@@ -112,14 +115,8 @@ Widget homeGenerator(int index, context){
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(height: 16),
-                  Text('Rp 343,200',
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 28, 
-                      ),
-                    )
-                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.005),
+                  
                   Text('total saldo yang dapat ditarik',
                     style: GoogleFonts.poppins(
                       textStyle: TextStyle(
@@ -135,7 +132,7 @@ Widget homeGenerator(int index, context){
     case 2:
       button1 = Positioned(
                       top:  MediaQuery.of(context).size.height * 0.09,
-                      left: MediaQuery.of(context).size.width * 0.39,
+                      left: MediaQuery.of(context).size.width * 0.41,
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.1,
                         child: FittedBox(
@@ -155,7 +152,7 @@ Widget homeGenerator(int index, context){
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(height: 16),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.005),
                   Text('10 packs',
                     style: GoogleFonts.poppins(
                       textStyle: TextStyle(
@@ -177,71 +174,73 @@ Widget homeGenerator(int index, context){
     break;
   }
 
-  return Column(
-
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              
-              Container(
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: MediaQuery.of(context).size.width,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                        height:  MediaQuery.of(context).size.height * 0.27,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: HexColor('#ECFBF4'),
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(30),
-                            topLeft: Radius.circular(30),
-                          )
+  return StreamProvider<QuerySnapshot>.value(
+      value: DatabaseService().currentUserInfo,
+      child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                
+                Container(
+                height: MediaQuery.of(context).size.height * 0.4,
+                width: MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          height:  MediaQuery.of(context).size.height * 0.27,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: HexColor('#ECFBF4'),
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(30),
+                              topLeft: Radius.circular(30),
+                            )
+                          ),
                         ),
                       ),
-                    ),
-                    button1,
-                    button2,
-                    Positioned(
-                      bottom: MediaQuery.of(context).size.height * 0.06,
-                      left: 0,
-                      child: 
-                      Container(
-                        width:MediaQuery.of(context).size.width * 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(height: 20,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0,0,240,0),
-                                  child: IconButton(
-                                    onPressed:() => {
-                                       Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: HistoryPage()))
-                                    },
-                                    icon: Icon(LineIcons.clock_o, size: 30)
+                      button1,
+                      button2,
+                      Positioned(
+                        bottom: MediaQuery.of(context).size.height * 0.06,
+                        left: 0,
+                        child: 
+                        Container(
+                          width:MediaQuery.of(context).size.width * 1,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: 20,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0,0,240,0),
+                                    child: IconButton(
+                                      onPressed:() => {
+                                         Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: HistoryPage()))
+                                      },
+                                      icon: Icon(LineIcons.clock_o, size: 30)
+                                    ),
                                   ),
-                                ),
-                                IconButton(
-                                  icon: Icon(LineIcons.question_circle, size: 30),
-                                  onPressed: () => {
-                                    Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: AppInfo()))
-                                  },
-                                ),
-                              ],
-                            ),
-                            texts,  
-                          ]
+                                  IconButton(
+                                    icon: Icon(LineIcons.question_circle, size: 30),
+                                    onPressed: () => {
+                                      Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: AppInfo()))
+                                    },
+                                  ),
+                                ],
+                              ),
+                              texts,  
+                            ]
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          );
+              ],
+            ),
+  );
 }
