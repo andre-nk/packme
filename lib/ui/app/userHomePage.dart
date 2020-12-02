@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-// ignore: unused_import
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// ignore: unused_import
-import 'package:line_icons/line_icons.dart';
-// ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pack_me/services/loginCh.dart';
+import 'package:pack_me/services/loginChecker.dart';
 import 'package:pack_me/services/database.dart';
-import 'package:pack_me/ui/app/app-info.dart';
-import 'package:pack_me/ui/app/joinUs.dart';
+import 'package:pack_me/ui/app/appInfoPage.dart';
+import 'package:pack_me/ui/app/joinUsPage.dart';
 import 'package:pack_me/ui/app/profilePage.dart';
-import 'package:pack_me/ui/app/settings.dart';
-import 'package:pack_me/ui/app/userProfile.dart';
+import 'package:pack_me/ui/app/settingsPage.dart';
+import 'package:pack_me/ui/app/userInfoHomeDB.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
-import 'history.dart';
+import 'historyPage.dart';
 import 'package:pack_me/ui/models/homeModel.dart';
 import 'package:pack_me/ui/models/userProfileModel.dart';
 
@@ -31,6 +26,7 @@ class UserHome extends StatefulWidget {
 class _UserHomeState extends State<UserHome> {
 
   final LoginChecker _auth = LoginChecker();
+  final currentCredit = WithdrawInfo();
 
   // ignore: unused_field
   int _page = 0;
@@ -53,9 +49,10 @@ class _UserHomeState extends State<UserHome> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                 Container(
                     color: HexColor('#CDF0E0'),
-                    height: MediaQuery.of(context).size.height * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.32,
                     child: DrawerHeader(
                       child: Center(
+                        //NODE CALLER
                         child: UserProfile(),
                       ),
                     ),
@@ -252,7 +249,7 @@ class _UserHomeState extends State<UserHome> {
         ),
 
         //BODY
-        body: homeGenerator(_page, context),
+        body: homeGenerator(_page, context, currentCredit),
   
         bottomNavigationBar: CurvedNavigationBar(
             key: _bottomNavigationKey,

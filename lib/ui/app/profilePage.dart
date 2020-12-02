@@ -4,7 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:pack_me/services/database.dart';
 import 'package:pack_me/ui/models/userProfileModel.dart';
-import 'package:pack_me/ui/app/userProfileFull.dart';
+import 'package:pack_me/ui/app/userProfileFullDB.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pack_me/ui/models/userProfileModel.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -15,11 +16,21 @@ class _UserProfileState extends State<UserProfile> {
     String userName;
 
     final userProfileData = Provider.of<List<UserProfileModel>>(context);
+
+    //cycles
     userProfileData.forEach((element) { 
       //user avatar
       userEmail = element.email;
       userName = element.userName;
     });
+
+    if(userEmail.length > 30){
+      userEmail = userEmail.substring(0,30) + '...';
+    }
+
+    if(userName.length > 20){
+      userEmail = userName.substring(0,20) + '...';
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,5 +57,38 @@ class _UserProfileState extends State<UserProfile> {
         ),                                                            
       ],
     );                     
+  }
+}
+
+class WithdrawInfo extends StatefulWidget {
+  @override
+  _WithdrawInfoState createState() => _WithdrawInfoState();
+}
+
+class _WithdrawInfoState extends State<WithdrawInfo> {
+  @override
+  Widget build(BuildContext context) {
+    
+    String currentCredit;
+
+    final userProfileCredit = Provider.of<List<UserProfileModel>>(context);
+
+    //cycles
+    userProfileCredit.forEach((element) { 
+      currentCredit = element.credit;
+    });
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('$currentCredit', 
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            fontSize: 32
+          ),
+        )                                                          
+      ],
+    );         
   }
 }

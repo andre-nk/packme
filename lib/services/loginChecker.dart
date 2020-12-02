@@ -2,7 +2,7 @@
 // ignore: unused_import
 import 'package:pack_me/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pack_me/ui/models/user.dart';
+import 'package:pack_me/ui/models/userModel.dart';
 
 class LoginChecker{
 
@@ -50,6 +50,7 @@ class LoginChecker{
             phoneNumber,
             user.email,
         );
+
         return _userFromFirebaseUser(user);
       } catch (error) {
         print(error.toString());

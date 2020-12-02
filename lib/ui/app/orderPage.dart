@@ -9,12 +9,12 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: unused_import
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pack_me/services/loginCh.dart';
+import 'package:pack_me/services/loginChecker.dart';
 import 'package:pack_me/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:page_transition/page_transition.dart';
-import 'history.dart';
+import 'historyPage.dart';
 import 'package:pack_me/ui/models/homeModel.dart';
 
 
@@ -222,7 +222,7 @@ class _OrderState extends State<Order> {
         ),
 
         //BODY 
-        body: homeGenerator(_page, context),
+        // body: //homeGenerator(_page, context),
       
         bottomNavigationBar: CurvedNavigationBar(
             key: _bottomNavigationKey,

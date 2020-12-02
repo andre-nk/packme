@@ -6,7 +6,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 // ignore: unused_import
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pack_me/services/loginCh.dart';
+import 'package:pack_me/services/loginChecker.dart';
 import 'package:pack_me/ui/models/loader.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 

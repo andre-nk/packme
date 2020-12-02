@@ -30,7 +30,7 @@ class _UserProfileFullState extends State<UserProfileFull> {
         //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
       });
     }
-
+    
     String userEmail;
     String userName;
     String userPhone;
@@ -53,6 +53,14 @@ class _UserProfileFullState extends State<UserProfileFull> {
       userUID = element.uid;
       oldPassMatcher = element.password;
     });
+
+    if(userEmail.length > 20){
+      userEmail = userEmail.substring(0,20) + '...';
+    }
+
+    if(userName.length > 20){
+      userEmail = userName.substring(0,20) + '...';
+    }
 
     return StreamBuilder<List<UserProfileModel>>(
         stream: DatabaseService().userProfile,
@@ -251,12 +259,14 @@ class _UserProfileFullState extends State<UserProfileFull> {
                                   fontWeight: FontWeight.w500
                                 )
                               ),
-                              Text('$userEmail', //IF EMAIL > X LETTER => CUT WITH ... 
+                              
+                                Text('$userEmail', //IF EMAIL > X LETTER => CUT WITH ... 
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w300
                                 )
                               ),
+                              
                             ],
                           ),
                           onTap: (){

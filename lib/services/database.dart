@@ -16,7 +16,6 @@ class DatabaseService{
 
   //USER COLLECTION
   final CollectionReference dbUser = FirebaseFirestore.instance.collection('users');
-
   // ignore: non_constant_identifier_names
   Future updateUserData(String uid, String userAddress, String userQR, String password, String userName, String phoneNumber, String email) async{
       return await dbUser.doc(uid).set({
@@ -30,6 +29,17 @@ class DatabaseService{
         "currentCredit" : credit.toString(),
       }
     );
+  }
+
+  Future createUserOrder() async{
+    return await dbUser.doc(uid).collection('order').doc('0001').set({
+      "amount" : 3,
+      "lender": "Red Lotus Resto", //resto
+      "borrower": userName,
+      "Box A": 1,
+      "Box B": 2,
+      "Box A - Mini": 1,
+    });
   }
 
   //FOR USER PROFILE IN DRAWER

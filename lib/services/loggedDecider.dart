@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pack_me/ui/app/userHome.dart';
-import 'package:pack_me/ui/authentication/login.dart';
-import 'package:pack_me/ui/models/user.dart';
+import 'package:pack_me/ui/app/userHomePage.dart';
+import 'package:pack_me/ui/authentication/signIn.dart';
+import 'package:pack_me/ui/models/userModel.dart';
 import 'package:provider/provider.dart';
 
 class LoginDecider extends StatelessWidget {
@@ -12,6 +12,7 @@ class LoginDecider extends StatelessWidget {
     
     // return either the Home or Authenticate widget
     if (user == null){
+      print(user);
       return Login();  
     } else {
       return UserHome();

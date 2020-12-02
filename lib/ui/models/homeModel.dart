@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-// ignore: unused_import
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// ignore: unused_import
 import 'package:line_icons/line_icons.dart';
-// ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
-// ignore: unused_import
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pack_me/ui/app/app-info.dart';
-import 'package:pack_me/ui/app/history.dart';
+import 'package:pack_me/ui/app/appInfoPage.dart';
+import 'package:pack_me/ui/app/historyPage.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pack_me/services/database.dart';
 
-Widget homeGenerator(int index, context){
+Widget homeGenerator(int index, context, Widget creditValue){
 
   Widget button1;
   Widget button2;
   Widget texts;
+  Widget credit = creditValue;
 
   switch(index){
     case 0:
@@ -116,7 +112,7 @@ Widget homeGenerator(int index, context){
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SizedBox(height: MediaQuery.of(context).size.height * 0.005),
-                  
+                  credit,
                   Text('total saldo yang dapat ditarik',
                     style: GoogleFonts.poppins(
                       textStyle: TextStyle(
@@ -139,7 +135,9 @@ Widget homeGenerator(int index, context){
                             child: FloatingActionButton(
                               elevation: 5,
                               heroTag: "new2",
-                              onPressed: (){},
+                              onPressed: (){
+                                DatabaseService().createUserOrder();
+                              },
                               child: Icon( Feather.box),
                               backgroundColor: HexColor('#FF8787'),
                           ),
