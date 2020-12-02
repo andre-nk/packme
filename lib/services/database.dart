@@ -1,10 +1,11 @@
 
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:pack_me/ui/models/userProfileModel.dart';
+import 'package:pack_me/ui/models/orderModel.dart';
 class DatabaseService{
 
   //initialize datas
-  final String uid;
+  String uid;
   final String email;
   final String password;
   final String userName;
@@ -13,6 +14,8 @@ class DatabaseService{
   final String userAddress;
   final int credit;
   DatabaseService({this.uid, this.email, this.password, this.userName, this.phoneNumber, this.userQR, this.userAddress, this.credit});
+
+  
 
   //USER COLLECTION
   final CollectionReference dbUser = FirebaseFirestore.instance.collection('users');
@@ -27,13 +30,16 @@ class DatabaseService{
         "phoneNumber" : phoneNumber,
         "email" : email,
         "currentCredit" : credit.toString(),
+        "amount": 0,
       }
     );
   }
 
-  Future createUserOrder() async{
-    return await dbUser.doc(uid).collection('order').doc('0001').set({
-      "amount" : 3,
+  Future createUserOrder(String userID) async{ 
+    final DocumentReference reference = FirebaseFirestore.instance.collection('users').doc(userID).collection('order').doc();
+    uid = userID;
+    return await reference.set({
+      "amount" : 4,
       "lender": "Red Lotus Resto", //resto
       "borrower": userName,
       "Box A": 1,
@@ -58,7 +64,8 @@ class DatabaseService{
         userAddress: doc.data()['address'],
         userQR: doc.data()['userQR'],
         userName: doc.data()['displayName'],
-        credit: doc.data()['currentCredit']
+        credit: doc.data()['currentCredit'],
+        amount: doc.data()['amount']
       );
     }).toList();
   }
@@ -67,4 +74,5 @@ class DatabaseService{
     return dbUser.snapshots().map(_userProfileModelSnapshot);
   }
 
+  // String amount =  FirebaseFirestore.instance.collection('users').doc(userID).collection('order').doc();
 }

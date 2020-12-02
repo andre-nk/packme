@@ -11,12 +11,14 @@ import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pack_me/services/database.dart';
 
-Widget homeGenerator(int index, context, Widget creditValue){
-
+Widget homeGenerator(int index, context, Widget creditValue, String userID, Widget packAmount){
+  
   Widget button1;
   Widget button2;
   Widget texts;
   Widget credit = creditValue;
+  Widget amount = packAmount;
+  String uid = userID;
 
   switch(index){
     case 0:
@@ -29,7 +31,9 @@ Widget homeGenerator(int index, context, Widget creditValue){
                             child: FloatingActionButton(
                               elevation: 5,
                               heroTag: "new2",
-                              onPressed: (){},
+                              onPressed: (){
+                                
+                              },
                               child: Icon( Icons.qr_code_scanner),
                               backgroundColor: HexColor('#FF8787'),
                           ),
@@ -136,7 +140,7 @@ Widget homeGenerator(int index, context, Widget creditValue){
                               elevation: 5,
                               heroTag: "new2",
                               onPressed: (){
-                                DatabaseService().createUserOrder();
+                                DatabaseService().createUserOrder(uid);
                               },
                               child: Icon( Feather.box),
                               backgroundColor: HexColor('#FF8787'),
@@ -151,13 +155,7 @@ Widget homeGenerator(int index, context, Widget creditValue){
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SizedBox(height: MediaQuery.of(context).size.height * 0.005),
-                  Text('10 packs',
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 28, 
-                      ),
-                    )
-                  ),
+                  amount,
                   Text('yang dapat dikembalikan',
                     style: GoogleFonts.poppins(
                       textStyle: TextStyle(

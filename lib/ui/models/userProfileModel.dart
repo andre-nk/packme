@@ -7,6 +7,7 @@ class UserProfileModel{
   final String userQR;
   final String userAddress;
   final String credit;
-  UserProfileModel({this.uid, this.email, this.password, this.userName, this.phoneNumber, this.userQR, this.userAddress, this.credit});
+  final int amount;
+  UserProfileModel({this.uid, this.email, this.password, this.userName, this.phoneNumber, this.userQR, this.userAddress, this.credit, this.amount});
 
 }

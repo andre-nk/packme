@@ -16,7 +16,7 @@ import 'package:page_transition/page_transition.dart';
 import 'historyPage.dart';
 import 'package:pack_me/ui/models/homeModel.dart';
 import 'package:pack_me/ui/models/userProfileModel.dart';
-
+import 'package:pack_me/ui/models/userModel.dart';
 //THEMES
 class UserHome extends StatefulWidget {
   @override
@@ -27,13 +27,19 @@ class _UserHomeState extends State<UserHome> {
 
   final LoginChecker _auth = LoginChecker();
   final currentCredit = WithdrawInfo();
+  final packAmount = PackInfo();
 
   // ignore: unused_field
   int _page = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
+  
 
   @override
   Widget build(BuildContext context) {
+
+    final userProfileData = Provider.of<Pengguna>(context);
+    // final packAmount2 = Provider.of<OrderModel>(context);
+
       return StreamProvider<List<UserProfileModel>>.value(
         value: DatabaseService().userProfile,
         child: Scaffold(
@@ -249,7 +255,7 @@ class _UserHomeState extends State<UserHome> {
         ),
 
         //BODY
-        body: homeGenerator(_page, context, currentCredit),
+        body: homeGenerator(_page, context, currentCredit, userProfileData.uid, packAmount),
   
         bottomNavigationBar: CurvedNavigationBar(
             key: _bottomNavigationKey,

@@ -92,3 +92,35 @@ class _WithdrawInfoState extends State<WithdrawInfo> {
     );         
   }
 }
+
+class PackInfo extends StatefulWidget {
+  @override
+  _PackInfoState createState() => _PackInfoState();
+}
+
+class _PackInfoState extends State<PackInfo> {
+  @override
+  Widget build(BuildContext context) {
+    int currentAmount;
+
+    final userProfileCredit = Provider.of<List<UserProfileModel>>(context);
+
+    //cycles
+    userProfileCredit.forEach((element) { 
+      currentAmount = element.amount;
+    });
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('$currentAmount', 
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            fontSize: 32
+          ),
+        )                                                          
+      ],
+    );       
+  }
+}
