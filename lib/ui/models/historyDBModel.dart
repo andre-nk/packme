@@ -1,12 +1,12 @@
-class HistoryModel{
-  final String uid;
-  final String email;
-  final String password;
-  final String userName;
-  final String phoneNumber;
-  final String userQR;
-  final String userAddress;
-  final String credit;
-  HistoryModel({this.uid, this.email, this.password, this.userName, this.phoneNumber, this.userQR, this.userAddress, this.credit});
+import 'package:pack_me/ui/models/userModel.dart';
 
+class HistoryModel extends Pengguna{
+
+  final historyModel = Pengguna();
+
+  final String amount;
+  final String type;
+  final String provider;
+  final String date;
+  HistoryModel({this.amount, this.type, this.provider, this.date});
 }

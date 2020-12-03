@@ -1,9 +1,8 @@
 
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:pack_me/ui/models/userProfileModel.dart';
-import 'package:pack_me/ui/models/orderModel.dart';
+import 'package:pack_me/ui/models/historyDBModel.dart';
 class DatabaseService{
-
   //initialize datas
   String uid;
   final String email;
@@ -13,9 +12,8 @@ class DatabaseService{
   final String userQR;
   final String userAddress;
   final int credit;
-  DatabaseService({this.uid, this.email, this.password, this.userName, this.phoneNumber, this.userQR, this.userAddress, this.credit});
-
-  
+  DocumentReference reference;
+  DatabaseService({this.uid,this.email, this.password, this.userName, this.phoneNumber, this.userQR, this.userAddress, this.credit});
 
   //USER COLLECTION
   final CollectionReference dbUser = FirebaseFirestore.instance.collection('users');
@@ -37,7 +35,6 @@ class DatabaseService{
 
   Future createUserOrder(String userID) async{ 
     final DocumentReference reference = FirebaseFirestore.instance.collection('users').doc(userID).collection('order').doc();
-    uid = userID;
     return await reference.set({
       "amount" : 4,
       "lender": "Red Lotus Resto", //resto
@@ -45,6 +42,16 @@ class DatabaseService{
       "Box A": 1,
       "Box B": 2,
       "Box A - Mini": 1,
+    });
+  }
+
+  Future createUserHistory(String userID, String historyType, String location, String date, String amount) async{ 
+    DocumentReference reference = FirebaseFirestore.instance.collection('users').doc(userID).collection('history').doc();
+    return await reference.set({
+      "amount" : amount,
+      "provider": location, //resto
+      "date": date,
+      "type": historyType
     });
   }
 
@@ -70,9 +77,23 @@ class DatabaseService{
     }).toList();
   }
 
+  List<HistoryModel> _userHistory(QuerySnapshot snapshot){
+    return snapshot.docs.map((doc){
+      return HistoryModel(
+        amount: doc.data()['amount'],
+        type: doc.data()['type'],
+        provider: doc.data()['provider'],
+        date: doc.data()['date']
+      );
+    });
+  }
+ 
   Stream<List<UserProfileModel>> get userProfile{
     return dbUser.snapshots().map(_userProfileModelSnapshot);
   }
 
+  Stream<List<HistoryModel>> get userHistory{
+    return FirebaseFirestore.instance.collection('users').doc().collection('history').snapshots().map(_userHistory);
+  }
   // String amount =  FirebaseFirestore.instance.collection('users').doc(userID).collection('order').doc();
 }

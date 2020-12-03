@@ -9,5 +9,4 @@ class UserProfileModel{
   final String credit;
   final int amount;
   UserProfileModel({this.uid, this.email, this.password, this.userName, this.phoneNumber, this.userQR, this.userAddress, this.credit, this.amount});
-
 }

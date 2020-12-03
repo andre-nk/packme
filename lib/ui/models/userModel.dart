@@ -1,13 +1,9 @@
 class Pengguna {
-
   final String uid;
-  
   Pengguna({ this.uid });
-
 }
 
 class UserData{
-
   final String uid;
   final String email;
   final String password;
@@ -17,5 +13,4 @@ class UserData{
   final String userAddress;
   final int credit;
   UserData({this.uid, this.email, this.password, this.userName, this.phoneNumber, this.userQR, this.userAddress, this.credit});
-
 }

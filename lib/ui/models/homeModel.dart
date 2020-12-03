@@ -20,6 +20,9 @@ Widget homeGenerator(int index, context, Widget creditValue, String userID, Widg
   Widget amount = packAmount;
   String uid = userID;
 
+  DateTime now = new DateTime.now();
+  String date = new DateTime(now.year, now.month, now.day).toString(); 
+
   switch(index){
     case 0:
       button1 = Positioned(
@@ -99,7 +102,9 @@ Widget homeGenerator(int index, context, Widget creditValue, String userID, Widg
                             child: FloatingActionButton(
                               elevation: 5,
                               heroTag: "new2",
-                              onPressed: (){},
+                              onPressed: (){
+                                DatabaseService().createUserHistory(uid, 'Transaction', 'Red Lotus Resto', date, '+50.000');
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.fromLTRB(0,0,4.5,0),
                                 child: Icon(FontAwesomeIcons.moneyBillAlt, size: 20),
