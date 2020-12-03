@@ -8,6 +8,7 @@ import 'package:pack_me/ui/app/historyList.dart';
 import 'package:pack_me/ui/models/historyDBModel.dart';
 import 'package:provider/provider.dart';
 import 'package:pack_me/services/database.dart';
+import 'package:pack_me/ui/models/userModel.dart';
 
 class HistoryPage extends StatefulWidget {
   @override
@@ -16,12 +17,15 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   @override
+
   Widget build(BuildContext context) {
+    
+    var asu = Pengguna().uid;
     dynamic test = MediaQuery.of(context).size.width * 0.36;
     dynamic test2 = MediaQuery.of(context).size.height * 0.03;
 
     return StreamProvider<List<HistoryModel>>.value(
-      value: DatabaseService().userHistory,
+      value: DatabaseService(uid: asu).userHistory,
       child: Scaffold(
         appBar: AppBar(
           leading: Builder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:pack_me/ui/models/userProfileModel.dart';
 import 'package:flutter/rendering.dart';
@@ -7,12 +8,18 @@ import "package:google_fonts/google_fonts.dart";
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:image_picker/image_picker.dart';
+
 class UserProfileFull extends StatefulWidget {
   @override
   _UserProfileFullState createState() => _UserProfileFullState();
 }
 
 class _UserProfileFullState extends State<UserProfileFull> {
+  String profileUrl;
+  
   @override
   Widget build(BuildContext context) {
 
@@ -82,9 +89,18 @@ class _UserProfileFullState extends State<UserProfileFull> {
                             left: MediaQuery.of(context).size.width * 0.415,
                             height: MediaQuery.of(context).size.height * 0.18,
                             width: MediaQuery.of(context).size.width * 0.15,
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(''),
-                              backgroundColor: Colors.red,
+                            child: GestureDetector(
+                              child: (profileUrl != null) ?
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(''),
+                                )
+                                :
+                                CircleAvatar(
+                                  backgroundColor: Colors.grey[300],
+                                ),
+                              onTap: (){
+                                uploadImage(userUID);
+                              },
                             ),
                           ),
                           Positioned(
@@ -1055,4 +1071,36 @@ class _UserProfileFullState extends State<UserProfileFull> {
         } 
     );
   }
+
+  void uploadImage(uid) async{
+
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile profileImagePicked;
+
+    //permissions
+    await Permission.photos.request();
+    var permissionStatus = await Permission.photos.status;
+    if(permissionStatus.isGranted){
+      //choosing image
+      profileImagePicked = await _picker.getImage(source: ImageSource.gallery);
+      var stagingFile = File(profileImagePicked.path);
+
+      if(profileImagePicked != null){
+        var snapshot = await _storage.ref().child('userProfile/$uid').putFile(stagingFile);
+        var downloadProfileURL = await snapshot.ref.getDownloadURL();
+        setState((){
+          profileUrl = downloadProfileURL;
+        });
+
+      }else{
+        //no image picked
+      }
+
+    }else{
+
+    }
+
+  }
+
 }

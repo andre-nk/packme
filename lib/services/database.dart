@@ -1,9 +1,12 @@
 
 import "package:cloud_firestore/cloud_firestore.dart";
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:pack_me/ui/models/userProfileModel.dart';
 import 'package:pack_me/ui/models/historyDBModel.dart';
 class DatabaseService{
   //initialize datas
+  User alpha = FirebaseAuth.instance.currentUser;
   String uid;
   final String email;
   final String password;
@@ -79,12 +82,14 @@ class DatabaseService{
 
   List<HistoryModel> _userHistory(QuerySnapshot snapshot){
     return snapshot.docs.map((doc){
+      
       return HistoryModel(
         amount: doc.data()['amount'],
         type: doc.data()['type'],
         provider: doc.data()['provider'],
         date: doc.data()['date']
       );
+     
     });
   }
  
@@ -93,7 +98,9 @@ class DatabaseService{
   }
 
   Stream<List<HistoryModel>> get userHistory{
-    return FirebaseFirestore.instance.collection('users').doc().collection('history').snapshots().map(_userHistory);
+    print(FirebaseFirestore.instance.collection('users').doc(alpha.uid).collection('history'));
+    print(alpha.uid);
+    return FirebaseFirestore.instance.collection('users').doc(alpha.uid).collection('history').snapshots().map(_userHistory);
   }
   // String amount =  FirebaseFirestore.instance.collection('users').doc(userID).collection('order').doc();
 }
