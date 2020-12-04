@@ -33,7 +33,7 @@ Widget homeGenerator(int index, context, Widget creditValue, String userID, Widg
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
-                              heroTag: "new2",
+                              heroTag: "case0A",
                               onPressed: (){
                                 
                               },
@@ -51,7 +51,7 @@ Widget homeGenerator(int index, context, Widget creditValue, String userID, Widg
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
-                              heroTag: "new2",
+                              heroTag: "case0B",
                               onPressed: (){},
                               child: Padding(
                                 padding: const EdgeInsets.fromLTRB(0,0,0,2),
@@ -101,7 +101,7 @@ Widget homeGenerator(int index, context, Widget creditValue, String userID, Widg
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
-                              heroTag: "new2",
+                              heroTag: "case1",
                               onPressed: (){
                                 DatabaseService().createUserHistory(uid, 'Transaction', 'Red Lotus Resto', date, '+50.000');
                               },
@@ -143,7 +143,7 @@ Widget homeGenerator(int index, context, Widget creditValue, String userID, Widg
                         child: FittedBox(
                             child: FloatingActionButton(
                               elevation: 5,
-                              heroTag: "new2",
+                              heroTag: "case2",
                               onPressed: (){
                                 DatabaseService().createUserOrder(uid);
                               },

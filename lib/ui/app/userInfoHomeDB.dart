@@ -82,12 +82,19 @@ class _WithdrawInfoState extends State<WithdrawInfo> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('$currentCredit', 
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-            fontSize: 32
-          ),
-        )                                                          
+        (currentCredit != null)?
+          Text('$currentCredit', 
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.bold,
+              fontSize: 32
+            ),
+          ) :
+          Text('', 
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.bold,
+              fontSize: 32
+            ),
+          )                                                         
       ],
     );         
   }

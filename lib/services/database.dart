@@ -1,9 +1,9 @@
 
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:pack_me/ui/models/userProfileModel.dart';
 import 'package:pack_me/ui/models/historyDBModel.dart';
+import 'package:pack_me/ui/models/infoDBModel.dart';
 class DatabaseService{
   //initialize datas
   User alpha = FirebaseAuth.instance.currentUser;
@@ -20,6 +20,10 @@ class DatabaseService{
 
   //USER COLLECTION
   final CollectionReference dbUser = FirebaseFirestore.instance.collection('users');
+
+  //FAQ COLLECTION
+  final CollectionReference dbFAQ = FirebaseFirestore.instance.collection("app-info-faq");
+
   // ignore: non_constant_identifier_names
   Future updateUserData(String uid, String userAddress, String userQR, String password, String userName, String phoneNumber, String email) async{
       return await dbUser.doc(uid).set({
@@ -90,7 +94,16 @@ class DatabaseService{
         date: doc.data()['date']
       );
      
-    });
+    }).toList();
+  }
+
+  List<InfoModel> _appInfoFAQ(QuerySnapshot snapshot){
+    return snapshot.docs.map((doc){
+      return InfoModel(
+        description: doc.data()['description'],
+        title: doc.data()['title']
+      );
+    }).toList();
   }
  
   Stream<List<UserProfileModel>> get userProfile{
@@ -98,9 +111,12 @@ class DatabaseService{
   }
 
   Stream<List<HistoryModel>> get userHistory{
-    print(FirebaseFirestore.instance.collection('users').doc(alpha.uid).collection('history'));
-    print(alpha.uid);
     return FirebaseFirestore.instance.collection('users').doc(alpha.uid).collection('history').snapshots().map(_userHistory);
+  }
+  
+
+  Stream<List<InfoModel>> get appInfoFAQ{
+    return dbFAQ.snapshots().map(_appInfoFAQ);
   }
   // String amount =  FirebaseFirestore.instance.collection('users').doc(userID).collection('order').doc();
 }

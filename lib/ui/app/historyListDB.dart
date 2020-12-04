@@ -13,7 +13,6 @@ class _HistoryListState extends State<HistoryList> {
   Widget build(BuildContext context) {
 
     final historyList = Provider.of<List<HistoryModel>>(context); 
-    print(historyList);
 
     return ListView.builder(
       itemCount: historyList.length,

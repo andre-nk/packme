@@ -250,7 +250,7 @@ class _SignUpState extends State<SignUp> {
                                               child: FittedBox(
                                                 child: FloatingActionButton(
                                                   elevation: 5,
-                                                  heroTag: "new1",
+                                                  heroTag: "register",
                                                   onPressed: () async {
                                                     if(_formKey.currentState.validate()){
                                                       setState(() {

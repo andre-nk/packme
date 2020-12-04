@@ -92,7 +92,7 @@ class HistoryTile extends StatelessWidget {
 //   }
 
 //   String amountString = amount.toString();
-//   String asu = amountString.substring(0,1);
+//   String foo = amountString.substring(0,1);
 //   String asu2 = amountString.substring(1, amountString.length);
 
 //   transactionType.indexOf('minjam') > 0 || transactionType.indexOf('bali') > 0 ?
@@ -104,7 +104,7 @@ class HistoryTile extends StatelessWidget {
 //     amount > 0 ?
 //       amountString = '+ ' + 'Rp' +  amountString
 //     :
-//       amountString = asu + ' Rp' + asu2;
+//       amountString = foo + ' Rp' + asu2;
 
 // Widget buildListTileHead(String transactionType, String transactionMethod, String date, int amount,  context) {
 //   void _showSnackBar(BuildContext context, String text) {
@@ -112,7 +112,7 @@ class HistoryTile extends StatelessWidget {
 //   }
 
 //   String amountString = amount.toString();
-//   String asu = amountString.substring(0,1);
+//   String foo = amountString.substring(0,1);
 //   String asu2 = amountString.substring(1, amountString.length);
 
 //   transactionType.indexOf('Peminjaman') > 0 ||  transactionType.indexOf('Pengembalian') > 0 ?
@@ -124,7 +124,7 @@ class HistoryTile extends StatelessWidget {
 //     amount > 0 ?
 //       amountString = '+ ' + 'Rp' +  amountString
 //     :
-//       amountString = asu + ' Rp' + asu2;
+//       amountString = foo + ' Rp' + asu2;
 
 //   return Padding(
 //                 padding: const EdgeInsets.all(0),
