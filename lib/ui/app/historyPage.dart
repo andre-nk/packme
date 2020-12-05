@@ -17,11 +17,9 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   @override
-
   Widget build(BuildContext context) {
-    
     var foo = Pengguna().uid;
-    dynamic test = MediaQuery.of(context).size.width * 0.36;
+    dynamic test = MediaQuery.of(context).size.width * 0.45;
     dynamic test2 = MediaQuery.of(context).size.height * 0.03;
 
     return StreamProvider<List<HistoryModel>>.value(
@@ -37,16 +35,12 @@ class _HistoryPageState extends State<HistoryPage> {
               ),
             ),
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, test2, test, 0),
-              child: Text('Riwayat',
-                  style: GoogleFonts.poppins(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: HexColor('#030835'))),
-            )
-          ],
+          title: Text('Riwayat',
+              style: GoogleFonts.poppins(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: HexColor('#030835'))),
+          centerTitle: true,
           toolbarHeight: 80,
           backgroundColor: Colors.transparent,
           elevation: 0,

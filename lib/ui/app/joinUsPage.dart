@@ -26,16 +26,12 @@ class JoinUs extends StatelessWidget {
               ),
             ),
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(0,test2,test,0),
-            child: Text('Gabung Kami', style: GoogleFonts.poppins(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: HexColor('#030835')
-            )),
-          )
-        ],
+        title: Text('Gabung dengan Kami',
+              style: GoogleFonts.poppins(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: HexColor('#030835'))),
+          centerTitle: true,
         toolbarHeight: 80,
         backgroundColor: Colors.transparent,
         elevation: 0,

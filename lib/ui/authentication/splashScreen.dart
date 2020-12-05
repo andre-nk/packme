@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:pack_me/services/loggedDecider.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
   /* CURRENTLY NOT WORKING
   Future langsungan() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -40,5 +39,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
-

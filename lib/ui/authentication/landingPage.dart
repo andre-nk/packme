@@ -10,12 +10,11 @@ class Landing extends StatefulWidget {
 }
 
 class _LandingState extends State<Landing> {
-
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-
-    Navigator.of(context).pushNamedAndRemoveUntil('/signup', (Route<dynamic> route) => false);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/signup', (Route<dynamic> route) => false);
 
     // Navigator.of(context).push(
     //   MaterialPageRoute(builder: (_) => Login()),
@@ -30,15 +29,13 @@ class _LandingState extends State<Landing> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     const bodyStyle = TextStyle(fontSize: 18.0);
     const pageDecoration = const PageDecoration(
       titleTextStyle: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
-      titlePadding: EdgeInsets.fromLTRB(0,50,0,0),
+      titlePadding: EdgeInsets.fromLTRB(0, 50, 0, 0),
       descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       pageColor: Colors.white,
       imagePadding: EdgeInsets.zero,
@@ -63,22 +60,19 @@ class _LandingState extends State<Landing> {
         ),
         PageViewModel(
           title: "Dapatkan saldo sampai Rp3.000!",
-          body:
-              "untuk setiap pengembalian satu packaging dengan utuh",
+          body: "untuk setiap pengembalian satu packaging dengan utuh",
           // image: _buildImage('img3'),
           decoration: pageDecoration,
         ),
-         PageViewModel(
+        PageViewModel(
           title: "Tarik saldo kamu!",
-          body:
-              "Ke rekening yang kamu inginkan. Kami sediakan banyak lho!",
+          body: "Ke rekening yang kamu inginkan. Kami sediakan banyak lho!",
           // image: _buildImage('img3'),
           decoration: pageDecoration,
         ),
-         PageViewModel(
+        PageViewModel(
           title: "Selamat kamu telah mengurangi sampah plastik",
-          body:
-              "Udah dapat uang, bisa ngurangin sampah plastik lagi! ",
+          body: "Udah dapat uang, bisa ngurangin sampah plastik lagi! ",
           // image: _buildImage('img3'),
           decoration: pageDecoration,
         ),
@@ -95,6 +89,6 @@ class _LandingState extends State<Landing> {
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
       ),
-    ); 
+    );
   }
 }

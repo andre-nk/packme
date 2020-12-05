@@ -10,10 +10,9 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-
   final User alpha = FirebaseAuth.instance.currentUser;
   String profilePic;
-  
+
   @override
   Widget build(BuildContext context) {
     String userEmail;
