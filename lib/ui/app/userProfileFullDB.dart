@@ -8,6 +8,7 @@ import "package:google_fonts/google_fonts.dart";
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,7 +19,9 @@ class UserProfileFull extends StatefulWidget {
 }
 
 class _UserProfileFullState extends State<UserProfileFull> {
-  String profileUrl;
+  
+  final CollectionReference dbUser = FirebaseFirestore.instance.collection('users');
+  final User alpha = FirebaseAuth.instance.currentUser;
   
   @override
   Widget build(BuildContext context) {
@@ -47,6 +50,7 @@ class _UserProfileFullState extends State<UserProfileFull> {
     String userUID;
     String oldPass;
     String oldPassMatcher;
+    String profilePic;
 
     final userProfileFullData = Provider.of<List<UserProfileModel>>(context);
     userProfileFullData.forEach((element) { 
@@ -59,6 +63,7 @@ class _UserProfileFullState extends State<UserProfileFull> {
       userQR = element.userQR;
       userUID = element.uid;
       oldPassMatcher = element.password;
+      profilePic = element.profilePic;
     });
 
     if(userEmail.length > 20){
@@ -68,6 +73,8 @@ class _UserProfileFullState extends State<UserProfileFull> {
     if(userName.length > 20){
       userEmail = userName.substring(0,20) + '...';
     }
+
+    print(profilePic);
 
     return StreamBuilder<List<UserProfileModel>>(
         stream: DatabaseService().userProfile,
@@ -90,9 +97,18 @@ class _UserProfileFullState extends State<UserProfileFull> {
                             height: MediaQuery.of(context).size.height * 0.18,
                             width: MediaQuery.of(context).size.width * 0.15,
                             child: GestureDetector(
-                              child: (profileUrl != null) ?
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(''),
+                              child: ('$profilePic' != null) ?
+                                Container(
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image:  new NetworkImage(
+                                        '$profilePic',
+                                        scale: 0.5
+                                      ),
+                                    ),
+                                  ),
                                 )
                                 :
                                 CircleAvatar(
@@ -1089,10 +1105,10 @@ class _UserProfileFullState extends State<UserProfileFull> {
       if(profileImagePicked != null){
         var snapshot = await _storage.ref().child('userProfile/$uid').putFile(stagingFile);
         var downloadProfileURL = await snapshot.ref.getDownloadURL();
-        setState((){
-          profileUrl = downloadProfileURL;
-        });
-
+        createUserProfilePic(downloadProfileURL);
+        // setState((){
+        //   profileUrl = downloadProfileURL;
+        // });
       }else{
         //no image picked
       }
@@ -1103,4 +1119,11 @@ class _UserProfileFullState extends State<UserProfileFull> {
 
   }
 
+  Future createUserProfilePic(String downloadURL) async{
+    print(dbUser);
+    print(alpha.uid);
+    return await dbUser.doc(alpha.uid).update({
+      "tesPic" : downloadURL,
+    });
+  }
 }

@@ -79,7 +79,8 @@ class DatabaseService{
         userQR: doc.data()['userQR'],
         userName: doc.data()['displayName'],
         credit: doc.data()['currentCredit'],
-        amount: doc.data()['amount']
+        amount: doc.data()['amount'],
+        profilePic: doc.data()['tesPic']
       );
     }).toList();
   }

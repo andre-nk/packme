@@ -216,16 +216,6 @@ class _UserHomeState extends State<UserHome> {
           actions: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20,22,20,20),
-              // child: ToggleSwitch(
-              //   minWidth: 50,
-              //   minHeight: 20,
-              //   cornerRadius: 20,
-              //   initialLabelIndex: 0,
-              //   labels: ['America', ''],
-              //   onToggle: (index) {
-              //     print('switched to: $index');
-              //   },
-              // ),
               child: Container(
                 child: RaisedButton(
                   onPressed: (){
@@ -239,18 +229,18 @@ class _UserHomeState extends State<UserHome> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0,0,18,0),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.push(context, PageTransition(type: PageTransitionType.topToBottom, child: ProfilePage() ));
-                },
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(''),
-                  backgroundColor: Colors.red,
-                ),
-              ),
-            )
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(0,0,18,0),
+            //   child: GestureDetector(
+            //     onTap: (){
+            //       Navigator.push(context, PageTransition(type: PageTransitionType.topToBottom, child: ProfilePage() ));
+            //     },
+            //     child: CircleAvatar(
+            //       backgroundImage: NetworkImage(''),
+            //       backgroundColor: Colors.red,
+            //     ),
+            //   ),
+            // )
           ],
         ),
 
