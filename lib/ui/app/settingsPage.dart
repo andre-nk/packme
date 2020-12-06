@@ -19,10 +19,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    dynamic test = MediaQuery.of(context).size.width * 0.3;
-    dynamic test2 = MediaQuery.of(context).size.height * 0.03;
-
     return Scaffold(
       appBar: AppBar(
         leading: Builder(

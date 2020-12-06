@@ -5,14 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me/ui/app/appInfoPage.dart';
 import 'package:pack_me/ui/app/historyPage.dart';
+import 'package:pack_me/ui/app/withdrawForm.dart';
 import 'package:pack_me/ui/models/zephyrnaut_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pack_me/services/database.dart';
+//import 'package:pack_me/ui/app/qr_scan.dart';
 
 Widget homeGenerator(
-    int index, context, Widget creditValue, String userID, Widget packAmount) {
+  int index, context, Widget creditValue, String userID, Widget packAmount) {
   Widget button1;
   Widget button2;
   Widget texts;
@@ -20,8 +22,9 @@ Widget homeGenerator(
   Widget amount = packAmount;
   String uid = userID;
 
-  DateTime now = new DateTime.now();
-  String date = new DateTime(now.year, now.month, now.day).toString();
+  // DateTime now = new DateTime.now();
+  // String date = new DateTime(now.year, now.month, now.day).toString();
+  String barcode = "";
 
   switch (index) {
     case 0:
@@ -34,7 +37,19 @@ Widget homeGenerator(
             child: FloatingActionButton(
               elevation: 5,
               heroTag: "case0A",
-              onPressed: () {},
+              onPressed: () async {
+                // QRScanMethod();
+                  // try {
+                  //   dynamic barcodeOutput = await BarcodeScanner.scan();
+                  //   barcode = barcodeOutput;
+                  // } on PlatformException catch (error) {
+                  //   if (error.code == BarcodeScanner.cameraAccessDenied) {
+                  //     barcode = 'PackMe tidak diizinkan membuka kamera';
+                  //   } else {
+                  //     barcode = '$error';
+                  //   }
+                  // }
+              },
               child: Icon(Zephyrnaut.qrMark, size: 20),
               backgroundColor: HexColor('#FF8787'),
             ),
@@ -65,7 +80,7 @@ Widget homeGenerator(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text('Scan QR',
+            Text('Scan QR = $barcode',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -91,24 +106,30 @@ Widget homeGenerator(
       );
       break;
     case 1:
-      button1 = Positioned(
-        top: MediaQuery.of(context).size.height * 0.09,
-        left: MediaQuery.of(context).size.width * 0.41,
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.1,
-          child: FittedBox(
-            child: FloatingActionButton(
-              elevation: 5,
-              heroTag: "case1",
-              onPressed: () {
-                DatabaseService().createUserHistory(
-                    uid, 'Transaction', 'Red Lotus Resto', date, '+50.000');
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 4, 9, 0),
-                child: Icon(Zephyrnaut.moneyMark, size: 17),
+      button1 = Center(
+        heightFactor: 2.5,
+        child: Positioned(
+          // top: MediaQuery.of(context).size.height * 0.03,
+          // left: MediaQuery.of(context).size.width * 0.41,
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.1,
+            child: FittedBox(
+              child: FloatingActionButton(
+                elevation: 5,
+                heroTag: "case1",
+                onPressed: () {
+                  Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.fade,
+                              child: WithdrawForm()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 4, 9, 0),
+                  child: Icon(Zephyrnaut.moneyMark, size: 17),
+                ),
+                backgroundColor: HexColor('#43D1A5'),
               ),
-              backgroundColor: HexColor('#43D1A5'),
             ),
           ),
         ),
@@ -134,20 +155,23 @@ Widget homeGenerator(
       );
       break;
     case 2:
-      button1 = Positioned(
-        top: MediaQuery.of(context).size.height * 0.09,
-        left: MediaQuery.of(context).size.width * 0.41,
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.1,
-          child: FittedBox(
-            child: FloatingActionButton(
-              elevation: 5,
-              heroTag: "case2",
-              onPressed: () {
-                DatabaseService().createUserOrder(uid);
-              },
-              child: Icon(Feather.box),
-              backgroundColor: HexColor('#FF8787'),
+      button1 = Center(
+        heightFactor: 2.5,
+        child: Positioned(
+          // top: MediaQuery.of(context).size.height * 0.09,
+          // left: MediaQuery.of(context).size.width * 0.41,
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.1,
+            child: FittedBox(
+              child: FloatingActionButton(
+                elevation: 5,
+                heroTag: "case2",
+                onPressed: () {
+                  DatabaseService().createUserOrder(uid);
+                },
+                child: Icon(Feather.box),
+                backgroundColor: HexColor('#FF8787'),
+              ),
             ),
           ),
         ),

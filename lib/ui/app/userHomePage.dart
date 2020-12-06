@@ -9,6 +9,7 @@ import 'package:pack_me/ui/app/appInfoPage.dart';
 import 'package:pack_me/ui/app/joinUsPage.dart';
 import 'package:pack_me/ui/app/profilePage.dart';
 import 'package:pack_me/ui/app/settingsPage.dart';
+import 'package:pack_me/ui/app/timelinePage.dart';
 import 'package:pack_me/ui/app/userInfoHomeDB.dart';
 import 'package:pack_me/ui/models/zephyrnaut_icons.dart';
 import 'package:provider/provider.dart';
@@ -125,7 +126,7 @@ class _UserHomeState extends State<UserHome> {
                           context,
                           PageTransition(
                               type: PageTransitionType.fade,
-                              child: SettingsPage()));
+                              child: TimelinePage()));
                     },
                   ),
                   ListTile(
@@ -249,22 +250,6 @@ class _UserHomeState extends State<UserHome> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 18, 0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.topToBottom,
-                            child: ProfilePage()));
-                  },
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(''),
-                    backgroundColor: Colors.red,
-                  ),
-                ),
-              )
             ],
           ),
 

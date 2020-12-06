@@ -19,8 +19,6 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     var foo = Pengguna().uid;
-    dynamic test = MediaQuery.of(context).size.width * 0.45;
-    dynamic test2 = MediaQuery.of(context).size.height * 0.03;
 
     return StreamProvider<List<HistoryModel>>.value(
       value: DatabaseService(uid: foo).userHistory,

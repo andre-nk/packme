@@ -100,7 +100,7 @@ class _WithdrawInfoState extends State<WithdrawInfo> {
       children: [
         (currentCredit != null)
             ? Text(
-                '$currentCredit',
+                'Rp$currentCredit',
                 style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold, fontSize: 32),
               )

@@ -56,6 +56,7 @@ class _AppInfoState extends State<AppInfo> {
           elevation: 0,
         ),
         body: InfoTileDB()
+
       ),
     );
   }

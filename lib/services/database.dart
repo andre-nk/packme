@@ -112,7 +112,7 @@ class DatabaseService{
   }
 
   Stream<List<HistoryModel>> get userHistory{
-    return FirebaseFirestore.instance.collection('users').doc(alpha.uid).collection('history').snapshots().map(_userHistory);
+    return FirebaseFirestore.instance.collection('users').doc(alpha.uid).collection("history").orderBy("date").snapshots().map(_userHistory);
   }
   
 

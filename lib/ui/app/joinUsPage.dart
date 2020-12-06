@@ -11,8 +11,6 @@ class JoinUs extends StatelessWidget {
  @override
   Widget build(BuildContext context) {
 
-    dynamic test = MediaQuery.of(context).size.width * 0.27;
-    dynamic test2 = MediaQuery.of(context).size.height * 0.03;
 
     return Scaffold(
       appBar: AppBar(

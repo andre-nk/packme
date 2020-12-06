@@ -12,7 +12,8 @@ class _HistoryListState extends State<HistoryList> {
   @override
   Widget build(BuildContext context) {
 
-    final historyList = Provider.of<List<HistoryModel>>(context); 
+    List historyList = Provider.of<List<HistoryModel>>(context); 
+    historyList = historyList.reversed.toList();
 
     return ListView.builder(
       itemCount: historyList.length,
