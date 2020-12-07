@@ -5,22 +5,33 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me/ui/app/appInfoPage.dart';
 import 'package:pack_me/ui/app/historyPage.dart';
+import 'package:pack_me/ui/app/orderMethod.dart';
 import 'package:pack_me/ui/app/withdrawForm.dart';
 import 'package:pack_me/ui/models/zephyrnaut_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pack_me/services/database.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 //import 'package:pack_me/ui/app/qr_scan.dart';
 
 Widget homeGenerator(
-  int index, context, Widget creditValue, String userID, Widget packAmount) {
+    int index, context, Widget creditValue, String userID, Widget packAmount) {
   Widget button1;
   Widget button2;
   Widget texts;
   Widget credit = creditValue;
   Widget amount = packAmount;
   String uid = userID;
+
+  final CollectionReference dbUser =
+      FirebaseFirestore.instance.collection('users');
+
+  Future createUserTempoQR(String outputQR) async {
+    return await dbUser.doc(uid).update({
+      "tempQR": outputQR,
+    });
+  }
 
   // DateTime now = new DateTime.now();
   // String date = new DateTime(now.year, now.month, now.day).toString();
@@ -38,17 +49,8 @@ Widget homeGenerator(
               elevation: 5,
               heroTag: "case0A",
               onPressed: () async {
-                // QRScanMethod();
-                  // try {
-                  //   dynamic barcodeOutput = await BarcodeScanner.scan();
-                  //   barcode = barcodeOutput;
-                  // } on PlatformException catch (error) {
-                  //   if (error.code == BarcodeScanner.cameraAccessDenied) {
-                  //     barcode = 'PackMe tidak diizinkan membuka kamera';
-                  //   } else {
-                  //     barcode = '$error';
-                  //   }
-                  // }
+                barcode = await scanner.scan();
+                createUserTempoQR(barcode);
               },
               child: Icon(Zephyrnaut.qrMark, size: 20),
               backgroundColor: HexColor('#FF8787'),
@@ -80,7 +82,7 @@ Widget homeGenerator(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text('Scan QR = $barcode',
+            Text('Scan QR',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -119,10 +121,10 @@ Widget homeGenerator(
                 heroTag: "case1",
                 onPressed: () {
                   Navigator.push(
-                          context,
-                          PageTransition(
-                              type: PageTransitionType.fade,
-                              child: WithdrawForm()));
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade,
+                          child: WithdrawForm()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 4, 9, 0),
@@ -167,7 +169,10 @@ Widget homeGenerator(
                 elevation: 5,
                 heroTag: "case2",
                 onPressed: () {
-                  DatabaseService().createUserOrder(uid);
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade, child: OrderMethod()));
                 },
                 child: Icon(Feather.box),
                 backgroundColor: HexColor('#FF8787'),
@@ -224,7 +229,7 @@ Widget homeGenerator(
               button1,
               button2,
               Positioned(
-                bottom: MediaQuery.of(context).size.height * 0.06,
+                bottom: MediaQuery.of(context).size.height * 0.04,
                 left: 0,
                 child: Container(
                   width: MediaQuery.of(context).size.width * 1,
@@ -233,7 +238,7 @@ Widget homeGenerator(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 20,
+                          height: 15,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

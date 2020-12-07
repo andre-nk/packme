@@ -6,11 +6,14 @@ import "package:google_fonts/google_fonts.dart";
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pack_me/ui/models/historyDBModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class HistoryTile extends StatelessWidget {
-  void _showSnackBar(BuildContext context, String text) {
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text(text)));
-  }
+  final CollectionReference dbUser =
+      FirebaseFirestore.instance.collection('users');
+  final User alpha = FirebaseAuth.instance.currentUser;
 
   final HistoryModel history;
   HistoryTile({this.history});
@@ -79,7 +82,9 @@ class HistoryTile extends StatelessWidget {
         IconSlideAction(
           color: HexColor('#FF8787'),
           icon: FlutterIcons.delete_outline_mco,
-          onTap: () => _showSnackBar(context, 'Delete'),
+          onTap: () => {
+            
+          }
         ),
       ],
     );

@@ -24,7 +24,7 @@ class JoinUs extends StatelessWidget {
               ),
             ),
         ),
-        title: Text('Gabung dengan Kami',
+        title: Text('Gabung',
               style: GoogleFonts.poppins(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
