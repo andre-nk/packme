@@ -9,12 +9,12 @@ import 'package:provider/provider.dart';
 import 'package:pack_me/ui/models/userProfileModel.dart';
 import 'package:pack_me/services/database.dart';
 
-class OrderDriverOnBoard extends StatefulWidget {
+class OrderCounterOnBoard extends StatefulWidget {
   @override
-  _OrderDriverOnBoardState createState() => _OrderDriverOnBoardState();
+  _OrderCounterOnBoardState createState() => _OrderCounterOnBoardState();
 }
 
-class _OrderDriverOnBoardState extends State<OrderDriverOnBoard> {
+class _OrderCounterOnBoardState extends State<OrderCounterOnBoard> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<UserProfileModel>>.value(
@@ -46,29 +46,23 @@ class _OrderDriverOnBoardState extends State<OrderDriverOnBoard> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                DriverOrderDB(),
+                DriverOrderDB(), //SOON FOR COUNTER LIST LOCATION
                 SizedBox(height: 30),
                 Text(
-                  'Driver kami akan secara otomatis mengunjungi alamat Anda untuk\nmengambil pack pada tanggal //20//\nsetiap bulannya',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                    fontSize: 16, fontWeight: FontWeight.w400)),
-                SizedBox(height: 30),
-                Text(
-                  'Anda dapat panggil driver kami ke alamat Anda sekarang dengan fee tertentu.',
+                  'Pilih counter di atas sesuai \n dengan counter yang Anda tuju lalu klik "Scan QR"',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                     fontSize: 16, fontWeight: FontWeight.w400)),
                 SizedBox(height: 30),
                 Container(
                 height: 50,
-                width: 190,
+                width: 270,
                 child: RaisedButton(
                   color: HexColor('#FF8787'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25)),
                   onPressed: () {},
-                  child: Text('Pesan Driver',
+                  child: Text('Scan QR Code Counter',
                       style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
