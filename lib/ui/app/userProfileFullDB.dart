@@ -242,7 +242,13 @@ class _UserProfileFullState extends State<UserProfileFull> {
                                                         : null,
                                                     onChanged: (val) {
                                                       setState(
-                                                          () => userName = val);
+                                                          (){
+                                                            userName = val;
+                                                            // FirebaseAuth.instance.currentUser.updateProfile(
+                                                              
+                                                            // );
+                                                          }
+                                                      );
                                                     },
                                                   ),
                                                 ),
