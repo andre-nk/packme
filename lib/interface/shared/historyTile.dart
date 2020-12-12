@@ -7,9 +7,9 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pack_me_alpha/models/transaction.dart';
 import 'package:pack_me_alpha/models/user.dart';
+import 'package:intl/intl.dart';
 
 class HistoryTile extends StatelessWidget {
-
   final int id;
   final String provider;
   final String providerLocation;
@@ -33,9 +33,8 @@ class HistoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     String typeString = type.toString();
-    typeString = typeString.substring(16,typeString.length);
+    typeString = typeString.substring(16, typeString.length);
 
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
@@ -79,7 +78,25 @@ class HistoryTile extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child: Text(total.toString(),
+                      child: Text(
+                          (type == TransactionType.Bonus)
+                              ? NumberFormat.currency(
+                                      symbol: 'IDR',
+                                      decimalDigits: 0,
+                                      locale: 'id-ID')
+                                  .format(total)
+                              : (type == TransactionType.Penarikan)
+                                  ? '-' +
+                                      NumberFormat.currency(
+                                              symbol: 'IDR',
+                                              decimalDigits: 0,
+                                              locale: 'id-ID')
+                                          .format(total)
+                                  : (type == TransactionType.Peminjaman)
+                                      ? total.toString() + ' pack'
+                                      : (type == TransactionType.Pengembalian)
+                                          ? '-' + total.toString() + ' pack'
+                                          : total.toString(),
                           style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                               fontWeight: FontWeight.w600,
@@ -97,12 +114,9 @@ class HistoryTile extends StatelessWidget {
       ),
       secondaryActions: <Widget>[
         IconSlideAction(
-          color: HexColor('#FF8787'),
-          icon: FlutterIcons.delete_outline_mco,
-          onTap: () => {
-            
-          }
-        ),
+            color: HexColor('#FF8787'),
+            icon: FlutterIcons.delete_outline_mco,
+            onTap: () => {}),
       ],
     );
   }

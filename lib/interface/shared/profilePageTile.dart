@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pack_me_alpha/models/user.dart';
@@ -24,7 +25,20 @@ class ProfilePageTile extends StatelessWidget {
           tileColor: HexColor('#FFFFFF'),
           leading: Padding(
             padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-            child: Icon(Feather.user, color: HexColor('#030835')),
+            child: Icon(
+                (type == 'Nama')
+                    ? Feather.user
+                    : (type == 'E-mail')
+                        ? Feather.mail
+                        : (type == 'Password')
+                            ? Feather.lock
+                            : (type == 'Nomor Telepon')
+                                ? Feather.phone
+                                : (type == 'Alamat')
+                                    ? FontAwesomeIcons.addressCard
+                                    : Icons.circle,
+                size: 20,
+                color: HexColor('#030835')),
           ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,9 +58,7 @@ class ProfilePageTile extends StatelessWidget {
                                   : (type == 'Alamat')
                                       ? userSource.address.substring(0, 20) +
                                           '...'
-                                      : (type == 'QR Code Personal')
-                                          ? '>'
-                                          : 'Data gagal dimuat',
+                                      : 'Data gagal dimuat',
                   style: GoogleFonts.poppins(
                       fontSize: 16, fontWeight: FontWeight.w300)),
             ],
@@ -92,7 +104,17 @@ class ProfilePageTile extends StatelessWidget {
                                           EdgeInsets.fromLTRB(15, 15, 15, 15),
                                       isDense: true,
                                       border: InputBorder.none,
-                                      hintText: userSource.name,
+                                      hintText: (type == 'Nama')
+                                          ? userSource.name
+                                          : (type == 'E-mail')
+                                              ? userSource.email
+                                              : (type == 'Password')
+                                                  ? 'Password baru'
+                                                  : (type == 'Nomor Telepon')
+                                                      ? userSource.phoneNumber
+                                                      : (type == 'Alamat')
+                                                          ? userSource.address.substring(0, 20) + '...'
+                                                          : 'Data gagal dimuat',
                                       hintStyle: GoogleFonts.poppins(
                                           color: Colors.grey[500],
                                           fontSize: 18)),

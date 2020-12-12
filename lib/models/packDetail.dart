@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class PackDetail extends Equatable{
   final int idPack;
   final String name;

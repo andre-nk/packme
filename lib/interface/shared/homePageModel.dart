@@ -3,6 +3,10 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pack_me_alpha/interface/app/appInfoPage.dart';
+import 'package:pack_me_alpha/interface/app/historyPage.dart';
+import 'package:pack_me_alpha/interface/app/orderPage.dart';
+import 'package:pack_me_alpha/interface/app/withdrawPage.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:pack_me_alpha/models/zephyrnaut_icons.dart';
@@ -107,11 +111,11 @@ Widget homeGenerator(int index, context /*int index, context, Widget creditValue
                 elevation: 5,
                 heroTag: "case1",
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     PageTransition(
-                  //         type: PageTransitionType.fade,
-                  //         child: WithdrawForm()));
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade,
+                          child: WithdrawPage()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 4, 9, 0),
@@ -156,10 +160,10 @@ Widget homeGenerator(int index, context /*int index, context, Widget creditValue
                 elevation: 5,
                 heroTag: "case2",
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     PageTransition(
-                  //         type: PageTransitionType.fade, child: OrderMethod()));
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade, child: OrderMethod()));
                 },
                 child: Icon(Feather.box),
                 backgroundColor: HexColor('#FF8787'),
@@ -232,22 +236,22 @@ Widget homeGenerator(int index, context /*int index, context, Widget creditValue
                             padding: const EdgeInsets.fromLTRB(0, 0, 240, 0),
                             child: IconButton(
                                 onPressed: () => {
-                                      // Navigator.push(
-                                      //     context,
-                                      //     PageTransition(
-                                      //         type: PageTransitionType.fade,
-                                      //         child: HistoryPage()))
+                                      Navigator.push(
+                                          context,
+                                          PageTransition(
+                                              type: PageTransitionType.fade,
+                                              child: HistoryPage()))
                                     },
                                 icon: Icon(LineIcons.clock_o, size: 30)),
                           ),
                           IconButton(
                             icon: Icon(LineIcons.question_circle, size: 30),
                             onPressed: () => {
-                              // Navigator.push(
-                              //     context,
-                              //     PageTransition(
-                              //         type: PageTransitionType.fade,
-                              //         child: AppInfo()))
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: AppInfo()))
                             },
                           ),
                         ],

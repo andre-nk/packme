@@ -1,36 +1,22 @@
 import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pack_me_alpha/interface/shared/pages.dart';
 import 'package:pack_me_alpha/interface/shared/profilePageTile.dart';
 import 'package:pack_me_alpha/models/user.dart';
 import 'package:pack_me_alpha/models/zephyrnaut_icons.dart';
-import 'package:provider/provider.dart';
-
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String userEmail;
-  String userName;
-  String userPhone;
-  String userPassword;
-  String userAddress;
-  String userQR;
-  String userUID;
-  String oldPass;
-  String oldPassMatcher;
-  String profilePic;
-
   final User user = sampleUser;
-
   @override
   Widget build(BuildContext context) {
+    final String userID = user.id.toString();
     return Scaffold(
       body: ListView(children: [
         GeneralPage(title: ''),
@@ -99,13 +85,129 @@ class _ProfilePageState extends State<ProfilePage> {
               userSource: user,
               type: 'Nomor Telepon',
             ),
-             ProfilePageTile(
+            ProfilePageTile(
               userSource: user,
               type: 'Password',
             ),
-            ProfilePageTile(
-              userSource: user,
-              type: 'QR Code Personal',
+            Container(
+              height: 65,
+              decoration: new BoxDecoration(
+                  border: new Border(
+                bottom: BorderSide(width: 1, color: HexColor('#C7F1E4')),
+              )),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(2, 4, 4, 0),
+                child: ListTile(
+                  tileColor: HexColor('#FFFFFF'),
+                  leading: Padding(
+                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                    child: Icon(Zephyrnaut.qrMark, color: HexColor('#030835')),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('QR Code',
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, fontWeight: FontWeight.w500)),
+                      Icon(Feather.chevron_right, color: HexColor('#030835')),
+                    ],
+                  ),
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (_) => new AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0))),
+                              content: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.75,
+                                width: MediaQuery.of(context).size.width * 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text('QR Code Pribadi',
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold)),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.03),
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              color: HexColor('#ECFBF4'),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromRGBO(
+                                                      67, 209, 165, 0.1),
+                                                  spreadRadius: 5,
+                                                  blurRadius: 50,
+                                                )
+                                              ]),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.03),
+                                                Image(
+                                                  image: NetworkImage(
+                                                      'https://api.qrserver.com/v1/create-qr-code/?data=pack-me-user-$userID&amp;size=500x500'),
+                                                ),
+                                                SizedBox(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.03),
+                                                Text(
+                                                  'pack-me-user-$userID',
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                SizedBox(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.03),
+                                              ],
+                                            ),
+                                          )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.03),
+                                      Text(
+                                        'Gunakan QR Code Pribadi ini atau masukkan kode pribadi Anda untuk memindah tangankan suatu aktivitas peminjaman pack kami ke orang lain.',
+                                        style:
+                                            GoogleFonts.poppins(fontSize: 14),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ));
+                  },
+                ),
+              ),
             ),
             Container(
               height: 65,

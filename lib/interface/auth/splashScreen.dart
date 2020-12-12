@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:pack_me_alpha/interface/auth/landingPage.dart';
 import 'package:pack_me_alpha/interface/auth/signIn.dart';
 // import 'package:pack_me/services/loggedDecider.dart';
 

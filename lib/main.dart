@@ -3,8 +3,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pack_me_alpha/interface/app/homePage.dart';
 import 'package:pack_me_alpha/interface/auth/splashScreen.dart';
-import 'package:provider/provider.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pack_me_alpha/interface/auth/signIn.dart';
 import 'package:pack_me_alpha/interface/auth/signUp.dart';
