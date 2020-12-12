@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: Text('a'), //TBA Images
-      nextScreen: Landing(), //LoginDecider(), //langsungan() is supposed to be in here
+      nextScreen: SignIn(), //LoginDecider(), //langsungan() is supposed to be in here
       splashTransition: SplashTransition.rotationTransition,
     );
   }

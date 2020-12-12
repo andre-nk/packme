@@ -80,7 +80,7 @@ class _LandingState extends State<Landing> {
         size: Size(8.0, 8.0),
         color: Color(0xFF43D1A5),
         activeColor: Color(0xFFFF8787),
-        activeSize: Size(30.0, 10.0),
+        activeSize: Size(25.0, 10.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),

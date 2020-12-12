@@ -3,6 +3,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:pack_me_alpha/interface/app/appInfoPage.dart';
+import 'package:pack_me_alpha/interface/app/historyPage.dart';
+import 'package:pack_me_alpha/interface/app/profilePage.dart';
 import 'package:pack_me_alpha/interface/shared/homePageModel.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
@@ -57,12 +60,12 @@ class _HomePageSampleState extends State<HomePageSample> {
                       ],
                     ),
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     PageTransition(
-                      //         type: PageTransitionType.fade,
-                      //         //child: ProfilePage()
-                      //     ));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.fade,
+                              child: ProfilePage(),
+                          ));
                     },
                   ),
                   ListTile(
@@ -80,11 +83,11 @@ class _HomePageSampleState extends State<HomePageSample> {
                       ],
                     ),
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     PageTransition(
-                      //         type: PageTransitionType.fade,
-                      //         child: HistoryPage()));
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.fade,
+                              child: HistoryPage()));
                     },
                   ),
                   ListTile(
@@ -145,11 +148,11 @@ class _HomePageSampleState extends State<HomePageSample> {
                         ],
                       ),
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     PageTransition(
-                        //         type: PageTransitionType.fade,
-                        //         child: AppInfo()));
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                child: AppInfo()));
                       }),
                   ListTile(
                     tileColor: HexColor('#CDF0E0'),

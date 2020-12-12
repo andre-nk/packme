@@ -16,11 +16,9 @@ Widget homeGenerator(int index, context /*int index, context, Widget creditValue
   // Widget amount = packAmount;
   // String uid = userID;
 
-  // Future createUserTempoQR(String outputQR) async {
-  //   return await dbUser.doc(uid).update({
-  //     "tempQR": outputQR,
-  //   });
-  // }
+  Future createUserTempoQR(String outputQR) async {
+    return print(outputQR);
+  }
 
   // DateTime now = new DateTime.now();
   // String date = new DateTime(now.year, now.month, now.day).toString();
@@ -38,8 +36,8 @@ Widget homeGenerator(int index, context /*int index, context, Widget creditValue
               elevation: 5,
               heroTag: "case0A",
               onPressed: () async {
-                // barcode = await scanner.scan();
-                // createUserTempoQR(barcode);
+                barcode = await scanner.scan();
+                createUserTempoQR(barcode);
               },
               child: Icon(Zephyrnaut.qrMark, size: 20),
               backgroundColor: HexColor('#FF8787'),
@@ -216,7 +214,7 @@ Widget homeGenerator(int index, context /*int index, context, Widget creditValue
             button1,
             button2,
             Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.04,
+              bottom: MediaQuery.of(context).size.height * 0.055,
               left: 0,
               child: Container(
                 width: MediaQuery.of(context).size.width * 1,
