@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:pack_me_alpha/models/packDetail.dart';
 
 class User extends Equatable {
   final int id;
@@ -10,7 +11,7 @@ class User extends Equatable {
   final String picturePath;
   final String personalQR;
   final int credit;
-  final int packAmount;
+  final List<PackDetail> packAmount;
   final String pickupDate;
 
   User(
@@ -41,7 +42,7 @@ User copyWith({
   String picturePath,
   String personalQR,
   int credit,
-  int packAmount,
+  List<PackDetail> packAmount,
   String pickupDate
 }) {
   return User(
@@ -69,5 +70,7 @@ User sampleUser = User(
     email: 'andreasnotokusumo23@gmail.com',
     credit: 34000,
     pickupDate: '20',
-    packAmount: 14,
+    packAmount: [
+      
+    ], //TOTAL PACK FROM ALL ACTIVE TRANSACTION (HAVEN'T BEEN RETURNED) //EMPTY IF ALL PACKS ARE ALREADY RETURNED
 );

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:pack_me_alpha/models/packDetail.dart';
 import 'package:pack_me_alpha/models/user.dart';
 
-enum TransactionStatus { in_progress, completed, pending}
+enum TransactionStatus {in_progress, completed, pending}
 enum TransactionType { Peminjaman, Pengembalian, Bonus, Penarikan }
 
 class Transaction extends Equatable {
@@ -25,7 +25,7 @@ class Transaction extends Equatable {
       this.type,
       this.packDetail,
       this.status,
-      this.user});
+      this.user,});
 
   Transaction copyWith(
       {int id,
@@ -69,7 +69,14 @@ List<Transaction> mockTransaction = [
     provider: 'De Koffie',
     providerLocation: 'Jalan Mayor Kaslam, no. 12, Wonosobo Barat, Jawa Tengah',
     total: 12,
-    packDetail: packDetails,
+    packDetail: [
+      PackDetail(
+        idPack: 2,
+        name: 'Medium Box',
+        quantity: 2,
+        packValue: 2000,
+      )
+    ],
     type: TransactionType.Peminjaman,
     status: TransactionStatus.completed,
     user: sampleUser,
@@ -80,7 +87,14 @@ List<Transaction> mockTransaction = [
     provider: 'Xi No Na Boba',
     providerLocation: 'Jalan Mayor Kaslam, no. 10, Wonosobo Barat, Jawa Tengah',
     total: 2,
-    packDetail: packDetails,
+    packDetail: [
+      PackDetail(
+        idPack: 8,
+        name: 'Medium Glass 500mL',
+        quantity: 3,
+        packValue: 500,
+      )
+    ],
     type: TransactionType.Peminjaman,
     status: TransactionStatus.completed,
     user: sampleUser,
@@ -91,7 +105,20 @@ List<Transaction> mockTransaction = [
     provider: 'Ahmadi Sancaka',
     providerLocation: 'Jalan Ahmad Yani, no. 76, Wonosobo Barat, Jawa Tengah, 56311',
     total: 14,
-    packDetail: packDetails,
+    packDetail: [
+      PackDetail(
+        idPack: 8,
+        name: 'Medium Glass 500mL',
+        quantity: 3,
+        packValue: 500,
+      ),
+      PackDetail(
+        idPack: 2,
+        name: 'Medium Box',
+        quantity: 2,
+        packValue: 2000,
+      )
+    ],
     type: TransactionType.Pengembalian,
     status: TransactionStatus.completed,
     user: sampleUser,

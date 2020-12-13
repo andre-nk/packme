@@ -287,7 +287,9 @@ class _HomePageState extends State<HomePage> {
             _page,
             context,
             (context.watch<UserCubit>().state as UserLoaded).user.credit,
-            (context.watch<UserCubit>().state as UserLoaded).user.packAmount),
+            //(context.watch<UserCubit>().state as UserLoaded).user.packAmount
+            14
+            ),
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           index: _page,

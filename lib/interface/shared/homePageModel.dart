@@ -6,8 +6,10 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me_alpha/interface/app/appInfoPage.dart';
 import 'package:pack_me_alpha/interface/app/historyPage.dart';
 import 'package:pack_me_alpha/interface/app/orderPage.dart';
+import 'package:pack_me_alpha/interface/app/rentConfirmationPage.dart';
 import 'package:pack_me_alpha/interface/app/withdrawPage.dart';
 import 'package:page_transition/page_transition.dart';
+// ignore: unused_import
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:pack_me_alpha/models/zephyrnaut_icons.dart';
 import 'package:intl/intl.dart';
@@ -18,11 +20,10 @@ Widget homeGenerator(int index, context, int creditValue, int packAmount) {
   Widget button2;
   Widget texts;
 
-  Future createUserTempoQR(String outputQR) async {
-    return print(outputQR);
-  }
 
-  String barcode = "";
+
+  // ignore: unused_local_variable
+  String outputCode = "abcURL"; //SAMPLE, REMOVE WHEN API IS READY
 
   switch (index) {
     case 0:
@@ -36,8 +37,14 @@ Widget homeGenerator(int index, context, int creditValue, int packAmount) {
               elevation: 5,
               heroTag: "case0A",
               onPressed: () async {
-                barcode = await scanner.scan();
-                createUserTempoQR(barcode);
+                // outputCode = await scanner.scan();
+                //URLLauncher to API based on outputCode string
+                Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.fade,
+                          child: RentConfirmationPage(),
+                ));
               },
               child: Icon(Zephyrnaut.qrMark, size: 20),
               backgroundColor: HexColor('#FF8787'),
