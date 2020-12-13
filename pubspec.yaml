@@ -34,8 +34,6 @@ dependencies:
   font_awesome_flutter: ^8.10.0
   hexcolor: ^1.0.6
   flutter_icons: ^1.1.0
-  firebase_auth: ^0.18.3
-  cloud_firestore: ^0.14.3
   introduction_screen: ^1.0.9
   animated_splash_screen: ^1.0.1+2
   page_transition: ^1.1.7+2
@@ -46,7 +44,6 @@ dependencies:
   loading_indicator: ^1.2.0
   intl_phone_field: ^1.4.2
   flutter_slidable: ^0.5.7
-  firebase_storage: ^5.1.0
   permission_handler: ^5.0.1+1
   image_picker: ^0.6.7+14
   timelines: ^0.0.2+1
@@ -55,6 +52,8 @@ dependencies:
   supercharged: ^1.12.0
   equatable: ^1.2.4
   intl: ^0.16.1
+  flutter_bloc: ^6.0.1
+  get: ^3.4.6
 
 dev_dependencies:
   flutter_test:

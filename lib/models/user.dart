@@ -9,7 +9,8 @@ class User extends Equatable {
   final String phoneNumber;
   final String picturePath;
   final String personalQR;
-  final int credit; 
+  final int credit;
+  final int packAmount;
   final String pickupDate;
 
   User(
@@ -22,11 +23,12 @@ class User extends Equatable {
       this.picturePath,
       this.personalQR,
       this.credit,
-      this.pickupDate});
+      this.pickupDate,
+      this.packAmount});
 
   @override
   List<Object> get props =>
-      [id, name, email, address, password, phoneNumber, picturePath];
+      [id, name, email, address, password, phoneNumber, picturePath, personalQR, credit, pickupDate, packAmount];
 }
 
 User copyWith({
@@ -39,6 +41,7 @@ User copyWith({
   String picturePath,
   String personalQR,
   int credit,
+  int packAmount,
   String pickupDate
 }) {
   return User(
@@ -50,13 +53,14 @@ User copyWith({
     phoneNumber: phoneNumber,
     picturePath: picturePath,
     credit: credit,
-    pickupDate: pickupDate
+    pickupDate: pickupDate,
+    packAmount: packAmount
   );
 }
 
 User sampleUser = User(
     id: 1,
-    name: 'Andreas Notokusumo',
+    name: 'Andreas Kwik',
     address: 'Jalan Ahmad Yani, no. 76, Wonosobo, Wonosobo Barat, 56311',
     password: '23Januari2004',
     phoneNumber: '082243010141',
@@ -64,5 +68,6 @@ User sampleUser = User(
     personalQR:  'https://api.qrserver.com/v1/create-qr-code/?data=pack-me-user-1&amp;size=500x500',
     email: 'andreasnotokusumo23@gmail.com',
     credit: 34000,
-    pickupDate: '20'
+    pickupDate: '20',
+    packAmount: 14,
 );

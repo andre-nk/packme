@@ -1,7 +1,6 @@
 // ignore: unused_import
 import 'package:flutter/material.dart';
 // ignore: unused_import
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class Landing extends StatefulWidget {

@@ -10,22 +10,18 @@ import 'package:pack_me_alpha/interface/app/withdrawPage.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:pack_me_alpha/models/zephyrnaut_icons.dart';
+import 'package:intl/intl.dart';
 //import 'package:pack_me/ui/app/qr_scan.dart';
 
-Widget homeGenerator(int index, context /*int index, context, Widget creditValue, String userID, Widget packAmount*/ ) {
+Widget homeGenerator(int index, context, int creditValue, int packAmount) {
   Widget button1;
   Widget button2;
   Widget texts;
-  // Widget credit = creditValue;
-  // Widget amount = packAmount;
-  // String uid = userID;
 
   Future createUserTempoQR(String outputQR) async {
     return print(outputQR);
   }
 
-  // DateTime now = new DateTime.now();
-  // String date = new DateTime(now.year, now.month, now.day).toString();
   String barcode = "";
 
   switch (index) {
@@ -134,7 +130,15 @@ Widget homeGenerator(int index, context /*int index, context, Widget creditValue
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.005),
-            // TBA credit,
+            Text( NumberFormat.currency(
+                        symbol: 'IDR', decimalDigits: 0, locale: 'id-ID')
+                    .format(creditValue),
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 32,
+                  ),
+            )),
             Text('total saldo yang dapat ditarik',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
@@ -179,7 +183,13 @@ Widget homeGenerator(int index, context /*int index, context, Widget creditValue
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.005),
-            // amount,
+            Text( packAmount.toString() + ' pack(s)',
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 32,
+                  ),
+            )),
             Text('yang dapat dikembalikan',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(

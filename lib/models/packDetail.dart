@@ -12,8 +12,15 @@ class PackDetail extends Equatable{
   List<Object> get props => [idPack, name, quantity];
 }
 
-PackDetail mediumGlass = PackDetail(
-  idPack: 8,
-  name: 'Medium Glass 500mL',
-  quantity: 1,
-);
+List<PackDetail> packDetails = [
+  PackDetail(
+    idPack: 8,
+    name: 'Medium Glass 500mL',
+    quantity: 1,
+  ),
+  PackDetail(
+    idPack: 8,
+    name: 'Medium Glass 500mL',
+    quantity: 1,
+  ),
+];

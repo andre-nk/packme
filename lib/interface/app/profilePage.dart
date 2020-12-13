@@ -5,18 +5,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pack_me_alpha/interface/shared/pages.dart';
 import 'package:pack_me_alpha/interface/shared/profilePageTile.dart';
-import 'package:pack_me_alpha/models/user.dart';
 import 'package:pack_me_alpha/models/zephyrnaut_icons.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pack_me_alpha/cubit/user_cubit.dart';
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final User user = sampleUser;
+  
   @override
   Widget build(BuildContext context) {
-    final String userID = user.id.toString();
+    final String userID = (context.watch<UserCubit>().state as UserLoaded).user.id.toString();
     return Scaffold(
       body: ListView(children: [
         GeneralPage(title: ''),
@@ -33,14 +34,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: MediaQuery.of(context).size.height * 0.20,
                   width: MediaQuery.of(context).size.width * 0.18,
                   child: GestureDetector(
-                    child: (user.picturePath != null)
+                    child: ((context.watch<UserCubit>().state as UserLoaded).user.picturePath != null)
                         ? Container(
                             decoration: new BoxDecoration(
                               color: Colors.cyan,
                               shape: BoxShape.circle,
                               image: new DecorationImage(
                                 fit: BoxFit.contain,
-                                image: new NetworkImage(user.picturePath,
+                                image: new NetworkImage((context.watch<UserCubit>().state as UserLoaded).user.picturePath,
                                     scale: 0.5),
                               ),
                             ),
@@ -74,19 +75,19 @@ class _ProfilePageState extends State<ProfilePage> {
               ]),
             ),
             ProfilePageTile(
-              userSource: user,
+              dataSource: (context.watch<UserCubit>().state as UserLoaded).user,
               type: 'Nama',
             ),
             ProfilePageTile(
-              userSource: user,
+              dataSource: (context.watch<UserCubit>().state as UserLoaded).user,
               type: 'Alamat',
             ),
             ProfilePageTile(
-              userSource: user,
+              dataSource: (context.watch<UserCubit>().state as UserLoaded).user,
               type: 'Nomor Telepon',
             ),
             ProfilePageTile(
-              userSource: user,
+              dataSource: (context.watch<UserCubit>().state as UserLoaded).user,
               type: 'Password',
             ),
             Container(

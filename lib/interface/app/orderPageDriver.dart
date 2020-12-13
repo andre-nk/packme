@@ -13,12 +13,12 @@ class OrderDriverOnBoard extends StatefulWidget {
 
 class _OrderDriverOnBoardState extends State<OrderDriverOnBoard> {
 
-  final User userSource = sampleUser;
+  final User dataSource = sampleUser;
 
   @override
   Widget build(BuildContext context){
 
-      final String pickupDate = userSource.pickupDate;
+      final String pickupDate = dataSource.pickupDate;
 
     return Scaffold(
         appBar: AppBar(
@@ -58,7 +58,7 @@ class _OrderDriverOnBoardState extends State<OrderDriverOnBoard> {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(userSource.address,
+                            Text(dataSource.address,
                                 style: GoogleFonts.poppins(
                                     fontSize: 16, fontWeight: FontWeight.w500)),
                             Container(

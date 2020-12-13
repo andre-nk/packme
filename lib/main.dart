@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pack_me_alpha/interface/app/homePage.dart';
@@ -6,6 +7,10 @@ import 'package:pack_me_alpha/interface/auth/splashScreen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pack_me_alpha/interface/auth/signIn.dart';
 import 'package:pack_me_alpha/interface/auth/signUp.dart';
+
+import 'cubit/packdetail_cubit.dart';
+import 'cubit/transaction_cubit.dart';
+import 'cubit/user_cubit.dart';
 
 void main() async{
   //onesignal config
@@ -35,13 +40,20 @@ class AppInit extends StatefulWidget {
 class _AppInitState extends State<AppInit> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pack Me V-Alpha',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => UserCubit()),
+        BlocProvider(create: (_) => PackDetailCubit()),
+        BlocProvider(create: (_) => TransactionCubit()),
+      ],
+        child: MaterialApp(
+        title: 'Pack Me V-Alpha',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: MainPage(title: 'Flutter Demo Home Page'),
       ),
-      home: MainPage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -88,7 +100,7 @@ class _MainPageState extends State<MainPage> {
         routes: {
           '/signup': (context) => SignUp(),
           '/signin': (context) => SignIn(),
-          '/homepage': (context) => HomePageSample(),
+          '/homepage': (context) => HomePage(),
         },
         // onGenerateRoute: (settings) {
         //   switch (settings.name) {

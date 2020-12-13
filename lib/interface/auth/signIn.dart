@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:pack_me/ui/app/userHome.dart';
-// import 'package:page_transition/page_transition.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-// ignore: unused_import
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pack_me_alpha/cubit/packdetail_cubit.dart';
+import 'package:pack_me_alpha/cubit/transaction_cubit.dart';
+import 'package:pack_me_alpha/cubit/user_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pack_me_alpha/models/loader.dart';
-// import 'package:pack_me/services/SignInChecker.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -67,11 +66,11 @@ class _SignInState extends State<SignIn> {
   String password = '';
   String error = '';
 
-  bool loading = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return loading
+    return (isLoading == true)
         ? Loader()
         : Scaffold(
             backgroundColor: Colors.white,
@@ -255,28 +254,44 @@ class _SignInState extends State<SignIn> {
                                                       elevation: 5,
                                                       heroTag: "SignIn",
                                                       onPressed: () async {
-                                                        Navigator.of(context).pushNamedAndRemoveUntil(
-                                                        '/homepage', (Route<dynamic> route) => false);
-                                                        //TBA
-                                                        // if (_formKey
-                                                        //     .currentState
-                                                        //     .validate()) {
-                                                        //   setState(() {
-                                                        //     loading = true;
-                                                        //   });
-                                                        //   dynamic result =
-                                                        //       await _auth
-                                                        //           .signInWithEmailAndPassword(
-                                                        //               email,
-                                                        //               password);
-                                                        //   if (result == null) {
-                                                        //     setState(() {
-                                                        //       error =
-                                                        //           'Could not sign in with those credentials';
-                                                        //       loading = false;
-                                                        //     });
-                                                        //   }
-                                                        // }
+                                                        await context
+                                                            .read<UserCubit>()
+                                                            .signIn(email,
+                                                                password);
+                                                        UserState state =
+                                                            context
+                                                                .read<
+                                                                    UserCubit>()
+                                                                .state;
+                                                        print('progress');
+
+                                                        if (state
+                                                            is UserLoaded) {
+                                                          setState(() {
+                                                            isLoading = true;
+                                                          });
+                                                          print('loaded');
+                                                          context
+                                                              .read<
+                                                                  PackDetailCubit>()
+                                                              .getPackDetail();
+                                                          context
+                                                              .read<
+                                                                  TransactionCubit>()
+                                                              .getTransaction();
+                                                          Navigator.of(context)
+                                                              .pushNamedAndRemoveUntil(
+                                                                  '/homepage',
+                                                                  (Route<dynamic>
+                                                                          route) =>
+                                                                      false);
+                                                        } else {
+                                                          print('error');
+                                                          setState(() {
+                                                            error =  (state as UserLoadingFailed).message;
+                                                            isLoading = false;
+                                                          });
+                                                        }
                                                       },
                                                       child: Padding(
                                                         padding:

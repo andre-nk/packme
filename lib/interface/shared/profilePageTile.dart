@@ -6,10 +6,10 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:pack_me_alpha/models/user.dart';
 
 class ProfilePageTile extends StatelessWidget {
-  final User userSource;
+  final User dataSource;
   final String type;
 
-  ProfilePageTile({this.userSource, this.type});
+  ProfilePageTile({this.dataSource, this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +48,15 @@ class ProfilePageTile extends StatelessWidget {
                       fontSize: 16, fontWeight: FontWeight.w500)),
               Text(
                   (type == 'Nama')
-                      ? userSource.name
+                      ? dataSource.name
                       : (type == 'E-mail')
-                          ? userSource.email
+                          ? dataSource.email
                           : (type == 'Password')
                               ? '>'
                               : (type == 'Nomor Telepon')
-                                  ? userSource.phoneNumber
+                                  ? dataSource.phoneNumber
                                   : (type == 'Alamat')
-                                      ? userSource.address.substring(0, 20) +
+                                      ? dataSource.address.substring(0, 20) +
                                           '...'
                                       : 'Data gagal dimuat',
                   style: GoogleFonts.poppins(
@@ -105,15 +105,15 @@ class ProfilePageTile extends StatelessWidget {
                                       isDense: true,
                                       border: InputBorder.none,
                                       hintText: (type == 'Nama')
-                                          ? userSource.name
+                                          ? dataSource.name
                                           : (type == 'E-mail')
-                                              ? userSource.email
+                                              ? dataSource.email
                                               : (type == 'Password')
                                                   ? 'Password baru'
                                                   : (type == 'Nomor Telepon')
-                                                      ? userSource.phoneNumber
+                                                      ? dataSource.phoneNumber
                                                       : (type == 'Alamat')
-                                                          ? userSource.address.substring(0, 20) + '...'
+                                                          ? dataSource.address.substring(0, 20) + '...'
                                                           : 'Data gagal dimuat',
                                       hintStyle: GoogleFonts.poppins(
                                           color: Colors.grey[500],

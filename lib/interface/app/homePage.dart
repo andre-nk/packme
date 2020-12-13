@@ -12,25 +12,24 @@ import 'package:pack_me_alpha/interface/shared/homePageModel.dart';
 import 'package:pack_me_alpha/models/user.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pack_me_alpha/models/zephyrnaut_icons.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pack_me_alpha/cubit/user_cubit.dart';
 import 'joinPage.dart';
 
-class HomePageSample extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _HomePageSampleState createState() => _HomePageSampleState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageSampleState extends State<HomePageSample> {
+class _HomePageState extends State<HomePage> {
   int _page = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
-  final User userSource = sampleUser;
-
+  final User dataSource = sampleUser;
 
   @override
   Widget build(BuildContext context) {
-    
-      print(userSource.picturePath);
-    
+    print(dataSource.picturePath);
+
     return Scaffold(
         backgroundColor: Colors.white,
         //DRAWER
@@ -47,38 +46,49 @@ class _HomePageSampleState extends State<HomePageSample> {
                   height: MediaQuery.of(context).size.height * 0.32,
                   child: DrawerHeader(
                     child: Center(
-                      child: Column(
+                        child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                         Container(
-                            decoration: new BoxDecoration(
-                              color: Colors.cyan,
-                              shape: BoxShape.circle,
-                              image: new DecorationImage(
-                                fit: BoxFit.contain,
-                                image: new NetworkImage(userSource.picturePath,
-                                    scale: 0.5),
-                              ),
+                        Container(
+                          decoration: new BoxDecoration(
+                            color: Colors.cyan,
+                            shape: BoxShape.circle,
+                            image: new DecorationImage(
+                              fit: BoxFit.contain,
+                              image: new NetworkImage(dataSource.picturePath,
+                                  scale: 0.5),
                             ),
                           ),
+                        ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0),
                         Text(
-                          userSource.name,
+                          (context.watch<UserCubit>().state as UserLoaded)
+                              .user
+                              .name,
                           style: TextStyle(
                               fontWeight: FontWeight.w900, fontSize: 18),
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0),
                         Text(
-                          (userSource.email.toString().length >= 25)
-                          ? userSource.email.toString().substring(0,25) + '...'
-                          : userSource.email.toString(),
+                          ((context.watch<UserCubit>().state as UserLoaded)
+                                      .user
+                                      .email
+                                      .length >=
+                                  25)
+                              ? (context.watch<UserCubit>().state as UserLoaded)
+                                      .user
+                                      .email
+                                      .substring(0, 25) +
+                                  '...'
+                              : (context.watch<UserCubit>().state as UserLoaded)
+                                  .user
+                                  .email,
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 14),
                         ),
-                        
                       ],
                     )),
                   ),
@@ -236,7 +246,6 @@ class _HomePageSampleState extends State<HomePageSample> {
             ),
           ),
         ),
-
         //APPBAR
         appBar: new AppBar(
           toolbarHeight: 80,
@@ -257,25 +266,28 @@ class _HomePageSampleState extends State<HomePageSample> {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 22, 20, 20),
-              child: Container(
-                child: RaisedButton(
-                  onPressed: () {
-                    //f changeType();
-                  },
-                  child: Text('Mode User'),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+                padding: const EdgeInsets.fromLTRB(20, 22, 20, 20),
+                child: Container(
+                  child: RaisedButton(
+                    onPressed: () {
+                      //f changeType();
+                    },
+                    child: Text('Mode User'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: HexColor('#CDF0E0'),
                   ),
-                  color: HexColor('#CDF0E0'),
-                ),
-              ),
-            ),
+                )),
           ],
         ),
 
         //BODY
-        body: homeGenerator(_page, context),
+        body: homeGenerator(
+            _page,
+            context,
+            (context.watch<UserCubit>().state as UserLoaded).user.credit,
+            (context.watch<UserCubit>().state as UserLoaded).user.packAmount),
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           index: _page,
