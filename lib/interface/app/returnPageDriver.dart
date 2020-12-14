@@ -6,12 +6,12 @@ import "package:google_fonts/google_fonts.dart";
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me_alpha/models/user.dart';
 
-class OrderDriverOnBoard extends StatefulWidget {
+class ReturnDriverOnBoard extends StatefulWidget {
   @override
-  _OrderDriverOnBoardState createState() => _OrderDriverOnBoardState();
+  _ReturnDriverOnBoardState createState() => _ReturnDriverOnBoardState();
 }
 
-class _OrderDriverOnBoardState extends State<OrderDriverOnBoard> {
+class _ReturnDriverOnBoardState extends State<ReturnDriverOnBoard> {
 
   final User dataSource = sampleUser;
 

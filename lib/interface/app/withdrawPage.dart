@@ -5,42 +5,70 @@ import "package:hexcolor/hexcolor.dart";
 import "package:google_fonts/google_fonts.dart";
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
+import 'package:pack_me_alpha/interface/app/withdrawConfirmationPage.dart';
 import 'package:pack_me_alpha/models/user.dart';
 import 'package:pack_me_alpha/models/zephyrnaut_icons.dart';
+import 'package:pack_me_alpha/cubit/user_cubit.dart';
+import 'package:pack_me_alpha/models/transaction.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WithdrawPage extends StatefulWidget {
+  final Transaction transaction;
+
+  WithdrawPage({this.transaction});
   @override
   _WithdrawPageState createState() => _WithdrawPageState();
 }
 
 class _WithdrawPageState extends State<WithdrawPage> {
-  final User user = sampleUser;
-  String index = '1';
+  String index = '0';
+  String input;
+  String output;
+  String error = '';
 
   Widget formContent() {
-    Widget output;
+    Widget outputWidget;
     switch (index) {
       case '0':
-        output = Text('Credit Card');
+        setState(() {
+          outputWidget = Text('Credit Card');
+          output = 'Credit Card';
+        });
         break;
       case '1':
-        output = Text('OVO');
+        setState(() {
+          outputWidget = Text('OVO');
+          output = 'OVO';
+        });
+
         break;
       case '2':
-        output = Text('Go-Pay');
+        setState(() {
+          outputWidget = Text('Go-Pay');
+          output = 'Go-Pay';
+        });
+
         break;
       case '3':
-        output = Text('LinkAja!');
+        setState(() {
+          outputWidget = Text('LinkAja!');
+          output = 'LinkAja!';
+        });
+
         break;
       case '4':
-        output = Text('DANA');
+        setState(() {
+          outputWidget = Text('DANA');
+          output = 'DANA';
+        });
         break;
     }
-    return output;
+    return outputWidget;
   }
 
   @override
   Widget build(BuildContext context) {
+    final User user = (context.watch<UserCubit>().state as UserLoaded).user;
     return Scaffold(
         appBar: AppBar(
           leading: Builder(
@@ -95,7 +123,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                               padding: const EdgeInsets.only(right: 20),
                               child: Text('Rp',
                                   style: GoogleFonts.poppins(
-                                    fontSize: 30,
+                                    fontSize: 28,
                                     fontWeight: FontWeight.w600,
                                   )),
                             ),
@@ -111,7 +139,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                                 ),
                                 decoration: InputDecoration(
                                     contentPadding:
-                                        EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                        EdgeInsets.fromLTRB(0, 5, 0, 10),
                                     isDense: true,
                                     hintText: 'Masukkan nominal',
                                     hintStyle: GoogleFonts.poppins(
@@ -120,6 +148,9 @@ class _WithdrawPageState extends State<WithdrawPage> {
                                         borderSide: BorderSide(
                                             color: Color(0xff43D1A5),
                                             width: 2.0))),
+                                onChanged: (val) {
+                                  setState(() => input = val);
+                                },
                               ),
                             ),
                           ],
@@ -136,6 +167,15 @@ class _WithdrawPageState extends State<WithdrawPage> {
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
+                            )),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        Text(
+                            error,
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.red
                             )),
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02),
@@ -254,7 +294,26 @@ class _WithdrawPageState extends State<WithdrawPage> {
                               color: HexColor('#FF8787'),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25)),
-                              onPressed: () {},
+                              onPressed: () {
+                                if (input != null) {
+                                  setState((){
+                                    error = '';
+                                  });
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            WithdrawConfirmationPage(
+                                              transaction: widget.transaction,
+                                              inputPassed: int.parse(input),
+                                              midtransMethod: output,
+                                            )),
+                                  );
+                                }else{
+                                  setState((){
+                                    error = 'Masukkan nominal penarikan terlebih dahulu';
+                                  });
+                                }
+                              },
                               child: Text('Lanjut',
                                   style: GoogleFonts.poppins(
                                       fontSize: 16,

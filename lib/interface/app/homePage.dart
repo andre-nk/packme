@@ -24,12 +24,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _page = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
-  final User dataSource = sampleUser;
 
   @override
   Widget build(BuildContext context) {
-    print(dataSource.picturePath);
-
+    final User dataSource = (context.watch<UserCubit>().state as UserLoaded).user;
+    print(dataSource.credit);
     return Scaffold(
         backgroundColor: Colors.white,
         //DRAWER

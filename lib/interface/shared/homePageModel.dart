@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:pack_me_alpha/interface/app/appInfoPage.dart';
 import 'package:pack_me_alpha/interface/app/historyPage.dart';
-import 'package:pack_me_alpha/interface/app/orderPage.dart';
+import 'package:pack_me_alpha/interface/app/returnPage.dart';
 import 'package:pack_me_alpha/interface/app/rentConfirmationPage.dart';
 import 'package:pack_me_alpha/interface/app/withdrawPage.dart';
 import 'package:pack_me_alpha/models/transaction.dart';
@@ -116,7 +116,7 @@ Widget homeGenerator(int index, context, int creditValue, int packAmount) {
                       context,
                       PageTransition(
                           type: PageTransitionType.fade,
-                          child: WithdrawPage()));
+                          child: WithdrawPage(transaction: Transaction(),)));
                 },
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 4, 9, 0),
@@ -172,7 +172,7 @@ Widget homeGenerator(int index, context, int creditValue, int packAmount) {
                   Navigator.push(
                       context,
                       PageTransition(
-                          type: PageTransitionType.fade, child: OrderMethod()));
+                          type: PageTransitionType.fade, child: ReturnMethod()));
                 },
                 child: Icon(Feather.box),
                 backgroundColor: HexColor('#FF8787'),

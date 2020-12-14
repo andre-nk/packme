@@ -4,35 +4,33 @@ import "package:hexcolor/hexcolor.dart";
 import "package:google_fonts/google_fonts.dart";
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
-import 'package:pack_me_alpha/cubit/cubit.dart';
 import 'package:pack_me_alpha/interface/app/homePage.dart';
 import 'package:pack_me_alpha/interface/shared/columnBuilder.dart';
 import 'package:pack_me_alpha/interface/shared/illustrationPage.dart';
-import 'package:pack_me_alpha/models/transaction.dart';
 import 'package:pack_me_alpha/models/user.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pack_me_alpha/cubit/user_cubit.dart';
 import 'package:pack_me_alpha/cubit/transaction_cubit.dart';
+import 'package:pack_me_alpha/cubit/user_cubit.dart';
+import 'package:pack_me_alpha/models/transaction.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RentConfirmationPage extends StatefulWidget {
+class ReturnConfirmationPage extends StatefulWidget {
   final Transaction transaction;
 
-  RentConfirmationPage({this.transaction});
-
+  ReturnConfirmationPage({this.transaction});
   @override
-  _RentConfirmationPageState createState() => _RentConfirmationPageState();
+  _ReturnConfirmationPageState createState() => _ReturnConfirmationPageState();
 }
 
-class _RentConfirmationPageState extends State<RentConfirmationPage> {
-  String error = '';
-
+class _ReturnConfirmationPageState extends State<ReturnConfirmationPage> {
   @override
   Widget build(BuildContext context) {
-    print(widget.transaction);
-
-    //DATAS FOR AND FROM API
-    // ignore: unused_local_variable
     final User user = (context.watch<UserCubit>().state as UserLoaded).user;
+
+    int totalRent = 12;
+    int estimateBonus = 25000;
+    String providerSample = 'Pack Me Ambarrukmo Plaza';
+    String providerLocationSample = 'Jalan Magelang, KM 2';
+
     List transactionPackTypeSample = [
       'Medium Box',
       'Mini Box',
@@ -53,15 +51,6 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
       'XL Box',
       1
     ];
-
-    // List transactionListOnBoard = (context.watch<TransactionCubit>().state as TransactionLoaded).transaction;
-    // for(var i = 0 ; i <= transactionListSample.length; i++ ){
-    //   (context.watch<TransactionCubit>().state as TransactionLoaded).transaction[i].packDetail;
-    // }
-    int totalRent = 12;
-    int estimateBonus = 25000;
-    String providerSample = 'Solaria Ambarrukmo Plaza';
-    String providerLocationSample = 'Jalan Magelang, KM 2';
 
     return Scaffold(
       appBar: AppBar(
@@ -187,8 +176,7 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
                                       }
                                     },
                                     itemCount:
-                                        (transactionPackTypeSample.length)
-                                ),
+                                        (transactionPackTypeSample.length)),
                                 SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.015),
@@ -251,7 +239,7 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
                                             .read<TransactionCubit>()
                                             .createTransaction(
                                                 widget.transaction.copyWith(
-                                                  user: user,
+                                                    user: user,
                                                     dateTime: DateTime.now()
                                                         .toString(),
                                                     total: totalRent,
@@ -261,7 +249,7 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
                                                     packDetail:
                                                         transactionPackSample,
                                                     type: TransactionType
-                                                        .Peminjaman,
+                                                        .Pengembalian,
                                                     status: TransactionStatus
                                                         .completed //WAIT FOR API 2 SIDE WRITED => COMPLETED
                                                     ));
@@ -307,15 +295,15 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
                                                     Scaffold(
                                                       body: IllustrationPage(
                                                           title:
-                                                              'Maaf!\nPeminjaman gagal',
+                                                              'Maaf!\nPengembalian gagal',
                                                           description:
-                                                              'Silahkan ulangi peminjaman dengan\n menekan tombol di bawah',
+                                                              'Silahkan ulangi pengembalian dengan\n menekan tombol di bawah',
                                                           picturePath: '',
                                                           button1:
-                                                              'Ulangi peminjaman',
+                                                              'Ulangi pengembalian',
                                                           button1Tap: () {
-                                                            Navigator
-                                                                .pop(context);
+                                                            Navigator.pop(
+                                                                context);
                                                           }),
                                                     )),
                                           );
@@ -332,11 +320,6 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
                                 SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.06),
-                                Text(
-                                  error,
-                                  style: TextStyle(
-                                      color: Colors.red, fontSize: 14.0),
-                                )
                               ]),
                             ),
                           ),

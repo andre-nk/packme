@@ -4,11 +4,11 @@ import "package:hexcolor/hexcolor.dart";
 import "package:google_fonts/google_fonts.dart";
 // ignore: unused_import
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:pack_me_alpha/interface/app/orderPageCounter.dart';
-import 'package:pack_me_alpha/interface/app/orderPageDriver.dart';
+import 'package:pack_me_alpha/interface/app/returnPageCounter.dart';
+import 'package:pack_me_alpha/interface/app/returnPageDriver.dart';
 import 'package:page_transition/page_transition.dart';
 
-class OrderMethod extends StatelessWidget {
+class ReturnMethod extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +48,7 @@ class OrderMethod extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.fade,
-                            child: OrderDriverOnBoard()))
+                            child: ReturnDriverOnBoard()))
                   },
                   child: Stack(
                     children: [
@@ -113,7 +113,7 @@ class OrderMethod extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.fade,
-                            child: OrderCounterOnBoard()))
+                            child: ReturnCounterOnBoard()))
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.3,

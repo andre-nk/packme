@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:pack_me_alpha/models/packDetail.dart';
 
+// ignore: must_be_immutable
 class User extends Equatable {
   final int id;
   final String name;
@@ -10,7 +11,7 @@ class User extends Equatable {
   final String phoneNumber;
   final String picturePath;
   final String personalQR;
-  final int credit;
+  int credit;
   final List<PackDetail> packAmount;
   final String pickupDate;
 
