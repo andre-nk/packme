@@ -6,6 +6,8 @@ import "package:google_fonts/google_fonts.dart";
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:intl/intl.dart';
 import 'package:pack_me_alpha/cubit/cubit.dart';
+import 'package:pack_me_alpha/interface/app/homePage.dart';
+import 'package:pack_me_alpha/interface/shared/illustrationPage.dart';
 import 'package:pack_me_alpha/models/packDetail.dart';
 import 'package:pack_me_alpha/models/transaction.dart';
 import 'package:pack_me_alpha/models/user.dart';
@@ -81,7 +83,7 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
 
   @override
   Widget build(BuildContext context) {
-
+    print(widget.transaction);
     //DATAS FOR AND FROM API
     // ignore: unused_local_variable
     final User user = (context.watch<UserCubit>().state as UserLoaded).user;
@@ -293,11 +295,13 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
                                           borderRadius:
                                               BorderRadius.circular(25)),
                                       onPressed: () async {
-                                        setState(() {
-                                          isLoading = true;
-                                        });
+                                        print("clicked");
+                                        // setState(() {
+                                        //   isLoading = true;
+                                        // });
+                                        print(widget.transaction);
                                         bool result = await context
-                                            .watch<TransactionCubit>()
+                                            .read<TransactionCubit>()
                                             .createTransaction(
                                                 widget.transaction.copyWith(
                                                     dateTime: DateTime.now()
@@ -313,17 +317,60 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
                                                     status: TransactionStatus
                                                         .completed //WAIT FOR API 2 SIDE WRITED => COMPLETED
                                                     ));
+                                        // bool result = false;
                                         if (result == true) {
                                           Navigator.of(context)
-                                              .pushNamedAndRemoveUntil(
-                                                  '/homepage', //SUCCESS PAGE
-                                                  (Route<dynamic> route) =>
-                                                      false);
+                                              .pushAndRemoveUntil(
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        Scaffold(
+                                                          body:
+                                                              IllustrationPage(
+                                                                  title:
+                                                                      'Woohoo!\nPeminjaman berhasil!',
+                                                                  description:
+                                                                      'Simpan dan kembalikan pack kami sesuai jadwal untuk dapat uang bonus kamu!',
+                                                                  picturePath:
+                                                                      '',
+                                                                  button1:
+                                                                      'Kembali ke Beranda',
+                                                                  button1Tap:
+                                                                      () {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pushAndRemoveUntil(
+                                                                      MaterialPageRoute(
+                                                                          builder: (BuildContext context) =>
+                                                                              HomePage()),
+                                                                      ModalRoute
+                                                                          .withName(
+                                                                              '/'),
+                                                                    );
+                                                                  }),
+                                                        )),
+                                            ModalRoute.withName('/'),
+                                          );
                                         } else {
-                                          setState(() {
-                                            isLoading = false;
-                                            error = 'Peminjaman gagal';
-                                          });
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (BuildContext
+                                                        context) =>
+                                                    Scaffold(
+                                                      body: IllustrationPage(
+                                                          title:
+                                                              'Maaf!\nPeminjaman gagal',
+                                                          description:
+                                                              'Silahkan ulangi peminjaman dengan\n menekan tombol di bawah',
+                                                          picturePath: '',
+                                                          button1:
+                                                              'Ulangi peminjaman',
+                                                          button1Tap: () {
+                                                            Navigator
+                                                                .pop(context);
+                                                          }),
+                                                    )),
+                                          );
                                         }
                                       },
                                       child: Text('Konfirmasi',
@@ -336,10 +383,11 @@ class _RentConfirmationPageState extends State<RentConfirmationPage> {
                                 ),
                                 SizedBox(
                                     height: MediaQuery.of(context).size.height *
-                                0.06),
+                                        0.06),
                                 Text(
                                   error,
-                                  style: TextStyle(color: Colors.red, fontSize: 14.0),
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 14.0),
                                 )
                               ]),
                             ),

@@ -8,6 +8,7 @@ import 'package:pack_me_alpha/interface/app/historyPage.dart';
 import 'package:pack_me_alpha/interface/app/orderPage.dart';
 import 'package:pack_me_alpha/interface/app/rentConfirmationPage.dart';
 import 'package:pack_me_alpha/interface/app/withdrawPage.dart';
+import 'package:pack_me_alpha/models/transaction.dart';
 import 'package:page_transition/page_transition.dart';
 // ignore: unused_import
 import 'package:qrscan/qrscan.dart' as scanner;
@@ -19,9 +20,6 @@ Widget homeGenerator(int index, context, int creditValue, int packAmount) {
   Widget button1;
   Widget button2;
   Widget texts;
-
-
-
   // ignore: unused_local_variable
   String outputCode = "abcURL"; //SAMPLE, REMOVE WHEN API IS READY
 
@@ -43,7 +41,7 @@ Widget homeGenerator(int index, context, int creditValue, int packAmount) {
                         context,
                         PageTransition(
                           type: PageTransitionType.fade,
-                          child: RentConfirmationPage(),
+                          child: RentConfirmationPage(transaction: Transaction()),
                 ));
               },
               child: Icon(Zephyrnaut.qrMark, size: 20),
