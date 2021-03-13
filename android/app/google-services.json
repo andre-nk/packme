@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "177550734227",
+    "firebase_url": "https://pack-me-97782.firebaseio.com",
+    "project_id": "pack-me-97782",
+    "storage_bucket": "pack-me-97782.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177550734227:android:5cdce5b4d8363ecd84ae66",
+        "android_client_info": {
+          "package_name": "com.example.pack_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177550734227-s7v2687jfsbv45md2chsmuch5sk5kc5h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTgIWi2nXPJQB9RMWMDlXVVBbrLxPokkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177550734227-s7v2687jfsbv45md2chsmuch5sk5kc5h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
