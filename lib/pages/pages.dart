@@ -7,9 +7,11 @@ import 'package:pack_me/widgets/default_button.dart';
 import 'package:provider/provider.dart';
 import 'package:pack_me/services/services.dart';
 
-part 'authentication/cta_sign_in_page.dart';
+part 'authentication/cta_auth_page.dart';
 part 'authentication/sign_up_email.dart';
+part 'authentication/sign_in_page.dart';
 part 'authentication/onboarding_pages.dart';
 part 'template/back_frame_page.dart';
 part "home_page.dart";
+
 

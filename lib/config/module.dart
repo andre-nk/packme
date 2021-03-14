@@ -12,8 +12,8 @@ class AppModule extends Module {
       child: (_, __) => InitialPage(),
       transition: TransitionType.fadeIn  
     ),
-    ChildRoute('/signIn',
-      child: (_, __) => SignInPage(),
+    ChildRoute('/auth',
+      child: (_, __) => CTAAuthPage(),
       transition: TransitionType.fadeIn  
     ),
     ChildRoute('/homePage',

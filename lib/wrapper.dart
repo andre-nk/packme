@@ -11,24 +11,17 @@ class AuthenticationWrapper extends StatefulWidget {
 
 class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
   @override
-  Widget build(BuildContext context){
-    User firebaseUser = Provider.of<User>(context, listen: true);
-
-    return StreamBuilder(
-      builder: (context, snasphot){
-        if(Provider.of<AuthenticationService>(context).isSigningIn == true){
-          return Text("Loading");
-        }
-        else if (firebaseUser != null){
-          return HomePage();
-        } else {
-          if (Provider.of<SharedPref>(context, listen: true).isFirstTime == true) {
-            return OnboardingPages();
-          } else {
-            return SignInPage();
-          }
-        }
-      },
-    );
+  Widget build(BuildContext context) {
+    if (Provider.of<AuthenticationService>(context).isSigningIn == true) {
+      return Text("Loading");
+    } else if (Provider.of<User>(context, listen: true) != null) {
+      return HomePage();
+    } else {
+      if (Provider.of<SharedPref>(context, listen: true).isFirstTime == true) {
+        return OnboardingPages();
+      } else {
+        return CTAAuthPage();
+      }
+    }
   }
 }

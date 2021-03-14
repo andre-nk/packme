@@ -1,19 +1,16 @@
 part of "../pages.dart";
 
-class SignUpWithEmailPage extends StatefulWidget {
+class SignInPage extends StatefulWidget {
+  
   @override
-  _SignUpWithEmailPageState createState() => _SignUpWithEmailPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
-
-  TextEditingController nameController = TextEditingController();
+class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController pass1Controller = TextEditingController();
-  TextEditingController pass2Controller = TextEditingController();
 
   bool _obscurePass1 = true;
-  bool _obscurePass2 = true;
 
   @override
   Widget build(BuildContext context) {
@@ -29,31 +26,58 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GFont.out(
-              title: "Daftar pakai E-mail",
+              title: "Masuk dulu yuk!",
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),
-            TextFormField(
-              cursorColor: Palette.greenWidget,
-              controller: nameController,
-              decoration: InputDecoration(                
-                border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 2.0),
+            SizedBox(height: MQuery.height(0.01, context)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                  customBorder: CircleBorder(),
+                  onTap: () {},
+                  child: Image(
+                      image: AssetImage("assets/facebook-icon.png")),
                 ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Palette.greenWidget, width: 3.0),
+                InkWell(
+                  customBorder: CircleBorder(),
+                  onTap: () {},
+                  child:
+                      Image(image: AssetImage("assets/google-icon.png")),
                 ),
-                hintText: "Nama lengkap kamu",
-                hintStyle: GFont.style(
-                  color: Colors.grey
+                InkWell(
+                  customBorder: CircleBorder(),
+                  onTap: () {},
+                  child:
+                      Image(image: AssetImage("assets/apple-icon.png")),
+                )
+              ],
+            ),
+            SizedBox(height: MQuery.height(0.005, context)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: MQuery.width(0.2, context),
+                  height: 1,
+                  color: Colors.grey,
                 ),
-                labelText: "Nama lengkap kamu",
-                labelStyle: GFont.style(fontSize: 18),
-              ),
-              style: GFont.style(
-                height: 2,
-                fontSize: 18
-              ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: MQuery.width(0.02, context)),
+                  child: GFont.out(
+                    title: "atau",
+                    fontSize: 16,
+                  ),
+                ),
+                Container(
+                  width: MQuery.width(0.2, context),
+                  height: 1,
+                  color: Colors.grey,
+                )
+              ],
             ),
             TextFormField(
               cursorColor: Palette.greenWidget,
@@ -118,49 +142,6 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                 fontSize: 18
               ),
             ),
-            TextFormField(
-              onSaved: (val) => pass2Controller.text = val,
-              validator: (val){
-                if(val.length < 6){
-                  return "Kata sandi kamu terlalu pendek";
-                }else if (pass1Controller.text == "" || val != pass1Controller.text){
-                  return "Kata sandi tidak sama";
-                }else{
-                  return null;
-                }
-              },
-              obscureText: _obscurePass2,
-              cursorColor: Palette.greenWidget,
-              controller: pass2Controller,
-              decoration: InputDecoration(  
-                suffixIcon: IconButton(
-                  onPressed: (){
-                    setState(() {
-                      _obscurePass2 = !_obscurePass2;                      
-                    });
-                  },
-                  icon: _obscurePass2
-                    ? Icon(Icons.remove_red_eye_outlined, color: Palette.pinkAccent)
-                    : Icon(Icons.remove_red_eye_rounded, color: Palette.pinkAccent)
-                ),              
-                border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 2.0),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Palette.greenWidget, width: 3.0),
-                ),
-                hintText: "Konfirmasi kata sandi",
-                hintStyle: GFont.style(
-                  color: Colors.grey
-                ),
-                labelText: "Konfirmasi kata sandi",
-                labelStyle: GFont.style(fontSize: 18),
-              ),
-              style: GFont.style(
-                height: 2,
-                fontSize: 18
-              ),
-            ),  
             SizedBox(
               height: MQuery.height(0.01, context),
             ),       
@@ -170,26 +151,42 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
               height: MQuery.height(0.08, context),
               child: DefaultButton(
                 title: GFont.out(
-                  title: "Daftar",
+                  title: "Masuk",
                   fontSize: 20,
                   color: Palette.whiteColor,
                   fontWeight: FontWeight.bold
                 ),
-                method: (){
-                  if(nameController.text != ""){
+                method: () async {
+                  if(pass1Controller.text != ""){
                     if(emailController.text != ""){
-                      if(pass1Controller.text == pass2Controller.text){
-                        AuthenticationService(FirebaseAuth.instance).signUpWithEmail(
-                          email: emailController.text.trim(),
-                          password: pass1Controller.text.trim(),
-                        );
-                      }
-                    }
+                      AuthenticationService(FirebaseAuth.instance).signInWithEmail(
+                        email: emailController.text.trim(),
+                        password: pass1Controller.text.trim(),
+                      );
+                    }                   
                   }   
                 },
                 color: Palette.pinkAccent,
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GFont.out(
+                  title: "Lupa kata sandi?",
+                  fontSize: 16,
+                ),
+                InkWell(
+                  child: GFont.out(
+                      title: " Klik disini!",
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                  onTap: (){
+                    
+                  },
+                )
+              ],
+            )
           ],
         ),
       ),

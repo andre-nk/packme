@@ -6,7 +6,7 @@ class OnboardingPages extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         Provider.of<SharedPref>(context, listen: false).setIsFirstTime(false);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CTAAuthPage()));
       },
       child: Text("Check")
     );

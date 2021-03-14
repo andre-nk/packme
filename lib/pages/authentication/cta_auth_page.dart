@@ -1,11 +1,11 @@
 part of '../pages.dart';
 
-class SignInPage extends StatefulWidget {
+class CTAAuthPage extends StatefulWidget {
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _CTAAuthPageState createState() => _CTAAuthPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _CTAAuthPageState extends State<CTAAuthPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -85,7 +85,7 @@ class _SignInPageState extends State<SignInPage> {
                   child: DefaultButton(
                     title: GFont.out(
                         title: "Daftar pakai E-mail",
-                        fontSize: 18,
+                        fontSize: 20,
                         color: Palette.whiteColor,
                         fontWeight: FontWeight.bold),
                     method: () {
@@ -108,7 +108,9 @@ class _SignInPageState extends State<SignInPage> {
                           title: " Masuk aja!",
                           fontSize: 16,
                           fontWeight: FontWeight.bold),
-                      onTap: () {},
+                      onTap: (){
+                        Get.to(() => SignInPage(), transition: Transition.cupertino);
+                      },
                     )
                   ],
                 )
