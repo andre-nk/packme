@@ -12,6 +12,7 @@ part 'authentication/sign_up_email.dart';
 part 'authentication/sign_in_page.dart';
 part 'authentication/onboarding_pages.dart';
 part 'template/back_frame_page.dart';
+part 'template/onboarding_page.dart';
 part "home_page.dart";
 
 

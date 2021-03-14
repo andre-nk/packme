@@ -30,6 +30,7 @@ dependencies:
   flutter_modular: ^3.0.1
   get: ^3.26.0
   google_fonts: ^2.0.0
+  introduction_screen: ^2.0.0
   provider: ^5.0.0
   shared_preferences: ^2.0.4
 

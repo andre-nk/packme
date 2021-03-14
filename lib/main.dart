@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:pack_me/config/configs.dart';
+import 'package:pack_me/pages/pages.dart';
 import 'package:pack_me/services/services.dart';
 import 'package:pack_me/wrapper.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +21,14 @@ Future<void> main() async {
         child: ChangeNotifierProvider<SharedPref>.value(
           value: SharedPref(snapshot.data),
           child: GetMaterialApp(
+            initialRoute: '/',
+            routes: {
+              '/': (context) => InitialPage(),
+              '/auth': (context) => CTAAuthPage(),
+              '/homepage': (context) => HomePage()
+            },
+            debugShowCheckedModeBanner: false,
             title: "PackMe",
-            home: InitialPage(),
           ),
         )
       ),

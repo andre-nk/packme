@@ -17,8 +17,7 @@ class AuthenticationService extends ChangeNotifier{
   Future<void> signInWithEmail({String email, String password}) async{
     try{
       isSigningIn = true;
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-      isSigningIn = false;
+      _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch(e){
       return e.message;
     }
@@ -27,10 +26,7 @@ class AuthenticationService extends ChangeNotifier{
   Future<void> signUpWithEmail({String email, String password, String userName}) async{
     try{
       isSigningIn = true;
-      UserCredential user = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      user.user.updateProfile(
-        displayName: userName ?? ""
-      );
+      _auth.createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch(e){
       return e.message;
     }
