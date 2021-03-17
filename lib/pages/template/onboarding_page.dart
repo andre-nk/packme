@@ -1,14 +1,13 @@
 part of "../pages.dart";
 
 class SplashContent extends StatelessWidget {
-  final String title;
-  final String description;
+  final String? title;
+  final String? description;
 
   const SplashContent({
-    Key key,
     this.title,
     this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

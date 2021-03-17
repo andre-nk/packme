@@ -2,9 +2,10 @@ part of "../pages.dart";
 
 class BackFramePage extends StatelessWidget {
 
-  final Widget child;
+  final Widget? child;
 
-  const BackFramePage({Key key, this.child}) : super(key: key);
+  BackFramePage({this.child});
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class BackFramePage extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios_rounded, color: Palette.blackColor),
         ),
       ),
-      body: SafeArea(child: this.child),
+      body: SafeArea(child: this.child!),
     );
   }
 }

@@ -26,6 +26,12 @@ class _OnboardingPagesState extends State<OnboardingPages> {
     },
   ];
 
+  Future<void> onGetStarted(BuildContext context) async {
+    final onboardingViewModel = context.read(onboardingViewModelProvider);
+    await onboardingViewModel.completeOnboarding();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +48,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                   child: TextButton(
                     child: GFont.out(title: "Lewati", fontSize: 16),
                     onPressed: () {
-                      Provider.of<SharedPref>(context, listen: false).setIsFirstTime(false);
+                      onGetStarted(context);
                       Get.offAndToNamed("/auth");
                       Get.to(() => CTAAuthPage(), transition: Transition.cupertino);
                     },
@@ -64,8 +70,8 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                     itemBuilder: (context, index) {
                       return SplashContent(
                         // image: splashData[index]["image"],
-                        title: splashData[index]['title'],
-                        description: splashData[index]['text'],
+                        title: splashData[index]['title'] ?? "Untitled",
+                        description: splashData[index]['text'] ?? "Description",
                       );
                     }),
               ),
@@ -87,7 +93,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                             : Palette.pinkAccent,
                           method: () {
                             if(currentPage == splashData.length - 1){
-                              Provider.of<SharedPref>(context, listen: false).setIsFirstTime(false);
+                              onGetStarted(context);
                               Get.offAndToNamed("/auth");
                             } else {
                               _controller.nextPage(

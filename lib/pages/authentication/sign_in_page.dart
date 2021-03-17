@@ -1,7 +1,10 @@
 part of "../pages.dart";
 
 class SignInPage extends StatefulWidget {
-  
+  final AuthenticationViewModel? viewModel;
+
+  SignInPage({this.viewModel});
+
   @override
   _SignInPageState createState() => _SignInPageState();
 }
@@ -102,9 +105,9 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             TextFormField(
-              onSaved: (val) => pass1Controller.text = val,
+              onSaved: (val) => pass1Controller.text = val ?? "",
               validator: (val){
-                if(val.length < 6){
+                if(val!.length < 6){
                   return "Kata sandi kamu terlalu pendek";
                 }else{
                   return null;
@@ -159,9 +162,9 @@ class _SignInPageState extends State<SignInPage> {
                 method: () async {
                   if(pass1Controller.text != ""){
                     if(emailController.text != ""){
-                      AuthenticationService(FirebaseAuth.instance).signInWithEmail(
-                        email: emailController.text.trim(),
-                        password: pass1Controller.text.trim(),
+                      widget.viewModel!.signIn(
+                        emailController.text.trim(),
+                        pass1Controller.text.trim(),
                       );
                     }                   
                   }   
@@ -182,7 +185,7 @@ class _SignInPageState extends State<SignInPage> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                   onTap: (){
-                    
+                    //webview forgot password;
                   },
                 )
               ],

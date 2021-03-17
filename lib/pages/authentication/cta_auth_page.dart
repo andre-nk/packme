@@ -1,17 +1,24 @@
 part of '../pages.dart';
 
-class CTAAuthPage extends StatefulWidget {
-  @override
-  _CTAAuthPageState createState() => _CTAAuthPageState();
-}
-
-class _CTAAuthPageState extends State<CTAAuthPage> {
+final authModelProvider = ChangeNotifierProvider<AuthenticationViewModel>(
+  (ref) => AuthenticationViewModel(auth: ref.watch(firebaseAuthProvider)),
+);
+class CTAAuthPage extends ConsumerWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context, ScopedReader watch) {
+    final authModel = watch(authModelProvider);
+
+    return ProviderListener<AuthenticationViewModel>(
+      provider: authModelProvider,
+      onChange: (context, model) async {
+        if (model.error != null) {
+          
+        }
+      },
+      child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Padding(
@@ -89,8 +96,10 @@ class _CTAAuthPageState extends State<CTAAuthPage> {
                         color: Palette.whiteColor,
                         fontWeight: FontWeight.bold),
                     method: () {
-                      Get.to(() => SignUpWithEmailPage(),
-                          transition: Transition.cupertino);
+                      Get.to(() => SignUpWithEmailPage(
+                        viewModel: authModel,
+                      ),
+                      transition: Transition.cupertino);
                     },
                     color: Palette.pinkAccent,
                   ),
@@ -109,7 +118,7 @@ class _CTAAuthPageState extends State<CTAAuthPage> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold),
                       onTap: (){
-                        Get.to(() => SignInPage(), transition: Transition.cupertino);
+                        Get.to(() => SignInPage(viewModel: authModel), transition: Transition.cupertino);
                       },
                     )
                   ],
@@ -118,6 +127,7 @@ class _CTAAuthPageState extends State<CTAAuthPage> {
             ),
           ),
         )
-      );
+      ),
+    );
   }
 }

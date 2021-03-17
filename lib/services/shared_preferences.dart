@@ -1,14 +1,16 @@
 part of "services.dart";
 
-class SharedPref extends ChangeNotifier{
-  final SharedPreferences sharedPref;
+final sharedPreferencesServiceProvider = Provider<SharedPreferencesService>((ref) => throw UnimplementedError());
+class SharedPreferencesService {
+  SharedPreferencesService(this.sharedPreferences);
+  final SharedPreferences sharedPreferences;
 
-  SharedPref(this.sharedPref);
+  static const onboardingCompleteKey = 'onboardingComplete';
 
-  bool get isFirstTime => sharedPref?.getBool("isFirstTime") ?? true;
-
-  void setIsFirstTime(bool value){
-    sharedPref.setBool("isFirstTime", value);
-    notifyListeners();
+  Future<void> setOnboardingComplete() async {
+    await sharedPreferences.setBool(onboardingCompleteKey, true);
   }
+
+  bool isOnboardingComplete() =>
+      sharedPreferences.getBool(onboardingCompleteKey) ?? false;
 }

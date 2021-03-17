@@ -1,6 +1,10 @@
 part of "../pages.dart";
 
 class SignUpWithEmailPage extends StatefulWidget {
+
+  final AuthenticationViewModel? viewModel;
+  SignUpWithEmailPage({this.viewModel});
+
   @override
   _SignUpWithEmailPageState createState() => _SignUpWithEmailPageState();
 }
@@ -78,9 +82,9 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
               ),
             ),
             TextFormField(
-              onSaved: (val) => pass1Controller.text = val,
+              onSaved: (val) => pass1Controller.text = val ?? "",
               validator: (val){
-                if(val.length < 6){
+                if(val!.length < 6){
                   return "Kata sandi kamu terlalu pendek";
                 }else{
                   return null;
@@ -119,9 +123,9 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
               ),
             ),
             TextFormField(
-              onSaved: (val) => pass2Controller.text = val,
+              onSaved: (val) => pass2Controller.text = val ?? "",
               validator: (val){
-                if(val.length < 6){
+                if(val!.length < 6){
                   return "Kata sandi kamu terlalu pendek";
                 }else if (pass1Controller.text == "" || val != pass1Controller.text){
                   return "Kata sandi tidak sama";
@@ -179,7 +183,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                   if(nameController.text != ""){
                     if(emailController.text != ""){
                       if(pass1Controller.text == pass2Controller.text){
-                        AuthenticationService(FirebaseAuth.instance).signUpWithEmail(
+                        widget.viewModel!.signUpWithEmail(
                           email: emailController.text.trim(),
                           password: pass1Controller.text.trim(),
                         );
