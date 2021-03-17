@@ -48,7 +48,9 @@ class CTAAuthPage extends ConsumerWidget {
                     ),
                     InkWell(
                       customBorder: CircleBorder(),
-                      onTap: () {},
+                      onTap: (){
+                        authModel.signUpWithGoogle();
+                      },
                       child:
                           Image(image: AssetImage("assets/google-icon.png")),
                     ),
