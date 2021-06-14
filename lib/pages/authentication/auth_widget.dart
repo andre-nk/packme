@@ -1,36 +1,39 @@
 part of "../pages.dart";
 
-class AuthWidget extends ConsumerWidget {
+class AuthWidget extends StatelessWidget {
   final WidgetBuilder? nonSignedInBuilder;
   final WidgetBuilder? signedInBuilder;
 
-  AuthWidget({this.nonSignedInBuilder, this.signedInBuilder});
+  AuthWidget({required this.nonSignedInBuilder, required this.signedInBuilder});
   
-  // const AuthWidget({
-  //   required this.signedInBuilder,
-  //   required this.nonSignedInBuilder,
-  // }) : super(key: key);
-
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final authStateChanges = watch(authStateChangesProvider);
-    return authStateChanges.when(
-      data: (user) => _data(context, user),
-      loading: () => const Scaffold(
+  Widget build(BuildContext context) {
+
+    AuthState states = context.watch<AuthenticationCubit>().state;
+
+    if(states is AuthInitial){
+      context.read<AuthenticationCubit>().isLoggedIn();
+    }
+
+    if(states is NotAuthenticated){
+      context.read<AuthenticationCubit>().isOnboardingCompleted();
+    }
+
+    return states is AuthInitial || states is AuthLoading
+    ? Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),
-      ),
-      error: (_, __) => const Scaffold(
-        body: Text("error")
-      ),
-    );
-  }
-
-  Widget _data(BuildContext context, User? user) {
-    if (user != null) {
-      return signedInBuilder!(context);
-    }
-    return nonSignedInBuilder!(context);
+      )
+    : states is Authenticated
+      ? signedInBuilder!(context)
+      : states is NotAuthenticated
+        ? nonSignedInBuilder!(context)
+        : Scaffold(
+            body: Center(
+              //TODO: 404 PAGE
+              child: CircularProgressIndicator(color: Colors.red,),
+            ),
+          );
   }
 }

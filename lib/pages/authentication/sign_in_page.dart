@@ -1,10 +1,6 @@
 part of "../pages.dart";
 
 class SignInPage extends StatefulWidget {
-  final AuthenticationViewModel? viewModel;
-
-  SignInPage({this.viewModel});
-
   @override
   _SignInPageState createState() => _SignInPageState();
 }
@@ -45,7 +41,9 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 InkWell(
                   customBorder: CircleBorder(),
-                  onTap: () {},
+                  onTap: () {
+                    context.read<AuthenticationCubit>().signUpWithGoogle();
+                  },
                   child:
                       Image(image: AssetImage("assets/google-icon.png")),
                 ),
@@ -62,23 +60,32 @@ class _SignInPageState extends State<SignInPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  width: MQuery.width(0.2, context),
-                  height: 1,
-                  color: Colors.grey,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MQuery.width(0.02, context)),
-                  child: GFont.out(
-                    title: "atau",
-                    fontSize: 16,
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    width: MQuery.width(0.19, context),
+                    height: 1,
+                    color: Colors.grey,
                   ),
                 ),
-                Container(
-                  width: MQuery.width(0.2, context),
-                  height: 1,
-                  color: Colors.grey,
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MQuery.width(0.02, context)),
+                    child: GFont.out(
+                      title: "atau",
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    width: MQuery.width(0.19, context),
+                    height: 1,
+                    color: Colors.grey,
+                  ),
                 )
               ],
             ),
@@ -162,7 +169,7 @@ class _SignInPageState extends State<SignInPage> {
                 method: () async {
                   if(pass1Controller.text != ""){
                     if(emailController.text != ""){
-                      widget.viewModel!.signIn(
+                      context.read<AuthenticationCubit>().signInWithEmailAndPassword(
                         emailController.text.trim(),
                         pass1Controller.text.trim(),
                       );

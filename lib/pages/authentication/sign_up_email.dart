@@ -1,10 +1,6 @@
 part of "../pages.dart";
 
 class SignUpWithEmailPage extends StatefulWidget {
-
-  final AuthenticationViewModel? viewModel;
-  SignUpWithEmailPage({this.viewModel});
-
   @override
   _SignUpWithEmailPageState createState() => _SignUpWithEmailPageState();
 }
@@ -183,9 +179,10 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                   if(nameController.text != ""){
                     if(emailController.text != ""){
                       if(pass1Controller.text == pass2Controller.text){
-                        widget.viewModel!.signUpWithEmail(
-                          email: emailController.text.trim(),
-                          password: pass1Controller.text.trim(),
+                        context.read<AuthenticationCubit>().signUpWithEmailAndPassword(
+                          emailController.text.trim(),
+                          pass1Controller.text.trim(),
+                          nameController.text.trim()
                         );
                       }
                     }

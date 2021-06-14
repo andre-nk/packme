@@ -1,23 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pack_me/cubit/authentication_cubit.dart';
 import 'package:pack_me/pages/pages.dart';
-import 'package:pack_me/providers/providers.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pack_me/services/services.dart';
+import 'package:pack_me/repository/repositories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final sharedPreferences = await SharedPreferences.getInstance();
+  // ignore: invalid_use_of_visible_for_testing_member
+  SharedPreferences.setMockInitialValues({});
   runApp(
-    ProviderScope(
-      overrides: [
-        sharedPreferencesServiceProvider.overrideWithValue(
-          SharedPreferencesService(sharedPreferences),
-        ),
-      ],
+    BlocProvider<AuthenticationCubit>(
+      create: (context) => AuthenticationCubit(AuthenticationRepository()),
       child: InitialPage(),
     )
   );
@@ -26,6 +23,9 @@ Future<void> main() async {
 class InitialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    print(context.watch<AuthenticationCubit>().state);
+
     return GetMaterialApp(
       initialRoute: '/',
       routes: {
@@ -35,13 +35,12 @@ class InitialPage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "PackMe",
       home: AuthWidget(
-        nonSignedInBuilder: (_) => Consumer(
-          builder: (context, watch, _) {
-            final didCompleteOnboarding =
-                watch(onboardingViewModelProvider.state);
-            return didCompleteOnboarding ? CTAAuthPage() : OnboardingPages();
-          },
-        ),
+        nonSignedInBuilder: (_) {
+          final authCubit = context.watch<AuthenticationCubit>();
+          return authCubit.state is OnboardingCompleted
+          ? CTAAuthPage()
+          : OnboardingPages();
+        },
         signedInBuilder: (_) => HomePage(),
       ),
     );

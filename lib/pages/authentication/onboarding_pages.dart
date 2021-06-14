@@ -27,10 +27,8 @@ class _OnboardingPagesState extends State<OnboardingPages> {
   ];
 
   Future<void> onGetStarted(BuildContext context) async {
-    final onboardingViewModel = context.read(onboardingViewModelProvider);
-    await onboardingViewModel.completeOnboarding();
+    await context.read<AuthenticationCubit>().completeOnboarding();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +47,8 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                     child: GFont.out(title: "Lewati", fontSize: 16),
                     onPressed: () {
                       onGetStarted(context);
-                      Get.offAndToNamed("/auth");
-                      Get.to(() => CTAAuthPage(), transition: Transition.cupertino);
+                      Get.Get.offAndToNamed("/auth");
+                      Get.Get.to(() => CTAAuthPage(), transition: Get.Transition.cupertino);
                     },
                   ),
                 ),
@@ -94,7 +92,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                           method: () {
                             if(currentPage == splashData.length - 1){
                               onGetStarted(context);
-                              Get.offAndToNamed("/auth");
+                              Get.Get.offAndToNamed("/auth");
                             } else {
                               _controller.nextPage(
                                 duration: Duration(milliseconds: 250),

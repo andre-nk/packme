@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as Get;
 import 'package:pack_me/config/configs.dart';
-import 'package:pack_me/providers/providers.dart';
+import 'package:pack_me/cubit/authentication_cubit.dart';
 import 'package:pack_me/widgets/default_button.dart';
 
 part 'authentication/auth_widget.dart';
