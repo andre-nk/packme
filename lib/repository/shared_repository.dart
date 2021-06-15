@@ -1,7 +1,7 @@
 part of 'repositories.dart';
 
 abstract class SharedRepository{
-  Future<bool> isOnboardingCompleted();
+  Future<bool?> isOnboardingCompleted();
   Future<void> completeOnboarding();
   Future<void> setUserID(String value);
 }
@@ -14,9 +14,9 @@ class SharedPreferencesRepository implements SharedRepository{
   }
 
   @override
-  Future<bool> isOnboardingCompleted() async {
+  Future<bool?> isOnboardingCompleted() async {
     final _sharedPref = await SharedPreferences.getInstance();
-    return _sharedPref.getBool("isOnboardingCompleted") ?? false;
+    return _sharedPref.getBool("isOnboardingCompleted");
   }
 
   @override

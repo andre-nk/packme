@@ -12,17 +12,17 @@ class _OnboardingPagesState extends State<OnboardingPages> {
     {
       "title": "Take-away!",
       "text": "Take-away di merchant favorit kamu dan jangan lupa pakai kemasan PackMe ya!",
-      // "image": "assets/images/splash_1.png"
+      "image": "assets/take.png"
     },
     {
       "title": "Kembalikan kemasan!",
-      "text": "Bisa di pick-up atau drop-off, \n jangan lupa ya kembalikan kemasan PackMe!",
-      // "image": "assets/images/splash_2.png"
+      "text": "Bisa di pick-up atau drop-off, jangan \n lupa kembalikan kemasan PackMe!",
+      "image": "assets/return.png"
     },
     {
       "title": "Klaim bonusnya!",
       "text": "Dapatkan bonus sampai Rp 10.000 \n per kemasan PackMe yang kamu kembalikan!",
-      // "image": "assets/images/splash_3.png"
+      "image": "assets/card.png"
     },
   ];
 
@@ -67,7 +67,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                     itemCount: splashData.length,
                     itemBuilder: (context, index) {
                       return SplashContent(
-                        // image: splashData[index]["image"],
+                        image: splashData[index]["image"],
                         title: splashData[index]['title'] ?? "Untitled",
                         description: splashData[index]['text'] ?? "Description",
                       );

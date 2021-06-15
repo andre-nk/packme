@@ -5,7 +5,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context){
     return ElevatedButton(
       onPressed: () async {
-        await FirebaseAuth.instance.signOut();
+        context.read<AuthenticationCubit>().signOut();
       },
       child: Text("Sign out and")
     );

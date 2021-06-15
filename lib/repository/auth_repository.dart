@@ -32,6 +32,7 @@ class AuthenticationRepository implements AuthRepository{
   Future<void> signUpWithEmail(String email, String password, String userName) async {
     try {
       UserCredential result = await auth.createUserWithEmailAndPassword(email: email, password: password);
+      auth.currentUser!.updateDisplayName(userName);
       _prefs.setUserID(result.user!.uid);
     } catch (e) {
       throw(e);

@@ -27,7 +27,6 @@ class AuthenticationCubit extends Cubit<AuthState> {
     try{
       final SharedPreferencesRepository _prefs = SharedPreferencesRepository();
       _prefs.isOnboardingCompleted().then((value){
-        print(value);
         if(value == true){
           emit(OnboardingCompleted());
         } else {
