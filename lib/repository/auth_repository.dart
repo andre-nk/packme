@@ -7,7 +7,7 @@ abstract class AuthRepository {
   Future<void> signUpWithEmail(String email, String password, String userName);
   Future<void> signUpWithGoogle();
   Future<void> signOutWithGoogle();
-  // Future<void> passwordResetSubmit(String email);
+  Future<void> passwordResetSubmit(String email);
   // Future<bool> isFirstRun();
   // Future<void> updatePersonalData(String firstname, String lastName, String birthday);
 }
@@ -85,10 +85,14 @@ class AuthenticationRepository implements AuthRepository{
   //   throw UnimplementedError();
   // }
 
-  // @override
-  // Future<void> passwordResetSubmit(String email) {
-  //   throw UnimplementedError();
-  // }
+  @override
+  Future<void> passwordResetSubmit(String email) async {
+    try{
+      await auth.sendPasswordResetEmail(email: email);
+    } catch (e){
+      throw(e);
+    }
+  }
 
   // @override
   // Future<void> updatePersonalData(String firstname, String lastName, String birthday) {

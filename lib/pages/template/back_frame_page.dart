@@ -3,14 +3,12 @@ part of "../pages.dart";
 class BackFramePage extends StatelessWidget {
 
   final Widget? child;
-
   BackFramePage({this.child});
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         toolbarHeight: MQuery.height(0.1, context),
         elevation: 0,

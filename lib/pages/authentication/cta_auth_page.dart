@@ -15,13 +15,30 @@ class CTAAuthPage extends StatelessWidget {
             children: [
               Container(
                 width: MQuery.width(0.45, context),
-                height: MQuery.height(0.075, context),
-                color: Colors.grey,
+                height: MQuery.height(0.06, context),
+                padding: EdgeInsets.zero,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset(
+                      "assets/logo_wide.png",
+                      fit: BoxFit.fitHeight,
+                      height: MQuery.height(0.1, context),
+                    ),
+                    IconButton(
+                      padding: EdgeInsets.all(3),
+                      icon: Icon(CupertinoIcons.info_circle),
+                      onPressed: (){
+                        Get.Get.to(() => HelpPage(), transition: Get.Transition.cupertino);
+                      },
+                    )
+                  ],
+                )
               ),
               Container(
-                height: MQuery.width(0.425, context),
+                height: MQuery.width(0.45, context),
                 width: MQuery.height(0.45, context),
-                color: Colors.grey,
+                color: Colors.grey.withOpacity(0.1),
               ),
               SizedBox(height: MQuery.height(0.01, context)),
               Row(

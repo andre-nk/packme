@@ -31,11 +31,6 @@ class AuthWidget extends StatelessWidget {
         ? nonSignedInBuilder!(context)
         : states is OnboardingIsNotCompleted
           ? OnboardingPages()
-          : Scaffold(
-              body: Center(
-                //TODO: 404 PAGE
-                child: CircularProgressIndicator(color: Colors.red,),
-              ),
-            );
+          : ErrorStatePage();
   }
 }
