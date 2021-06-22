@@ -32,7 +32,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GFont.out(
-                  title: "Daftar pakai E-mail",
+                  title: "Daftar MitraPRO",
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),

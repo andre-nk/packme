@@ -30,7 +30,7 @@ class InitialPage extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/auth': (context) => CTAAuthPage(),
-        '/homepage': (context) => HomePage()
+        '/homepage': (context) => UserListener()
       },
       debugShowCheckedModeBanner: false,
       title: "PackMe",
@@ -41,7 +41,7 @@ class InitialPage extends StatelessWidget {
           ? CTAAuthPage()
           : OnboardingPages();
         },
-        signedInBuilder: (_) => HomePage(),
+        signedInBuilder: (_) => UserListener(),
       ),
     );
   }
