@@ -1,11 +1,14 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:get/get.dart' as Get;
+import 'package:intl/intl.dart';
 import 'package:pack_me/config/configs.dart';
+import 'package:pack_me/config/pack_me_icons.dart';
 import 'package:pack_me/cubit/authentication_cubit.dart';
 import 'package:pack_me/cubit/user_cubit.dart';
 import 'package:pack_me/repository/repositories.dart';
