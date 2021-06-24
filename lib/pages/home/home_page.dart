@@ -48,47 +48,157 @@ class _HomePageState extends State<HomePage> {
             );
         } else {
           if (state is UserExist) {
-
-            Future.delayed(Duration(seconds: 1), (){
-              Get.Get.back();
-              Get.Get.dialog(
-                Dialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))
-                  ),
-                  backgroundColor: Palette.whiteColor,
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    height: MQuery.height(0.65, context),
-                    child: Container(
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                        color: Palette.whiteColor,
-                        borderRadius: BorderRadius.all(Radius.circular(10))
-                      ),
-                      child: Image.asset("assets/sample_ads.png", fit: BoxFit.fill),
-                    )
-                  )
-                ),
-              );
-            });
-
+            // Future.delayed(Duration(seconds: 1), (){
+            //   Get.Get.back();
+            //   Get.Get.dialog(
+            //     Dialog(
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.all(Radius.circular(20))
+            //       ),
+            //       backgroundColor: Palette.whiteColor,
+            //       child: Container(
+            //         padding: EdgeInsets.all(10),
+            //         height: MQuery.height(0.65, context),
+            //         child: Container(
+            //           clipBehavior: Clip.hardEdge,
+            //           decoration: BoxDecoration(
+            //             color: Palette.whiteColor,
+            //             borderRadius: BorderRadius.all(Radius.circular(10))
+            //           ),
+            //           child: Image.asset("assets/sample_ads.png", fit: BoxFit.fill),
+            //         )
+            //       )
+            //     ),
+            //   );
+            // });
             return Scaffold(
+              drawer: Drawer(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: MQuery.width(0.02, context)
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                            left: MQuery.width(0.02, context)
+                          ),
+                          width: MQuery.width(0.3, context),
+                          child: Image.asset("assets/logo_wide.png")
+                        ),
+                        SizedBox(height: MQuery.height(0.04, context)),
+                        ListTile(
+                          onTap: (){},
+                          title: GFont.out(
+                            title: "Beranda",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            textAlign: TextAlign.start
+                          ),
+                        ),
+                        ListTile(
+                          onTap: (){},
+                          title: GFont.out(
+                            title: "Riwayat",
+                            fontSize: 18,
+                            textAlign: TextAlign.start
+                          ),
+                        ),
+                        ListTile(
+                          onTap: (){},
+                          title: GFont.out(
+                            title: "Transfer Packs",
+                            fontSize: 18,
+                            textAlign: TextAlign.start
+                          ),
+                        ),
+                        ListTile(
+                          onTap: (){},
+                          title: GFont.out(
+                            title: "Promosi",
+                            fontSize: 18,
+                            textAlign: TextAlign.start
+                          ),
+                        ),
+                        ListTile(
+                          onTap: (){},
+                          title: GFont.out(
+                            title: "Riwayat",
+                            fontSize: 18,
+                            textAlign: TextAlign.start
+                          ),
+                        ),
+                        ListTile(
+                          onTap: (){},
+                          title: GFont.out(
+                            title: "FAQ",
+                            fontSize: 18,
+                            textAlign: TextAlign.start
+                          ),
+                        ),
+                        ListTile(
+                          onTap: (){},
+                          title: GFont.out(
+                            title: "Tentang kami",
+                            fontSize: 18,
+                            textAlign: TextAlign.start
+                          ),
+                        ),
+                        ListTile(
+                          onTap: (){},
+                          title: GFont.out(
+                            title: "Gabung kami",
+                            fontSize: 18,
+                            textAlign: TextAlign.start
+                          ),
+                        ),
+                        ListTile(
+                          onTap: (){
+                            context.read<AuthenticationCubit>().signOut();
+                          },
+                          title: GFont.out(
+                            title: "Log out",
+                            fontWeight: FontWeight.bold,
+                            color: Palette.alertColor,
+                            fontSize: 18,
+                            textAlign: TextAlign.start
+                          ),
+                        )
+                      ]
+                    ),
+                  ),
+                ),
+              ),
               appBar: AppBar(
                 elevation: 0,
                 backgroundColor: Palette.whiteColor,
                 toolbarHeight: MQuery.height(0.07, context),
-                leading: Icon(
-                  PackMe.menu,
-                  color: Palette.blackColor,
-                  size: 22,
+                leading: Builder(builder: (context) => // Ensure Scaffold is in context
+                  IconButton(
+                    onPressed: (){
+                      Scaffold.of(context).openDrawer();
+                    },
+                    icon: Icon(
+                      PackMe.menu,
+                      color: Palette.blackColor,
+                      size: 22
+                    ),
+                  ),
                 ),
                 actions: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      right: MQuery.width(0.02, context)
+                  GestureDetector(
+                    onTap: (){
+                      Get.Get.to(() => ProfilePage(), transition: Get.Transition.cupertino);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        right: MQuery.width(0.02, context)
+                      ),
+                      child: FlutterLogo(),
                     ),
-                    child: FlutterLogo(),
                   )
                 ],
               ),
@@ -293,7 +403,7 @@ class _HomePageState extends State<HomePage> {
                   FloatingNavbarItem(icon: PackMe.qr, title: 'Rent'),
                   FloatingNavbarItem(icon: CupertinoIcons.cube_box, title: 'Return'),
                 ],
-              ),
+              )
             );
           } else {
             return ErrorStatePage();
