@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:pack_me/config/configs.dart';
 import 'package:pack_me/cubit/authentication_cubit.dart';
 import 'package:pack_me/pages/pages.dart';
 import 'package:pack_me/repository/repositories.dart';
@@ -27,6 +28,9 @@ class InitialPage extends StatelessWidget {
     print(context.watch<AuthenticationCubit>().state);
 
     return GetMaterialApp(
+      theme: ThemeData(
+        dividerColor: Palette.greenAccent
+      ),
       initialRoute: '/',
       routes: {
         '/auth': (context) => CTAAuthPage(),

@@ -12,7 +12,6 @@ import 'package:pack_me/config/configs.dart';
 import 'package:pack_me/config/pack_me_icons.dart';
 import 'package:pack_me/cubit/authentication_cubit.dart';
 import 'package:pack_me/cubit/user_cubit.dart';
-import 'package:pack_me/model/models.dart';
 import 'package:pack_me/repository/repositories.dart';
 import 'package:pack_me/widgets/default_button.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,4 +29,8 @@ part 'template/error_state_page.dart';
 part 'template/help_page.dart';
 part 'home/home_page.dart';
 part 'home/profile_page.dart';
+part 'home/about_us.dart';
+part 'home/history_page.dart';
+part 'home/promotion_page.dart';
+part 'home/detailed_promotion_page.dart';
 

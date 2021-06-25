@@ -100,7 +100,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         ListTile(
-                          onTap: (){},
+                          onTap: (){
+                            
+                          },
                           title: GFont.out(
                             title: "Riwayat",
                             fontSize: 18,
@@ -116,7 +118,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         ListTile(
-                          onTap: (){},
+                          onTap: (){
+                            Get.Get.back();
+                            Get.Get.to(() => PromotionPage(), transition: Get.Transition.cupertino);
+                          },
                           title: GFont.out(
                             title: "Promosi",
                             fontSize: 18,
@@ -124,7 +129,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         ListTile(
-                          onTap: (){},
+                          onTap: (){
+                            Get.Get.back();
+                            Get.Get.to(() => HistoryPage(), transition: Get.Transition.cupertino);
+                          },
                           title: GFont.out(
                             title: "Riwayat",
                             fontSize: 18,
@@ -140,7 +148,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         ListTile(
-                          onTap: (){},
+                          onTap: (){
+                            Get.Get.back();
+                            Get.Get.to(() => AboutUsPage(), transition: Get.Transition.cupertino);
+                          },
                           title: GFont.out(
                             title: "Tentang kami",
                             fontSize: 18,
