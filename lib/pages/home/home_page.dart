@@ -110,7 +110,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         ListTile(
-                          onTap: (){},
+                          onTap: (){
+                            Get.Get.back();
+                            Get.Get.to(() => TransferPage(), transition: Get.Transition.cupertino);
+                          },
                           title: GFont.out(
                             title: "Transfer Packs",
                             fontSize: 18,

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' as Get;
 import 'package:intl/intl.dart';
 import 'package:pack_me/config/configs.dart';
@@ -33,4 +34,7 @@ part 'home/about_us.dart';
 part 'home/history_page.dart';
 part 'home/promotion_page.dart';
 part 'home/detailed_promotion_page.dart';
+part 'home/transfer_page.dart';
+part 'home/qr_code_page.dart';
+part 'home/choose_pack_page.dart';
 
