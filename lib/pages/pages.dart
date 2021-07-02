@@ -37,4 +37,5 @@ part 'home/detailed_promotion_page.dart';
 part 'home/transfer_page.dart';
 part 'home/qr_code_page.dart';
 part 'home/choose_pack_page.dart';
+part 'home/transfer_pack_confirmation.dart';
 

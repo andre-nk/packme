@@ -4,10 +4,10 @@ class ChoosePackPage extends StatefulWidget {
   const ChoosePackPage({ Key? key }) : super(key: key);
 
   @override
-  _ChoosePackPageState createState() => _ChoosePackPageState();
+  _TransferConfirmationPageState createState() => _TransferConfirmationPageState();
 }
 
-class _ChoosePackPageState extends State<ChoosePackPage> {
+class _TransferConfirmationPageState extends State<ChoosePackPage> {
 
   TextEditingController _searchController = TextEditingController();
   Set<int> selectedPacks = Set();
@@ -17,35 +17,81 @@ class _ChoosePackPageState extends State<ChoosePackPage> {
   @override
   Widget build(BuildContext context) {
 
-    print(selectedPacks);
+    if(selectedPacks.isEmpty){
+      setState(() {
+        isSelecting = false;
+      });
+    }
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
+      floatingActionButton: AnimatedContainer(
+        duration: Duration(milliseconds: 250),
         height: MQuery.height(0.1, context),
+        width: selectedPacks.length == 0
+        ? MQuery.height(0.09, context)
+        : MQuery.width(0.35, context),
         padding: EdgeInsets.only(
           bottom: MQuery.height(0.025, context)
         ),
-        child: FittedBox(
-          child: FloatingActionButton(
-            backgroundColor: Palette.pinkAccent,
-            elevation: 5,
-            child: Icon(PackMe.qr, color: Colors.white),
-            materialTapTargetSize: MaterialTapTargetSize.padded,
-            onPressed: (){
-              Get.Get.to(() => QRCodePage(), transition: Get.Transition.cupertino);
-            },
+        child: ElevatedButton(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MQuery.width(0.01, context)
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GFont.out(
+                  title: selectedPacks.length == 0
+                  ? ""
+                  : "${selectedPacks.length} packs dipilih",
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white
+                ),
+                Icon(CupertinoIcons.chevron_right_2),
+              ],
+            ),
           ),
-        ),
+          onPressed: (){
+            if(selectedPacks.length == 0){
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Palette.alertColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5))
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                  content: Container(
+                    height: MQuery.height(0.03, context),
+                    child: Center(
+                      child: GFont.out(
+                        title: "Pilih minimal 1 jenis pack untuk di transfer!",
+                        fontSize: 18,
+                        color: Palette.whiteColor
+                      )
+                    ),
+                  ),
+                )
+              );
+            } else {
+              Get.Get.to(() => TransferConfirmationPage(), transition: Get.Transition.cupertino);
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Palette.pinkAccent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(50)
+              )
+            )
+          )
+        )
       ),
       appBar: AppBar(
         backgroundColor: Palette.whiteColor,
-        toolbarHeight: MQuery.height(0.07, context),
-        title: GFont.out(
-          title: "Pilih Packs",
-          fontSize: 18,
-          fontWeight: FontWeight.bold
-        ),
+        toolbarHeight: MQuery.height(0.07, context), 
         elevation: 0,
         leading: IconButton(
           onPressed: (){
@@ -131,6 +177,7 @@ class _ChoosePackPageState extends State<ChoosePackPage> {
                           onLongPress: (){
                             setState(() {
                               isSelecting = !isSelecting;
+                              selectedPacks.add(index);
                             });
                           },
                           horizontalTitleGap: MQuery.width(0.025, context),
@@ -155,6 +202,7 @@ class _ChoosePackPageState extends State<ChoosePackPage> {
                           trailing: Container(
                             width: MQuery.width(0.075, context),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 GFont.out(
                                   title: "2x",
@@ -162,10 +210,12 @@ class _ChoosePackPageState extends State<ChoosePackPage> {
                                   color: Palette.blackColor,
                                   textAlign: TextAlign.start
                                 ),
-                                SizedBox(width: MQuery.width(
+                                SizedBox(
+                                  width: MQuery.width(
                                   selectedPacks.toList().indexOf(index) >= 0
                                   ? 0.02
-                                  : 0, context)),
+                                  : 0, context
+                                )),
                                 selectedPacks.toList().indexOf(index) >= 0
                                 ? ZoomIn(
                                     duration: Duration(milliseconds: 100),

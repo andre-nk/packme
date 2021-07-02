@@ -38,7 +38,7 @@ class _TransferPageState extends State<TransferPage> {
         toolbarHeight: MQuery.height(0.07, context),
         title: GFont.out(
           title: "Transfer Packs",
-          fontSize: 22,
+          fontSize: 18,
           fontWeight: FontWeight.bold
         ),
         elevation: 0,
