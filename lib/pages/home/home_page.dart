@@ -243,55 +243,71 @@ class _HomePageState extends State<HomePage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(PackMe.history),
-                                  Icon(PackMe.help)
+                                  GestureDetector(
+                                    onTap: (){
+                                      Get.Get.to(() => HistoryPage(), transition: Get.Transition.cupertino);
+                                    },
+                                    child: Icon(PackMe.history)
+                                  ),
+                                  GestureDetector(
+                                    onTap: (){
+                                      Get.Get.to(() => HelpPage(), transition: Get.Transition.cupertino);
+                                    },
+                                    child: Icon(PackMe.help)
+                                  )
                                 ],
                               ),
                               SizedBox(height: MQuery.height(0.025, context)),
                               selectedPage == "Withdraw"
-                              ? Column(
-                                  children: [
-                                    GFont.out(
-                                      title: formatCurrency.format(215540).substring(0, formatCurrency.format(215540).length - 3),
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w800
-                                    ),
-                                    GFont.out(
-                                      title: "yang dapat kamu cairkan\nke e-money atau rekening kamu!",
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.normal
-                                    )
-                                  ],
-                                )
-                              : selectedPage == "Rent"
-                                ? Column(
+                              ? FadeInUp(
+                                  child: Column(
                                     children: [
                                       GFont.out(
-                                        title: "Scan QR",
+                                        title: formatCurrency.format(215540).substring(0, formatCurrency.format(215540).length - 3),
                                         fontSize: 30,
                                         fontWeight: FontWeight.w800
                                       ),
                                       GFont.out(
-                                        title: "di merchant / vendor\nuntuk mulai pinjam packs",
+                                        title: "yang dapat kamu cairkan\nke e-money atau rekening kamu!",
                                         fontSize: 20,
                                         fontWeight: FontWeight.normal
                                       )
                                     ],
-                                  )
-                                : selectedPage == "Return"
-                                  ? Column(
+                                  ),
+                                )
+                              : selectedPage == "Rent"
+                                ? FadeInUp(
+                                    child: Column(
                                       children: [
                                         GFont.out(
-                                          title: "10 packs",
+                                          title: "Scan QR",
                                           fontSize: 30,
                                           fontWeight: FontWeight.w800
                                         ),
                                         GFont.out(
-                                          title: "yang dapat kamu kembalikan\ndan dapatkan bonusnya!",
+                                          title: "di merchant / vendor\nuntuk mulai pinjam packs",
                                           fontSize: 20,
                                           fontWeight: FontWeight.normal
                                         )
                                       ],
+                                    ),
+                                  )
+                                : selectedPage == "Return"
+                                  ? FadeInUp(
+                                      child: Column(
+                                        children: [
+                                          GFont.out(
+                                            title: "10 packs",
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.w800
+                                          ),
+                                          GFont.out(
+                                            title: "yang dapat kamu kembalikan\ndan dapatkan bonusnya!",
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.normal
+                                          )
+                                        ],
+                                      ),
                                     )
                                   : SizedBox()
                             ],
@@ -344,7 +360,7 @@ class _HomePageState extends State<HomePage> {
                             top: -40,
                             child: InkWell(
                               onTap: (){
-                                print("tap");
+                                Get.Get.to(() => RentCodePage(), transition: Get.Transition.cupertino);
                               },
                               child: Container(
                                 decoration: BoxDecoration(

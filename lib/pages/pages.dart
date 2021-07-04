@@ -16,6 +16,7 @@ import 'package:pack_me/cubit/user_cubit.dart';
 import 'package:pack_me/repository/repositories.dart';
 import 'package:pack_me/widgets/default_button.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 part 'authentication/auth_widget.dart';
 part 'authentication/cta_auth_page.dart';
@@ -38,4 +39,7 @@ part 'home/transfer_page.dart';
 part 'home/qr_code_page.dart';
 part 'home/choose_pack_page.dart';
 part 'home/transfer_pack_confirmation.dart';
+part 'home/rent_code_page.dart';
+part 'home/rent_pack_confirmation.dart';
+
 

@@ -37,6 +37,7 @@ dependencies:
   flutter_linkify: ^5.0.2
   flutter_native_splash: ^1.1.8+4
   flutter_svg: ^0.22.0
+  font_awesome_flutter: ^9.1.0
   get: ^4.0.0-nullsafety.2
   google_fonts: ^2.1.0
   google_sign_in: ^5.0.4

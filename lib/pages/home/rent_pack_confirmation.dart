@@ -1,40 +1,17 @@
 part of "../pages.dart";
 
-class TransferConfirmationPage extends StatefulWidget {
-  const TransferConfirmationPage({ Key? key }) : super(key: key);
+class RentPackConfirmation extends StatefulWidget {
+  const RentPackConfirmation({ Key? key }) : super(key: key);
 
   @override
-  _TransferConfirmationPage createState() => _TransferConfirmationPage();
+  _RentPackConfirmationState createState() => _RentPackConfirmationState();
 }
 
-class _TransferConfirmationPage extends State<TransferConfirmationPage> {
-
-  bool transferBonusActive = false;
-
+class _RentPackConfirmationState extends State<RentPackConfirmation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: Container(
-      //   height: MQuery.height(0.1, context),
-      //   margin: EdgeInsets.only(
-      //     top: MQuery.height(0.025, context)
-      //   ),
-      //   padding: EdgeInsets.only(
-      //     bottom: MQuery.height(0.025, context)
-      //   ),
-      //   child: FittedBox(
-      //     child: FloatingActionButton(
-      //       backgroundColor: Palette.pinkAccent,
-      //       elevation: 5,
-      //       child: Icon(PackMe.qr, color: Colors.white),
-      //       materialTapTargetSize: MaterialTapTargetSize.padded,
-      //       onPressed: (){
-      //         Get.Get.to(() => QRCodePage(), transition: Get.Transition.cupertino);
-      //       },
-      //     ),
-      //   ),
-      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         backgroundColor: Palette.whiteColor,
         toolbarHeight: MQuery.height(0.07, context), 
@@ -103,36 +80,48 @@ class _TransferConfirmationPage extends State<TransferConfirmationPage> {
                             fontWeight: FontWeight.normal
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: MQuery.width(0.03, context)
-                            ),
-                            child: Icon(
-                              CupertinoIcons.arrow_down
-                            ),
-                          ),
-                        ),
                         ListTile(
-                          horizontalTitleGap: MQuery.width(0.02, context),
                           leading: Container(
-                            height: MQuery.height(0.05, context),
-                            width: MQuery.height(0.05, context),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                              color: Palette.pinkAccent
+                            width: MQuery.width(0.05, context),
+                            child: Center(
+                              child: Icon(
+                                CupertinoIcons.clock
+                              ),
                             ),
                           ),
                           title: GFont.out(
-                            title: "Irina",
+                            title: "14 Juni 2021 (tenggat kembali)",
                             fontSize: 16,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start,
                             fontWeight: FontWeight.bold
                           ),
                           subtitle: GFont.out(
-                            title: "+62 822 1234 5678",
+                            title: "sebelum bonus hangus",
+                            fontSize: 14,
+                            color: Palette.blackColor,
+                            textAlign: TextAlign.start,
+                            fontWeight: FontWeight.normal
+                          ),
+                        ),
+                        ListTile(
+                          leading: Container(
+                            width: MQuery.width(0.05, context),
+                            child: Center(
+                              child: Icon(
+                                CupertinoIcons.location
+                              ),
+                            ),
+                          ),
+                          title: GFont.out(
+                            title: "Janji Jiwa Jilid 61 (Central Park)",
+                            fontSize: 16,
+                            color: Palette.blackColor,
+                            textAlign: TextAlign.start,
+                            fontWeight: FontWeight.bold
+                          ),
+                          subtitle: GFont.out(
+                            title: "Jakarta Utara",
                             fontSize: 14,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start,
@@ -176,64 +165,85 @@ class _TransferConfirmationPage extends State<TransferConfirmationPage> {
                             },
                           ),
                         ),
-                        Divider(),
                         Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: MQuery.height(0.01, context),
-                            horizontal: MQuery.width(0.02, context)
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
                           ),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GFont.out(
-                                    title: "Total packs",
-                                    fontSize: 16,
-                                    color: Palette.blackColor,
-                                    textAlign: TextAlign.start
-                                  ),
-                                  GFont.out(
-                                    title: "3",
-                                    fontSize: 16,
-                                    color: Palette.blackColor,
-                                    textAlign: TextAlign.start,
-                                    fontWeight: FontWeight.bold
-                                  ),
-                                ]
+                          margin: EdgeInsets.symmetric(
+                            horizontal: MQuery.width(0.02, context),
+                            vertical: MQuery.height(0.01, context)
+                          ),
+                          child: ListTile(
+                            tileColor: Palette.greenShade,
+                            leading: Container(
+                              width: MQuery.width(0.03, context),
+                              child: Center(
+                                child: Icon(
+                                  CupertinoIcons.location
+                                ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GFont.out(
-                                    title: "Pindah tangankan bonus?",
-                                    fontSize: 16,
-                                    color: Palette.blackColor,
-                                    textAlign: TextAlign.start
-                                  ),
-                                  Switch(
-                                    inactiveTrackColor: Colors.grey,
-                                    inactiveThumbColor: Colors.grey.withOpacity(0.5),
-                                    trackColor: MaterialStateProperty.all(Palette.greenAccent.withOpacity(0.5)),
-                                    thumbColor: MaterialStateProperty.all(Palette.greenAccent),
-                                    value: transferBonusActive,
-                                    onChanged: (bool value){
-                                      setState(() {
-                                        transferBonusActive = !transferBonusActive;
-                                      });
-                                    }
-                                  )
-                                ]
+                            ),
+                            title: GFont.out(
+                              title: "Pilih promo yang tersedia",
+                              fontSize: 16,
+                              color: Palette.blackColor,
+                              textAlign: TextAlign.start,
+                              fontWeight: FontWeight.w500
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: MQuery.height(0.01, context)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: MQuery.width(0.025, context)
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GFont.out(
+                                title: "Total packs",
+                                fontSize: 16,
+                                color: Palette.blackColor,
+                                textAlign: TextAlign.start,
+                                fontWeight: FontWeight.w500
                               ),
                               GFont.out(
-                                title: "Jika bonus dipindahtangankan, kamu tidak akan dapat bonus setelah kemasan dikembalikan.",
+                                title: "3",
                                 fontSize: 16,
-                                color: Palette.alertColor,
-                                textAlign: TextAlign.start
+                                color: Palette.blackColor,
+                                textAlign: TextAlign.start,
+                                fontWeight: FontWeight.bold
                               ),
                             ],
                           ),
-                        )
+                        ),
+                        SizedBox(height: MQuery.height(0.01, context)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: MQuery.width(0.025, context)
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GFont.out(
+                                title: "Estimasi bonus",
+                                fontSize: 16,
+                                color: Palette.blackColor,
+                                textAlign: TextAlign.start,
+                                fontWeight: FontWeight.w500
+                              ),
+                              GFont.out(
+                                title: "Rp 10.000,-",
+                                fontSize: 16,
+                                color: Palette.blackColor,
+                                textAlign: TextAlign.start,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: MQuery.height(0.01, context)),
                       ],
                     ),
                   ),

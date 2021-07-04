@@ -1,7 +1,8 @@
 part of "../pages.dart";
 
 class ChoosePackPage extends StatefulWidget {
-  const ChoosePackPage({ Key? key }) : super(key: key);
+  final bool fromTransferPack;
+  const ChoosePackPage({ Key? key, required this.fromTransferPack }) : super(key: key);
 
   @override
   _TransferConfirmationPageState createState() => _TransferConfirmationPageState();
@@ -76,7 +77,11 @@ class _TransferConfirmationPageState extends State<ChoosePackPage> {
                 )
               );
             } else {
-              Get.Get.to(() => TransferConfirmationPage(), transition: Get.Transition.cupertino);
+              Get.Get.to((){
+                return widget.fromTransferPack
+                ? TransferConfirmationPage()
+                : RentPackConfirmation();
+              }, transition: Get.Transition.cupertino);
             }
           },
           style: ElevatedButton.styleFrom(

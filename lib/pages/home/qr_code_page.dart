@@ -22,7 +22,9 @@ class QRCodePage extends StatelessWidget {
             ),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onPressed: (){
-              Get.Get.to(() => ChoosePackPage(), transition: Get.Transition.cupertino);
+              Get.Get.to(() => ChoosePackPage(
+                fromTransferPack: true
+              ), transition: Get.Transition.cupertino);
             },
           ),
         ),
