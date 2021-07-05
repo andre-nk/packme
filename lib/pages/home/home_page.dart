@@ -324,7 +324,9 @@ class _HomePageState extends State<HomePage> {
                           top: -40,
                           child: InkWell(
                             onTap: (){
-                              print("tap");
+                              if(selectedPage == "Return"){
+                                Get.Get.to(() => ReturnMethodPage(), transition: Get.Transition.cupertino);
+                              }
                             },
                             child: Container(
                               decoration: BoxDecoration(
