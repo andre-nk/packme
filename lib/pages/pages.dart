@@ -42,4 +42,5 @@ part 'home/rent_code_page.dart';
 part 'home/rent_pack_confirmation.dart';
 part 'home/return_method_page.dart';
 part 'home/point_location_page.dart';
+part 'home/withdraw_page.dart';
 

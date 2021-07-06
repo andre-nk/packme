@@ -326,6 +326,8 @@ class _HomePageState extends State<HomePage> {
                             onTap: (){
                               if(selectedPage == "Return"){
                                 Get.Get.to(() => ReturnMethodPage(), transition: Get.Transition.cupertino);
+                              } else if (selectedPage == "Withdraw"){
+                                Get.Get.to(() => WithdrawPage(), transition: Get.Transition.cupertino);
                               }
                             },
                             child: Container(
