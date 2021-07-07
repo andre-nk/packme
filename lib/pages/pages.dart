@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
@@ -15,6 +17,7 @@ import 'package:pack_me/cubit/authentication_cubit.dart';
 import 'package:pack_me/cubit/user_cubit.dart';
 import 'package:pack_me/repository/repositories.dart';
 import 'package:pack_me/widgets/default_button.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 part 'authentication/auth_widget.dart';
@@ -43,4 +46,5 @@ part 'home/rent_pack_confirmation.dart';
 part 'home/return_method_page.dart';
 part 'home/point_location_page.dart';
 part 'home/withdraw_page.dart';
+part 'home/qr_code_scanner.dart';
 

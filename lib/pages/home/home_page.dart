@@ -328,6 +328,8 @@ class _HomePageState extends State<HomePage> {
                                 Get.Get.to(() => ReturnMethodPage(), transition: Get.Transition.cupertino);
                               } else if (selectedPage == "Withdraw"){
                                 Get.Get.to(() => WithdrawPage(), transition: Get.Transition.cupertino);
+                              } else if (selectedPage == "Rent"){
+                                Get.Get.to(() => QRViewExample(), transition: Get.Transition.cupertino);
                               }
                             },
                             child: Container(
