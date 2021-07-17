@@ -26,7 +26,6 @@ class InitialPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     print(context.watch<AuthenticationCubit>().state);
-
     return GetMaterialApp(
       theme: ThemeData(
         dividerColor: Palette.greenAccent

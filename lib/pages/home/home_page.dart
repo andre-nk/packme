@@ -1,5 +1,7 @@
 part of '../pages.dart';
 
+enum AniProps { x, y }
+
 class UserListener extends StatelessWidget {
 
   final UserDataRepository user = UserDataRepository();
@@ -38,6 +40,64 @@ class _HomePageState extends State<HomePage> {
       context.watch<UserCubit>().createUserData();
     }
 
+    final _tween = TimelineTween<AniProps>()
+    ..addScene(begin: 0.seconds, duration: Duration(milliseconds: 1000))
+        .animate(AniProps.x, tween: (80.0).tweenTo(-60.0))
+    ..addScene(begin: 0.seconds, duration: Duration(milliseconds: 1000))
+        .animate(AniProps.y, tween: (10.0).tweenTo(-36.0))
+    ..addScene(begin: 1000.milliseconds, duration: Duration(milliseconds: 1500))
+        .animate(AniProps.x, tween: (-60.0).tweenTo(80.0))
+    ..addScene(begin: 1000.milliseconds, duration: Duration(milliseconds: 1500))
+        .animate(AniProps.y, tween: (-36.0).tweenTo(-80.0))
+    ..addScene(begin: 2500.milliseconds, duration: Duration(milliseconds: 1000))
+        .animate(AniProps.x, tween: (80.0).tweenTo(32.0))
+    ..addScene(begin: 2500.milliseconds, duration: Duration(milliseconds: 1000))
+        .animate(AniProps.y, tween: (-80.0).tweenTo(30.0))
+    ..addScene(begin: 3500.milliseconds, duration: Duration(milliseconds: 1500))
+        .animate(AniProps.x, tween: (32.0).tweenTo(-20.0))
+    ..addScene(begin: 3500.milliseconds, duration: Duration(milliseconds: 1500))
+        .animate(AniProps.y, tween: (30.0).tweenTo(-20.0))
+    ..addScene(begin: 5000.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.x, tween: (-20.0).tweenTo(0.0))
+    ..addScene(begin: 5000.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.y, tween: (-20.0).tweenTo(-15.0))
+    ..addScene(begin: 5500.milliseconds, duration: Duration(milliseconds: 1500))
+        .animate(AniProps.x, tween: (-0.0).tweenTo(0.0))
+    ..addScene(begin: 5500.milliseconds, duration: Duration(milliseconds: 1500))
+        .animate(AniProps.y, tween: (-15.0).tweenTo(-15.0));
+
+    
+    final _tweenReturn = TimelineTween<AniProps>()
+    ..addScene(begin: 0.seconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.x, tween: (90.0).tweenTo(85.0))
+    ..addScene(begin: 0.seconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.y, tween: (-35.0).tweenTo(-70.0))
+    ..addScene(begin: 500.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.x, tween: (85.0).tweenTo(60.0))
+    ..addScene(begin: 500.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.y, tween: (-70.0).tweenTo(-60.0))
+    ..addScene(begin: 1000.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.x, tween: (60.0).tweenTo(40.0))
+    ..addScene(begin: 1000.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.y, tween: (-60.0).tweenTo(-50.0))
+    ..addScene(begin: 1500.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.x, tween: (40.0).tweenTo(20.0))
+    ..addScene(begin: 1500.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.y, tween: (-50.0).tweenTo(-20.0))
+    ..addScene(begin: 2000.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.x, tween: (20.0).tweenTo(20.0))
+    ..addScene(begin: 2000.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.y, tween: (-20.0).tweenTo(-20.0))
+    ..addScene(begin: 2500.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.x, tween: (20.0).tweenTo(90.0))
+    ..addScene(begin: 2500.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.y, tween: (-20.0).tweenTo(-20.0))
+    ..addScene(begin: 3000.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.x, tween: (90.0).tweenTo(90.0))
+    ..addScene(begin: 3000.milliseconds, duration: Duration(milliseconds: 500))
+        .animate(AniProps.y, tween: (-20.0).tweenTo(-35.0));
+
+
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state){
         if ((state is UserLoading)) {
@@ -48,6 +108,60 @@ class _HomePageState extends State<HomePage> {
             );
         } else {
           if (state is UserExist) {
+
+            Future.delayed((1.seconds), (){
+              Get.Get.back();
+              Get.Get.dialog(
+                Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                  ),
+                  backgroundColor: Palette.whiteColor,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: MQuery.height(0.6, context),
+                      minWidth: MQuery.width(0.6, context)
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        color: Palette.whiteColor,
+                        borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: MQuery.height(0.1, context),
+                              child: Image.asset("assets/logo_fiksi.jpg")
+                            ),
+                            SizedBox(height: MQuery.height(0.02, context)),
+                            Column(
+                              children: [
+                                GFont.out(
+                                  title: "Halo!\nSelamat datang di versi MVP PackMe",
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                SizedBox(height: MQuery.height(0.02, context)),
+                                GFont.out(
+                                  title: "Fitur-fitur dalam aplikasi ini adalah demonstrasi untuk kompetisi FIKSI 2021 dan implementasi fitur belum selesai sepenuhnya seperti pembayaran dan penarikan dana.\n Hubungi CS kami di halaman Hubungi Kami / Bantuan untuk panduan aplikasi.\n Selamat mencoba!",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  )
+                ),
+              );
+            });
+
             // Future.delayed(Duration(seconds: 1), (){
             //   Get.Get.back();
             //   Get.Get.dialog(
@@ -221,7 +335,56 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     flex: 6,
-                    child: SizedBox()
+                    child: selectedPage == "Rent"
+                    ? Center(
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          alignment: Alignment.center,
+                          children: [
+                            Positioned(
+                              bottom: 20,
+                              child: Container(
+                                width: 200,
+                                height: 200,
+                                child: Image.asset("assets/QR.png")
+                              )
+                            ),
+                            LoopAnimation<TimelineValue<AniProps>>(
+                              tween: _tween, // Pass in tween
+                              duration: _tween.duration, // Obtain duration
+                              builder: (context, child, value) {
+                                return Transform.translate(
+                                  offset: Offset(value.get(AniProps.x), value.get(AniProps.y)),
+                                  child: Container(
+                                    width: 200,
+                                    height: 200,
+                                    child: Image.asset("assets/HP.png"),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    : Padding(
+                        padding: EdgeInsets.only(
+                          bottom: 5
+                        ),
+                        child: LoopAnimation<TimelineValue<AniProps>>(
+                          tween: _tweenReturn, // Pass in tween
+                          duration: _tweenReturn.duration, // Obtain duration
+                          builder: (context, child, value) {
+                            return Transform.translate(
+                              offset: Offset(value.get(AniProps.x), value.get(AniProps.y)),
+                              child: Container(
+                                width: 200,
+                                height: 200,
+                                child: Image.asset("assets/return_anim.png"),
+                              ),
+                            );
+                          },
+                        ),
+                      )
                   ),
                   Expanded(
                     flex: 5,
