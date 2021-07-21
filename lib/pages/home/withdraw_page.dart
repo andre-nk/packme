@@ -307,7 +307,29 @@ class _WithdrawPageState extends State<WithdrawPage> {
                   bottom: MQuery.height(0.04, context)
                 ),
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    if(int.parse(withdrawController.text) > 215250){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Palette.alertColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5))
+                          ),
+                          behavior: SnackBarBehavior.floating,
+                          content: Container(
+                            height: MQuery.height(0.03, context),
+                            child: Center(
+                              child: GFont.out(
+                                title: "Nominal penarikan melebihi saldo PackMe kamu!",
+                                fontSize: 18,
+                                color: Palette.whiteColor
+                              )
+                            ),
+                          ),
+                        )
+                      );
+                    }
+                  },
                   child: GFont.out(
                     title: "Konfirmasi Penarikan",
                     fontSize: 22,

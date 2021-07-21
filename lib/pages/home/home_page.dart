@@ -1,6 +1,6 @@
 part of '../pages.dart';
 
-enum AniProps { x, y }
+enum AniProps { x, y, r }
 
 class UserListener extends StatelessWidget {
 
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
       context.watch<UserCubit>().createUserData();
     }
 
-    final _tween = TimelineTween<AniProps>()
+    final _tweenRent = TimelineTween<AniProps>()
     ..addScene(begin: 0.seconds, duration: Duration(milliseconds: 1000))
         .animate(AniProps.x, tween: (80.0).tweenTo(-60.0))
     ..addScene(begin: 0.seconds, duration: Duration(milliseconds: 1000))
@@ -97,6 +97,19 @@ class _HomePageState extends State<HomePage> {
     ..addScene(begin: 3000.milliseconds, duration: Duration(milliseconds: 500))
         .animate(AniProps.y, tween: (-20.0).tweenTo(-35.0));
 
+    final _tweenWithdraw = TimelineTween<AniProps>()
+    ..addScene(begin: 0.seconds, duration: Duration(milliseconds: 2500))
+        .animate(AniProps.x, tween: (40.0).tweenTo(150.0))
+    ..addScene(begin: 0.seconds, duration: Duration(milliseconds: 2500))
+        .animate(AniProps.y, tween: (20.0).tweenTo(20.0))
+    ..addScene(begin: 0.seconds, duration: Duration(milliseconds: 2500))
+        .animate(AniProps.r, tween: (0.0).tweenTo(5.0))
+    ..addScene(begin: 2500.milliseconds, duration: Duration(milliseconds: 2500))
+        .animate(AniProps.x, tween: (150.0).tweenTo(40.0))
+    ..addScene(begin: 2500.milliseconds, duration: Duration(milliseconds: 2500))
+        .animate(AniProps.y, tween: (20.0).tweenTo(20.0))
+    ..addScene(begin: 2500.milliseconds, duration: Duration(milliseconds: 2500))
+        .animate(AniProps.r, tween: (5.0).tweenTo(0.0));
 
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state){
@@ -109,58 +122,58 @@ class _HomePageState extends State<HomePage> {
         } else {
           if (state is UserExist) {
 
-            Future.delayed((1.seconds), (){
-              Get.Get.back();
-              Get.Get.dialog(
-                Dialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))
-                  ),
-                  backgroundColor: Palette.whiteColor,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: MQuery.height(0.6, context),
-                      minWidth: MQuery.width(0.6, context)
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                        color: Palette.whiteColor,
-                        borderRadius: BorderRadius.all(Radius.circular(10))
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: MQuery.height(0.1, context),
-                              child: Image.asset("assets/logo_fiksi.jpg")
-                            ),
-                            SizedBox(height: MQuery.height(0.02, context)),
-                            Column(
-                              children: [
-                                GFont.out(
-                                  title: "Halo!\nSelamat datang di versi MVP PackMe",
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                SizedBox(height: MQuery.height(0.02, context)),
-                                GFont.out(
-                                  title: "Fitur-fitur dalam aplikasi ini adalah demonstrasi untuk kompetisi FIKSI 2021 dan implementasi fitur belum selesai sepenuhnya seperti pembayaran dan penarikan dana.\n Hubungi CS kami di halaman Hubungi Kami / Bantuan untuk panduan aplikasi.\n Selamat mencoba!",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  )
-                ),
-              );
-            });
+            // Future.delayed((1.seconds), (){
+            //   Get.Get.back();
+            //   Get.Get.dialog(
+            //     Dialog(
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.all(Radius.circular(20))
+            //       ),
+            //       backgroundColor: Palette.whiteColor,
+            //       child: ConstrainedBox(
+            //         constraints: BoxConstraints(
+            //           maxHeight: MQuery.height(0.6, context),
+            //           minWidth: MQuery.width(0.6, context)
+            //         ),
+            //         child: Container(
+            //           padding: EdgeInsets.all(20),
+            //           clipBehavior: Clip.hardEdge,
+            //           decoration: BoxDecoration(
+            //             color: Palette.whiteColor,
+            //             borderRadius: BorderRadius.all(Radius.circular(10))
+            //           ),
+            //           child: Center(
+            //             child: Column(
+            //               mainAxisAlignment: MainAxisAlignment.center,
+            //               children: [
+            //                 Container(
+            //                   height: MQuery.height(0.1, context),
+            //                   child: Image.asset("assets/logo_fiksi.jpg")
+            //                 ),
+            //                 SizedBox(height: MQuery.height(0.02, context)),
+            //                 Column(
+            //                   children: [
+            //                     GFont.out(
+            //                       title: "Halo!\nSelamat datang di versi MVP PackMe",
+            //                       fontSize: 22,
+            //                       fontWeight: FontWeight.bold,
+            //                     ),
+            //                     SizedBox(height: MQuery.height(0.02, context)),
+            //                     GFont.out(
+            //                       title: "Fitur-fitur dalam aplikasi ini adalah demonstrasi untuk kompetisi FIKSI 2021 dan implementasi fitur belum selesai sepenuhnya seperti pembayaran dan penarikan dana.\n Hubungi CS kami di halaman Hubungi Kami / Bantuan untuk panduan aplikasi.\n Selamat mencoba!",
+            //                       fontSize: 18,
+            //                       fontWeight: FontWeight.normal,
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
+            //         )
+            //       )
+            //     ),
+            //   );
+            // });
 
             // Future.delayed(Duration(seconds: 1), (){
             //   Get.Get.back();
@@ -350,8 +363,8 @@ class _HomePageState extends State<HomePage> {
                               )
                             ),
                             LoopAnimation<TimelineValue<AniProps>>(
-                              tween: _tween, // Pass in tween
-                              duration: _tween.duration, // Obtain duration
+                              tween: _tweenRent, // Pass in tween
+                              duration: _tweenRent.duration, // Obtain duration
                               builder: (context, child, value) {
                                 return Transform.translate(
                                   offset: Offset(value.get(AniProps.x), value.get(AniProps.y)),
@@ -366,7 +379,8 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       )
-                    : Padding(
+                    : selectedPage == "Return"
+                    ? Padding(
                         padding: EdgeInsets.only(
                           bottom: 5
                         ),
@@ -381,6 +395,62 @@ class _HomePageState extends State<HomePage> {
                                 height: 200,
                                 child: Image.asset("assets/return_anim.png"),
                               ),
+                            );
+                          },
+                        ),
+                      )
+                    : Padding(
+                        padding: EdgeInsets.only(
+                          bottom: 5
+                        ),
+                        child: LoopAnimation<TimelineValue<AniProps>>(
+                          tween: _tweenReturn, // Pass in tween
+                          duration: _tweenReturn.duration, // Obtain duration
+                          builder: (context, child, value) {
+                            return Stack(
+                              clipBehavior: Clip.none,
+                              alignment: Alignment.center,
+                              children: [
+                                LoopAnimation<TimelineValue<AniProps>>(
+                                  tween: _tweenWithdraw, // Pass in tween
+                                  duration: _tweenWithdraw.duration, // Obtain duration
+                                  builder: (context, child, value) {
+                                    return Transform.translate(
+                                      offset: Offset(value.get(AniProps.x), value.get(AniProps.y)),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 20.0
+                                            ),
+                                            child: Image.asset("assets/pack_withdraw.png"),
+                                          ),
+                                          SizedBox(width: MQuery.width(0.025, context)),
+                                          LoopAnimation<TimelineValue<AniProps>>(
+                                            tween: _tweenWithdraw, // Pass in tween
+                                            duration: _tweenWithdraw.duration,
+                                            builder: (context, child, value) {
+                                              return Transform.rotate(
+                                                angle: value.get(AniProps.r),
+                                                child: Image.asset("assets/coin_withdraw.png")
+                                              );
+                                            }
+                                          )// Obtain durationTransform.rotate(
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                                Positioned(
+                                  bottom: 120,
+                                  child: Container(
+                                    width: 200,
+                                    height: 200,
+                                    child: Image.asset("assets/phone_variant.png")
+                                  )
+                                ),
+                              ],
                             );
                           },
                         ),
@@ -565,7 +635,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, item){
                   return GestureDetector(
                     onTap: (){
-                      setState(() {
+                      setState((){
                         selectedPage = item.title ?? "";
                       });
                     },

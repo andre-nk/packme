@@ -24,7 +24,6 @@ Future<void> main() async {
 class InitialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     print(context.watch<AuthenticationCubit>().state);
     return GetMaterialApp(
       theme: ThemeData(
