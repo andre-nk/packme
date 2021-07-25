@@ -69,7 +69,7 @@ class ResetPasswordPage extends StatelessWidget {
                         SnackBar(
                           backgroundColor: Palette.successColor,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5))
+                            borderRadius: BorderRadius.all(Radius.circular(10))
                           ),
                           behavior: SnackBarBehavior.floating,
                           content: Container(
@@ -90,7 +90,7 @@ class ResetPasswordPage extends StatelessWidget {
                       SnackBar(
                         backgroundColor: Palette.alertColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5))
+                          borderRadius: BorderRadius.all(Radius.circular(10))
                         ),
                         behavior: SnackBarBehavior.floating,
                         content: Container(

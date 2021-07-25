@@ -67,7 +67,7 @@ class QRCodePage extends StatelessWidget {
                   height: MQuery.height(0.065, context),
                   width: MQuery.height(0.065, context),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Palette.pinkAccent
                   ),
                 ),

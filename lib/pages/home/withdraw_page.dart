@@ -313,7 +313,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
                         SnackBar(
                           backgroundColor: Palette.alertColor,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5))
+                            borderRadius: BorderRadius.all(Radius.circular(10))
                           ),
                           behavior: SnackBarBehavior.floating,
                           content: Container(

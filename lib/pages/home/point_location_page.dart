@@ -118,7 +118,7 @@ class _PointLocationPageState extends State<PointLocationPage> {
                             height: MQuery.height(0.05, context),
                             width: MQuery.height(0.05, context),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                               color: Palette.pinkAccent
                             ),
                           ),

@@ -13,7 +13,7 @@ class _TransferConfirmationPageState extends State<ChoosePackPage> {
   TextEditingController _searchController = TextEditingController();
   Set<int> selectedPacks = Set();
   bool isSelecting = false;
-  int length = 4;
+  int length = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _TransferConfirmationPageState extends State<ChoosePackPage> {
                 SnackBar(
                   backgroundColor: Palette.alertColor,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5))
+                    borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                   behavior: SnackBarBehavior.floating,
                   content: Container(
@@ -194,12 +194,17 @@ class _TransferConfirmationPageState extends State<ChoosePackPage> {
                             height: MQuery.height(0.05, context),
                             width: MQuery.height(0.05, context),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                               color: Palette.pinkAccent
                             ),
+                            child: Image.asset(
+                              index.isEven
+                              ? "assets/box_drink.png"
+                              : "assets/box_food.png"
+                            )
                           ),
                           title: GFont.out(
-                            title: "Mealbox Size L",
+                            title: index.isEven ? "Mealbox Size L" : "Drink Glass Size M" ,
                             fontSize: 18,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start

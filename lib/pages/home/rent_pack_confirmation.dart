@@ -61,7 +61,7 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                             height: MQuery.height(0.05, context),
                             width: MQuery.height(0.05, context),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                               color: Palette.pinkAccent
                             ),
                           ),
@@ -132,7 +132,7 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                         Container(
                           height: MQuery.height(0.275, context),
                           child: ListView.builder(
-                            itemCount: 3,
+                            itemCount: 2,
                             itemBuilder: (context, index){
                               return Column(
                                 children: [
@@ -142,12 +142,17 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                                       height: MQuery.height(0.04, context),
                                       width: MQuery.height(0.04, context),
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
                                         color: Palette.pinkAccent
                                       ),
+                                      child: Image.asset(
+                                        index.isEven
+                                        ? "assets/box_drink.png"
+                                        : "assets/box_food.png"
+                                      )
                                     ),
                                     title: GFont.out(
-                                      title: "Mealbox Size L",
+                                      title: index.isEven ? "Mealbox Size L" : "Drink Glass Size M",
                                       fontSize: 16,
                                       color: Palette.blackColor,
                                       textAlign: TextAlign.start
@@ -168,7 +173,7 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                         Container(
                           clipBehavior: Clip.hardEdge,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           margin: EdgeInsets.symmetric(
                             horizontal: MQuery.width(0.02, context),

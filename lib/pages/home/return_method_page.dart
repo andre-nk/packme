@@ -59,7 +59,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                 flex: 10,
                 child: GestureDetector(
                   onTap: (){
-                    Get.Get.to(() => PointLocationPage(), transition: Get.Transition.cupertino);
+                    Get.Get.to(() => MapPage(), transition: Get.Transition.cupertino);
                   },
                   child: Container(
                     width: double.infinity,
