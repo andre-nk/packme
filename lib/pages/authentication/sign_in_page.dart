@@ -64,7 +64,7 @@ class _SignInPageState extends State<SignInPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex: 4,
+                      flex: 3,
                       child: Container(
                         width: MQuery.width(0.19, context),
                         height: 1,
@@ -83,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     Expanded(
-                      flex: 4,
+                      flex: 3,
                       child: Container(
                         width: MQuery.width(0.19, context),
                         height: 1,

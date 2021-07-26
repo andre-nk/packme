@@ -34,6 +34,7 @@ part 'authentication/mitra_pro_registration.dart';
 part 'template/back_frame_page.dart';
 part 'template/onboarding_page.dart';
 part 'template/error_state_page.dart';
+part 'template/success_state_page.dart';
 part 'template/help_page.dart';
 part 'home/home_page.dart';
 part 'home/profile_page.dart';

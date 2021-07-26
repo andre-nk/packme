@@ -115,6 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ListTile(
                   onTap: (){
                     context.read<AuthenticationCubit>().signOut();
+                    Get.Get.offAll(CTAAuthPage());
                   },
                   title: GFont.out(
                     title: "Log out",

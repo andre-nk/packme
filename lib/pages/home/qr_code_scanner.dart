@@ -15,6 +15,14 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   @override
   Widget build(BuildContext context) {
+
+    if(result != null){
+      print(result!.code);
+      if(result!.code == "PMS-CLDmHNKAXj"){
+        Get.Get.to(() => RentPackConfirmation());
+      }
+    }
+
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(

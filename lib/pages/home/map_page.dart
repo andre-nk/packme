@@ -48,6 +48,20 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    Future.delayed(15.seconds, (){
+      print("scranton");
+      Get.Get.offAll(
+        SuccessStatePage(
+          title: "Yeay! Berhasil!",
+          description: "Terimakasih telah mengembalikan kemasan PackMe, Tunggu bonus uang dari PackMe dan jangan lupa untuk pakai kemasan PackMe lagi ya!",
+          buttonMessage: "Kembali ke Beranda",
+          image: "assets/success_box.png",
+        ),
+        transition: Get.Transition.cupertino
+      );
+    });
+
     return Scaffold(
       body: SlidingUpPanel(
         minHeight: MQuery.height(0.2, context),

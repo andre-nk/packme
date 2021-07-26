@@ -8,6 +8,9 @@ class RentPackConfirmation extends StatefulWidget {
 }
 
 class _RentPackConfirmationState extends State<RentPackConfirmation> {
+
+  User currentUser = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,12 +61,16 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                         ListTile(
                           horizontalTitleGap: MQuery.width(0.02, context),
                           leading: Container(
+                            clipBehavior: Clip.antiAlias,
                             height: MQuery.height(0.05, context),
                             width: MQuery.height(0.05, context),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(Radius.circular(10)),
                               color: Palette.pinkAccent
                             ),
+                            child: currentUser.photoURL == null
+                            ? SizedBox()
+                            : Image.network(currentUser.photoURL!)
                           ),
                           title: GFont.out(
                             title: "Andreas Notokusumo",
@@ -91,14 +98,14 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                           ),
                           title: GFont.out(
                             title: "14 Juni 2021 (tenggat kembali)",
-                            fontSize: 16,
+                            fontSize: 14,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start,
                             fontWeight: FontWeight.bold
                           ),
                           subtitle: GFont.out(
                             title: "sebelum bonus hangus",
-                            fontSize: 14,
+                            fontSize: 12,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start,
                             fontWeight: FontWeight.normal
@@ -115,14 +122,14 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                           ),
                           title: GFont.out(
                             title: "Janji Jiwa Jilid 61 (Central Park)",
-                            fontSize: 16,
+                            fontSize: 14,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start,
                             fontWeight: FontWeight.bold
                           ),
                           subtitle: GFont.out(
                             title: "Jakarta Utara",
-                            fontSize: 14,
+                            fontSize: 12,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start,
                             fontWeight: FontWeight.normal
@@ -130,7 +137,7 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                         ),
                         Divider(),
                         Container(
-                          height: MQuery.height(0.275, context),
+                          height: MQuery.height(0.2, context),
                           child: ListView.builder(
                             itemCount: 2,
                             itemBuilder: (context, index){
@@ -279,7 +286,15 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                         ),
                       ),
                       onPressed: (){
-                        
+                        Get.Get.to(
+                          () => SuccessStatePage(
+                            title: "Yeay! Berhasil",
+                            description: "Terimakasih menggunakan kemasan PackMe! Kamu telah menyelamatkan lingkungan, dan jangan lupa ya kembalikan kemasan kami untuk mendapatkan bonus uangnya!",
+                            buttonMessage: "Kembali ke Beranda",
+                            image: "assets/success_box.png",
+                          ),
+                          transition: Get.Transition.cupertino
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Palette.pinkAccent,

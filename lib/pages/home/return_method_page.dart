@@ -62,42 +62,48 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                     Get.Get.to(() => MapPage(), transition: Get.Transition.cupertino);
                   },
                   child: Container(
+                    clipBehavior: Clip.antiAlias,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        width: double.infinity,
-                        height: 120,
-                        padding: EdgeInsets.all(MQuery.height(0.02, context)),
-                        decoration: BoxDecoration(
-                          color: Palette.greenShade,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
+                    child: Stack(
+                      children: [
+                        Image.network("https://blog-media.lifepal.co.id/wp-content/uploads/2018/02/5-Profesi-Baru-yang-Bisa-Dilirik.jpg"),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            width: double.infinity,
+                            height: 140,
+                            padding: EdgeInsets.all(MQuery.height(0.02, context)),
+                            decoration: BoxDecoration(
+                              color: Palette.greenShade,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GFont.out(
+                                  title: "Driver Pick-up",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                                ),
+                                SizedBox(height: MQuery.height(0.01, context)),
+                                GFont.out(
+                                  title: "Driver PackMe atau mitra akan menjemput kemasan yang akan Anda kembalikan di lokasi permintaan",
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  textAlign: TextAlign.start
+                                ),
+                              ]
+                            )
                           ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            GFont.out(
-                              title: "Driver Pick-up",
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold
-                            ),
-                            SizedBox(height: MQuery.height(0.01, context)),
-                            GFont.out(
-                              title: "Driver PackMe atau mitra akan menjemput kemasan yang akan Anda kembalikan di lokasi permintaan",
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              textAlign: TextAlign.start
-                            ),
-                          ]
-                        )
-                      ),
+                      ],
                     )
                   ),
                 )
@@ -110,42 +116,48 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                     Get.Get.to(() => PointLocationPage(), transition: Get.Transition.cupertino);
                   },
                   child: Container(
+                    clipBehavior: Clip.antiAlias,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        width: double.infinity,
-                        height: 120,
-                        padding: EdgeInsets.all(MQuery.height(0.02, context)),
-                        decoration: BoxDecoration(
-                          color: Palette.greenShade,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
+                    child: Stack(
+                      children: [
+                        Image.network("https://media-cdn.tripadvisor.com/media/photo-s/0d/5c/06/89/information-counter-ground.jpg"),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            width: double.infinity,
+                            height: 120,
+                            padding: EdgeInsets.all(MQuery.height(0.02, context)),
+                            decoration: BoxDecoration(
+                              color: Palette.greenShade,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GFont.out(
+                                  title: "Drop-off Point",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                                ),
+                                SizedBox(height: MQuery.height(0.01, context)),
+                                GFont.out(
+                                  title: "Kembalikan kemasan PackMe di berbagai PackMe Point terdekat dari Anda tanpa biaya operasional",
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  textAlign: TextAlign.start
+                                ),
+                              ]
+                            )
                           ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            GFont.out(
-                              title: "Drop-off Point",
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold
-                            ),
-                            SizedBox(height: MQuery.height(0.01, context)),
-                            GFont.out(
-                              title: "Kembalikan kemasan PackMe di berbagai PackMe Point terdekat dari Anda tanpa biaya operasional",
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              textAlign: TextAlign.start
-                            ),
-                          ]
-                        )
-                      ),
+                      ],
                     )
                   ),
                 )

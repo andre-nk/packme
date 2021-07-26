@@ -25,6 +25,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   String selectedPage = "Rent";
+  bool isDialogShowed = false;
+  User currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -121,83 +123,69 @@ class _HomePageState extends State<HomePage> {
             );
         } else {
           if (state is UserExist) {
+            Future.delayed((1.seconds), (){
+              Get.Get.back();
+              if(isDialogShowed == false){
+                Get.Get.dialog(
+                Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                  ),
+                  backgroundColor: Palette.whiteColor,
+                  child: GestureDetector(
+                      onTap: (){
+                        WidgetsBinding.instance!.addPostFrameCallback((_){
+                          setState(() {
+                            isDialogShowed = true;
+                          });
+                        });
+                      },
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: MQuery.height(0.6, context),
+                        minWidth: MQuery.width(0.6, context)
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                          color: Palette.whiteColor,
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: MQuery.height(0.1, context),
+                                child: Image.asset("assets/logo_fiksi.jpg")
+                              ),
+                              SizedBox(height: MQuery.height(0.02, context)),
+                              Column(
+                                children: [
+                                  GFont.out(
+                                    title: "Halo!\nSelamat datang di versi MVP PackMe",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  SizedBox(height: MQuery.height(0.02, context)),
+                                  GFont.out(
+                                    title: "Fitur-fitur dalam aplikasi ini adalah demonstrasi untuk kompetisi FIKSI 2021 dan implementasi fitur belum selesai sepenuhnya seperti pembayaran dan penarikan dana.\n Hubungi CS kami di halaman Hubungi Kami / Bantuan untuk panduan aplikasi.\n Selamat mencoba!",
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ),
+                  )
+                ),
+              );
+            }});
 
-            // Future.delayed((1.seconds), (){
-            //   Get.Get.back();
-            //   Get.Get.dialog(
-            //     Dialog(
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.all(Radius.circular(20))
-            //       ),
-            //       backgroundColor: Palette.whiteColor,
-            //       child: ConstrainedBox(
-            //         constraints: BoxConstraints(
-            //           maxHeight: MQuery.height(0.6, context),
-            //           minWidth: MQuery.width(0.6, context)
-            //         ),
-            //         child: Container(
-            //           padding: EdgeInsets.all(20),
-            //           clipBehavior: Clip.hardEdge,
-            //           decoration: BoxDecoration(
-            //             color: Palette.whiteColor,
-            //             borderRadius: BorderRadius.all(Radius.circular(10))
-            //           ),
-            //           child: Center(
-            //             child: Column(
-            //               mainAxisAlignment: MainAxisAlignment.center,
-            //               children: [
-            //                 Container(
-            //                   height: MQuery.height(0.1, context),
-            //                   child: Image.asset("assets/logo_fiksi.jpg")
-            //                 ),
-            //                 SizedBox(height: MQuery.height(0.02, context)),
-            //                 Column(
-            //                   children: [
-            //                     GFont.out(
-            //                       title: "Halo!\nSelamat datang di versi MVP PackMe",
-            //                       fontSize: 22,
-            //                       fontWeight: FontWeight.bold,
-            //                     ),
-            //                     SizedBox(height: MQuery.height(0.02, context)),
-            //                     GFont.out(
-            //                       title: "Fitur-fitur dalam aplikasi ini adalah demonstrasi untuk kompetisi FIKSI 2021 dan implementasi fitur belum selesai sepenuhnya seperti pembayaran dan penarikan dana.\n Hubungi CS kami di halaman Hubungi Kami / Bantuan untuk panduan aplikasi.\n Selamat mencoba!",
-            //                       fontSize: 18,
-            //                       fontWeight: FontWeight.normal,
-            //                     ),
-            //                   ],
-            //                 ),
-            //               ],
-            //             ),
-            //           ),
-            //         )
-            //       )
-            //     ),
-            //   );
-            // });
-
-            // Future.delayed(Duration(seconds: 1), (){
-            //   Get.Get.back();
-            //   Get.Get.dialog(
-            //     Dialog(
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.all(Radius.circular(20))
-            //       ),
-            //       backgroundColor: Palette.whiteColor,
-            //       child: Container(
-            //         padding: EdgeInsets.all(10),
-            //         height: MQuery.height(0.65, context),
-            //         child: Container(
-            //           clipBehavior: Clip.hardEdge,
-            //           decoration: BoxDecoration(
-            //             color: Palette.whiteColor,
-            //             borderRadius: BorderRadius.all(Radius.circular(10))
-            //           ),
-            //           child: Image.asset("assets/sample_ads.png", fit: BoxFit.fill),
-            //         )
-            //       )
-            //     ),
-            //   );
-            // });
             return Scaffold(
               drawer: Drawer(
                 child: Center(
@@ -228,32 +216,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         ListTile(
                           onTap: (){
-                            
-                          },
-                          title: GFont.out(
-                            title: "Riwayat",
-                            fontSize: 18,
-                            textAlign: TextAlign.start
-                          ),
-                        ),
-                        ListTile(
-                          onTap: (){
                             Get.Get.back();
                             Get.Get.to(() => TransferPage(), transition: Get.Transition.cupertino);
                           },
                           title: GFont.out(
                             title: "Transfer Packs",
-                            fontSize: 18,
-                            textAlign: TextAlign.start
-                          ),
-                        ),
-                        ListTile(
-                          onTap: (){
-                            Get.Get.back();
-                            Get.Get.to(() => PromotionPage(), transition: Get.Transition.cupertino);
-                          },
-                          title: GFont.out(
-                            title: "Promosi",
                             fontSize: 18,
                             textAlign: TextAlign.start
                           ),
@@ -299,6 +266,7 @@ class _HomePageState extends State<HomePage> {
                         ListTile(
                           onTap: (){
                             context.read<AuthenticationCubit>().signOut();
+                            Get.Get.offAll(CTAAuthPage());
                           },
                           title: GFont.out(
                             title: "Log out",
@@ -338,7 +306,19 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.only(
                         right: MQuery.width(0.02, context)
                       ),
-                      child: FlutterLogo(),
+                      child: Container(
+                        child: currentUser.photoURL != null
+                        ? Image.network(currentUser.photoURL!)
+                        : FlutterLogo(),
+                        clipBehavior: Clip.antiAlias,
+                        margin: EdgeInsets.only(
+                          top: MQuery.height(0.0125, context),
+                          bottom: MQuery.height(0.0125, context)
+                        ),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle
+                        ),
+                      )
                     ),
                   )
                 ],

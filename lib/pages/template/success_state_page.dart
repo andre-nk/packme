@@ -1,12 +1,12 @@
 part of "../pages.dart";
 
-class ErrorStatePage extends StatelessWidget {
+class SuccessStatePage extends StatelessWidget {
   final String? title;
   final String? description;
   final String? buttonMessage;
   final String? image;
 
-  const ErrorStatePage({
+  const SuccessStatePage({
     this.image,
     this.title,
     this.description,
@@ -41,13 +41,13 @@ class ErrorStatePage extends StatelessWidget {
                         height:  MQuery.height(0.25, context),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: HexColor("FFDBDB")
+                          color: Palette.greenAccent.withOpacity(0.25)
                         ),
                       ),
                     ),
                     BounceInDown(
                       duration: Duration(milliseconds: 1650),
-                      child: Image.asset("assets/error.png"),
+                      child: Image.asset(this.image!),
                     )
                   ]
                 ),
@@ -62,13 +62,13 @@ class ErrorStatePage extends StatelessWidget {
                 children: [
                   GFont.out(
                     title: this.title ?? "Maaf! Gagal!",
-                    fontSize: 32,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                   ),
                   SizedBox(height: MQuery.height(0.01, context)),
                   GFont.out(
                     title: this.description ?? "Proses ini tidak dapat dilakukan karena kendala pada layanan kami. Mohon coba lagi!",
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.normal,
                   ),
                 ],
