@@ -41,7 +41,6 @@ class _TransferConfirmationPage extends State<TransferConfirmationPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
           },
           icon: Icon(
             CupertinoIcons.chevron_left,
@@ -269,15 +268,7 @@ class _TransferConfirmationPage extends State<TransferConfirmationPage> {
                         ),
                       ),
                       onPressed: (){
-                        Get.Get.offAll(
-                          SuccessStatePage(
-                            title: "Yeay! Berhasil",
-                            description: "Kemasanmu telah berhasil dipindahtangankan ke Irene",
-                            buttonMessage: "Kembali ke Beranda",
-                            image: "assets/success_box.png",
-                          ),
-                          transition: Get.Transition.cupertino
-                        );
+                       
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Palette.pinkAccent,

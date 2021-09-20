@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
           elevation: 0,
           leading: IconButton(
             onPressed: (){
-              Get.Get.back();
+              Navigator.pop(context);
             },
             icon: Icon(
               CupertinoIcons.chevron_left,
@@ -114,8 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 ListTile(
                   onTap: (){
-                    context.read<AuthenticationCubit>().signOut();
-                    Get.Get.offAll(CTAAuthPage());
+                    context.read<AuthCubit>().signOut();
                   },
                   title: GFont.out(
                     title: "Log out",

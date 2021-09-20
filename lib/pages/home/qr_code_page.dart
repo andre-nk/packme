@@ -22,9 +22,6 @@ class QRCodePage extends StatelessWidget {
             ),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onPressed: (){
-              Get.Get.to(() => ChoosePackPage(
-                fromTransferPack: true
-              ), transition: Get.Transition.cupertino);
             },
           ),
         ),
@@ -35,7 +32,6 @@ class QRCodePage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
           },
           icon: Icon(
             CupertinoIcons.chevron_left,

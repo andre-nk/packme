@@ -33,7 +33,7 @@ class _MitraProRegistrationState extends State<MitraProRegistration> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GFont.out(
-                title: "Daftar pakai E-mail",
+                title: "Daftar MitraPRO",
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),

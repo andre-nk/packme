@@ -25,6 +25,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Palette.whiteColor,
       appBar: AppBar(
         backgroundColor: Palette.whiteColor,
         toolbarHeight: MQuery.height(0.07, context),
@@ -36,7 +37,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
+            Navigator.pop(context);
           },
           icon: Icon(
             CupertinoIcons.chevron_left,

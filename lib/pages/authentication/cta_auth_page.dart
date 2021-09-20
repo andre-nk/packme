@@ -29,40 +29,56 @@ class CTAAuthPage extends StatelessWidget {
                       padding: EdgeInsets.all(3),
                       icon: Icon(CupertinoIcons.info_circle),
                       onPressed: (){
-                        Get.Get.to(() => HelpPage(), transition: Get.Transition.cupertino);
+                        Navigator.push(
+                          context,
+                          PageTransition(child: HelpPage(), type: PageTransitionType.rightToLeftWithFade)
+                        );
                       },
                     )
                   ],
                 )
               ),
+              SizedBox(height: MQuery.height(0.1, context)),
               Container(
-                height: MQuery.width(0.45, context),
-                width: MQuery.height(0.45, context),
-                color: Colors.grey.withOpacity(0.1),
+                height: MQuery.width(0.25, context),
+                width: MQuery.height(0.25, context),
+                child: Spin(
+                  infinite: true,
+                  child: Image.asset("assets/recycle_2.png")
+                ),
               ),
-              SizedBox(height: MQuery.height(0.01, context)),
+              SizedBox(height: MQuery.height(0.075, context)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   InkWell(
                     customBorder: CircleBorder(),
                     onTap: () {},
-                    child: Image(
-                        image: AssetImage("assets/facebook-icon.png")),
+                    child: Container(
+                      height: 48,
+                      width: 48,
+                      child: Image(image: AssetImage("assets/facebook.png"))
+                    ),
                   ),
                   InkWell(
                     customBorder: CircleBorder(),
                     onTap: (){
-                      BlocProvider.of<AuthenticationCubit>(context).signUpWithGoogle();
+                      BlocProvider.of<AuthCubit>(context).signUpWithGoogle();
                     },
-                    child:
-                        Image(image: AssetImage("assets/google-icon.png")),
+                    child: Container(
+                      height: 48,
+                      width: 48,
+                      child: Image(image: AssetImage("assets/google.png"))
+                    ),
                   ),
                   InkWell(
                     customBorder: CircleBorder(),
                     onTap: () {},
-                    child:
-                        Image(image: AssetImage("assets/apple-icon.png")),
+                    child: Container(
+                      height: 48,
+                      width: 48,
+                      child: Image(image: AssetImage("assets/apple.png"))
+                    ),
                   )
                 ],
               ),
@@ -106,12 +122,16 @@ class CTAAuthPage extends StatelessWidget {
                 height: MQuery.height(0.08, context),
                 child: DefaultButton(
                   title: GFont.out(
-                      title: "Daftar pakai E-mail",
-                      fontSize: 20,
-                      color: Palette.whiteColor,
-                      fontWeight: FontWeight.bold),
+                    title: "Daftar pakai E-mail",
+                    fontSize: 20,
+                    color: Palette.whiteColor,
+                    fontWeight: FontWeight.bold
+                  ),
                   method: () {
-                    Get.Get.to(() => SignUpWithEmailPage(),transition: Get.Transition.cupertino);
+                    Navigator.push(
+                      context,
+                      PageTransition(child: SignUpWithEmailPage(), type: PageTransitionType.rightToLeftWithFade)
+                    );
                   },
                   color: Palette.pinkAccent,
                 ),
@@ -126,11 +146,15 @@ class CTAAuthPage extends StatelessWidget {
                   ),
                   InkWell(
                     child: GFont.out(
-                        title: " Masuk aja!",
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
+                      title: " Masuk aja!",
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
+                    ),
                     onTap: (){
-                      Get.Get.to(() => SignInPage(), transition: Get.Transition.cupertino);
+                      Navigator.push(
+                        context,
+                        PageTransition(child: SignInPage(), type: PageTransitionType.rightToLeftWithFade)
+                      );
                     },
                   )
                 ],

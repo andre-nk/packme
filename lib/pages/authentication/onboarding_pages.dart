@@ -4,7 +4,6 @@ class OnboardingPages extends StatefulWidget {
   @override
   _OnboardingPagesState createState() => _OnboardingPagesState();
 }
-
 class _OnboardingPagesState extends State<OnboardingPages> {
   PageController _controller = PageController();
   int currentPage = 0;
@@ -26,10 +25,6 @@ class _OnboardingPagesState extends State<OnboardingPages> {
     },
   ];
 
-  Future<void> onGetStarted(BuildContext context) async {
-    await context.read<AuthenticationCubit>().completeOnboarding();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,10 +40,8 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                   padding: EdgeInsets.symmetric(horizontal: MQuery.width(0.05, context)),
                   child: TextButton(
                     child: GFont.out(title: "Lewati", fontSize: 16),
-                    onPressed: () {
-                      onGetStarted(context);
-                      Get.Get.offAndToNamed("/auth");
-                      Get.Get.to(() => CTAAuthPage(), transition: Get.Transition.cupertino);
+                    onPressed: () async {
+                      await context.read<AuthCubit>().completeOnboarding();
                     },
                   ),
                 ),
@@ -89,10 +82,9 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                           color: currentPage.isEven
                             ? Palette.greenAccent
                             : Palette.pinkAccent,
-                          method: () {
+                          method: () async {
                             if(currentPage == splashData.length - 1){
-                              onGetStarted(context);
-                              Get.Get.offAndToNamed("/auth");
+                              await context.read<AuthCubit>().completeOnboarding();
                             } else {
                               _controller.nextPage(
                                 duration: Duration(milliseconds: 250),

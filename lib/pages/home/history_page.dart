@@ -11,6 +11,7 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Palette.whiteColor,
       appBar: AppBar(
         backgroundColor: Palette.whiteColor,
         toolbarHeight: MQuery.height(0.07, context),
@@ -22,7 +23,7 @@ class _HistoryPageState extends State<HistoryPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
+            Navigator.pop(context);
           },
           icon: Icon(
             CupertinoIcons.chevron_left,

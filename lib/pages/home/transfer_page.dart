@@ -15,6 +15,7 @@ class _TransferPageState extends State<TransferPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Palette.whiteColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
         height: MQuery.height(0.1, context),
@@ -28,7 +29,6 @@ class _TransferPageState extends State<TransferPage> {
             child: Icon(PackMe.qr, color: Colors.white),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onPressed: (){
-              Get.Get.to(() => QRCodePage(), transition: Get.Transition.cupertino);
             },
           ),
         ),
@@ -44,7 +44,7 @@ class _TransferPageState extends State<TransferPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
+            Navigator.pop(context);
           },
           icon: Icon(
             CupertinoIcons.chevron_left,

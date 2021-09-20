@@ -1,50 +1,63 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:pack_me/config/configs.dart';
 import 'package:pack_me/cubit/authentication_cubit.dart';
 import 'package:pack_me/pages/pages.dart';
 import 'package:pack_me/repository/repositories.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // ignore: invalid_use_of_visible_for_testing_member
-  SharedPreferences.setMockInitialValues({});
+
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory()
+  );
+
   runApp(
-    BlocProvider<AuthenticationCubit>(
-      create: (context) => AuthenticationCubit(AuthenticationRepository()),
-      child: InitialPage(),
-    )
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(AuthenticationRepository()),
+        ),
+      ],
+     child: InitialPage())
   );
 }
 
 class InitialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print(context.watch<AuthenticationCubit>().state);
-    return GetMaterialApp(
+    print(context.watch<AuthCubit>().state);
+    return MaterialApp(
       theme: ThemeData(
         dividerColor: Palette.greenAccent
       ),
       initialRoute: '/',
       routes: {
         '/auth': (context) => CTAAuthPage(),
-        '/homepage': (context) => UserListener()
+        '/homepage': (context) => HomePage()
       },
       debugShowCheckedModeBanner: false,
       title: "PackMe",
-      home: AuthWidget(
-        nonSignedInBuilder: (_) {
-          final authCubit = context.watch<AuthenticationCubit>();
-          return authCubit.state is OnboardingCompleted
-          ? CTAAuthPage()
-          : OnboardingPages();
+      home: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state){
+          if(state is AuthFailedState){
+            print(state.errorMessage);
+          }
         },
-        signedInBuilder: (_) => UserListener(),
-      ),
+        builder: (context, state) {
+          if(state is AuthSuccess){
+            return HomePage();
+          } else if (state is OnboardingIsNotCompleted || state is AuthInitial) {
+            return OnboardingPages();
+          } else {
+            return CTAAuthPage();
+          }
+        },
+      )
     );
   }
 }

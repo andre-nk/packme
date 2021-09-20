@@ -27,7 +27,7 @@ class _PointLocationPageState extends State<PointLocationPage> {
             child: Icon(PackMe.qr, color: Colors.white),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onPressed: (){
-              Get.Get.to(() => QRCodePage(), transition: Get.Transition.cupertino);
+             
             },
           ),
         ),
@@ -43,7 +43,7 @@ class _PointLocationPageState extends State<PointLocationPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
+           
           },
           icon: Icon(
             CupertinoIcons.chevron_left,

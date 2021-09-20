@@ -32,7 +32,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GFont.out(
-                  title: "Daftar MitraPRO",
+                  title: "Daftar pakai E-mail",
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
@@ -182,7 +182,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                       if(nameController.text != ""){
                         if(emailController.text != ""){
                           if(pass1Controller.text == pass2Controller.text){
-                            context.read<AuthenticationCubit>().signUpWithEmailAndPassword(
+                            context.read<AuthCubit>().signUpWithEmailAndPassword(
                               emailController.text.trim(),
                               pass1Controller.text.trim(),
                               nameController.text.trim()

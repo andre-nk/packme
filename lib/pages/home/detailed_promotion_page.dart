@@ -12,7 +12,7 @@ class DetailedPromotionPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
+
           },
           icon: Icon(
             CupertinoIcons.chevron_left,

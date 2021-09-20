@@ -39,22 +39,31 @@ class _SignInPageState extends State<SignInPage> {
                     InkWell(
                       customBorder: CircleBorder(),
                       onTap: () {},
-                      child: Image(
-                          image: AssetImage("assets/facebook-icon.png")),
+                      child: Container(
+                        height: 48,
+                        width: 48,
+                        child: Image(image: AssetImage("assets/facebook.png"))
+                      ),
                     ),
                     InkWell(
                       customBorder: CircleBorder(),
-                      onTap: () {
-                        context.read<AuthenticationCubit>().signUpWithGoogle();
+                      onTap: (){
+                        BlocProvider.of<AuthCubit>(context).signUpWithGoogle();
                       },
-                      child:
-                          Image(image: AssetImage("assets/google-icon.png")),
+                      child: Container(
+                        height: 48,
+                        width: 48,
+                        child: Image(image: AssetImage("assets/google.png"))
+                      ),
                     ),
                     InkWell(
                       customBorder: CircleBorder(),
                       onTap: () {},
-                      child:
-                          Image(image: AssetImage("assets/apple-icon.png")),
+                      child: Container(
+                        height: 48,
+                        width: 48,
+                        child: Image(image: AssetImage("assets/apple.png"))
+                      ),
                     )
                   ],
                 ),
@@ -172,7 +181,7 @@ class _SignInPageState extends State<SignInPage> {
                     method: () async {
                       if(pass1Controller.text != ""){
                         if(emailController.text != ""){
-                          context.read<AuthenticationCubit>().signInWithEmailAndPassword(
+                          context.read<AuthCubit>().signInWithEmailAndPassword(
                             emailController.text.trim(),
                             pass1Controller.text.trim(),
                           );
@@ -191,13 +200,15 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     InkWell(
                       child: GFont.out(
-                          title: " Klik disini!",
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
+                        title: " Klik disini!",
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                      ),
                       onTap: (){
-                        Get.Get.to(() => ResetPasswordPage(
-                          emailController: TextEditingController(),
-                        ), transition: Get.Transition.cupertino);
+                        Navigator.push(
+                          context,
+                          PageTransition(child: ResetPasswordPage(), type: PageTransitionType.rightToLeftWithFade)
+                        );
                       },
                     )
                   ],

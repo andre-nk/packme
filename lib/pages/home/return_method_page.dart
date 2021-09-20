@@ -24,7 +24,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
             child: Icon(PackMe.qr, color: Colors.white),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onPressed: (){
-              Get.Get.to(() => QRCodePage(), transition: Get.Transition.cupertino);
+            
             },
           ),
         ),
@@ -40,7 +40,6 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
           },
           icon: Icon(
             CupertinoIcons.chevron_left,
@@ -59,7 +58,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                 flex: 10,
                 child: GestureDetector(
                   onTap: (){
-                    Get.Get.to(() => MapPage(), transition: Get.Transition.cupertino);
+                 
                   },
                   child: Container(
                     clipBehavior: Clip.antiAlias,
@@ -113,7 +112,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                 flex: 10,
                 child:  GestureDetector(
                   onTap: (){
-                    Get.Get.to(() => PointLocationPage(), transition: Get.Transition.cupertino);
+                    Navigator.pop(context);
                   },
                   child: Container(
                     clipBehavior: Clip.antiAlias,

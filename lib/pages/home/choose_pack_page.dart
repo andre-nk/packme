@@ -77,11 +77,7 @@ class _TransferConfirmationPageState extends State<ChoosePackPage> {
                 )
               );
             } else {
-              Get.Get.to((){
-                return widget.fromTransferPack
-                ? TransferConfirmationPage()
-                : RentPackConfirmation();
-              }, transition: Get.Transition.cupertino);
+
             }
           },
           style: ElevatedButton.styleFrom(
@@ -100,7 +96,7 @@ class _TransferConfirmationPageState extends State<ChoosePackPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
+
           },
           icon: Icon(
             CupertinoIcons.chevron_left,

@@ -82,7 +82,6 @@ class ErrorStatePage extends StatelessWidget {
               child: DefaultButton(
                 color: Palette.pinkAccent,
                 method: () {
-                  Get.Get.offAll(UserListener());
                 },
                 title: GFont.out(
                   title: this.buttonMessage ?? "Coba lagi",

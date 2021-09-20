@@ -17,7 +17,7 @@ class PromotionPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
+
           },
           icon: Icon(
             CupertinoIcons.chevron_left,
@@ -31,7 +31,6 @@ class PromotionPage extends StatelessWidget {
         itemBuilder: (context, index){
           return GestureDetector(
             onTap: (){
-              Get.Get.to(() => DetailedPromotionPage(), transition: Get.Transition.cupertino);
             },
             child: AspectRatio(
               aspectRatio: 16/9,

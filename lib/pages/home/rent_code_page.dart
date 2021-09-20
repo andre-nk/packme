@@ -22,7 +22,6 @@ class _RentCodePageState extends State<RentCodePage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
           },
           icon: Icon(
             CupertinoIcons.chevron_left,
@@ -152,9 +151,7 @@ class _RentCodePageState extends State<RentCodePage> {
                           isError = true;
                         });
                       } else {
-                        Get.Get.to(() => ChoosePackPage(
-                          fromTransferPack: false,
-                        ), transition: Get.Transition.cupertino);
+
                       }
                     },
                   ),

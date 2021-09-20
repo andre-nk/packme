@@ -21,7 +21,6 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-            Get.Get.back();
           },
           icon: Icon(
             CupertinoIcons.chevron_left,
@@ -286,15 +285,7 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                         ),
                       ),
                       onPressed: (){
-                        Get.Get.to(
-                          () => SuccessStatePage(
-                            title: "Yeay! Berhasil",
-                            description: "Terimakasih menggunakan kemasan PackMe! Kamu telah menyelamatkan lingkungan, dan jangan lupa ya kembalikan kemasan kami untuk mendapatkan bonus uangnya!",
-                            buttonMessage: "Kembali ke Beranda",
-                            image: "assets/success_box.png",
-                          ),
-                          transition: Get.Transition.cupertino
-                        );
+                        
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Palette.pinkAccent,

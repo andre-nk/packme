@@ -1,11 +1,11 @@
 part of "../pages.dart";
 
-class QRViewExample extends StatefulWidget {
+class QRCodeScanner extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _QRViewExampleState();
+  State<StatefulWidget> createState() => _QRCodeScannerState();
 }
 
-class _QRViewExampleState extends State<QRViewExample> {
+class _QRCodeScannerState extends State<QRCodeScanner> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -15,14 +15,6 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   @override
   Widget build(BuildContext context) {
-
-    if(result != null){
-      print(result!.code);
-      if(result!.code == "PMS-CLDmHNKAXj"){
-        Get.Get.to(() => RentPackConfirmation());
-      }
-    }
-
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
@@ -68,8 +60,9 @@ class _QRViewExampleState extends State<QRViewExample> {
       ),
       body: Stack(
         children: <Widget>[
-          Expanded(
-            flex: 4, child: _buildQrView(context)
+          Container(
+            height: 500,
+            child: _buildQrView(context)
           ),
         ],
       ),
@@ -77,13 +70,9 @@ class _QRViewExampleState extends State<QRViewExample> {
   }
 
   Widget _buildQrView(BuildContext context) {
-    // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-          MediaQuery.of(context).size.height < 400)
-        ? 150.0
-        : 300.0;
-    // To ensure the Scanner view is properly sizes after rotation
-    // we need to listen for Flutter SizeChanged notification and update controller
+    var scanArea = (MediaQuery.of(context).size.width < 400 || MediaQuery.of(context).size.height < 400)
+    ? 150.0
+    : 300.0;
     return QRView(
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,

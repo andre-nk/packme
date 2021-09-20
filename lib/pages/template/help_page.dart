@@ -103,7 +103,6 @@ class _HelpPageState extends State<HelpPage> with SingleTickerProviderStateMixin
                     SizedBox(height: MQuery.height(0.025, context)),
                     GestureDetector(
                       onTap: (){
-                        Get.Get.to(() => MitraProRegistration(), transition: Get.Transition.cupertino);
                       },
                       child: Center(
                         child: GFont.out(
