@@ -120,20 +120,23 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                    padding: EdgeInsets.only(
-                        left: MQuery.width(0.02, context)),
-                    width: MQuery.width(0.3, context),
-                    child: Image.asset("assets/logo_wide.png")),
+                  padding: EdgeInsets.only(
+                    left: MQuery.width(0.02, context)
+                  ),
+                  width: MQuery.width(0.3, context),
+                  child: Image.asset("assets/logo_wide.png")
+                ),
                 SizedBox(height: MQuery.height(0.04, context)),
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
                   },
                   title: GFont.out(
-                      title: "Beranda",
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22,
-                      textAlign: TextAlign.start),
+                    title: "Beranda",
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    textAlign: TextAlign.start
+                  ),
                 ),
                 ListTile(
                   onTap: () {
@@ -196,16 +199,27 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 18,
                       textAlign: TextAlign.start),
                 ),
-                ListTile(
-                  onTap: () {
-                    context.read<AuthCubit>().signOut();
+                BlocBuilder<AuthCubit, AuthState>(
+                  builder: (context, state) {
+                    return ListTile(
+                      onTap: () {
+                        if(state is AuthSuccess){
+                          if(state.user.provider == 'email'){
+                            context.read<AuthCubit>().signOut();
+                          } else if(state.user.provider == 'google'){
+                            context.read<AuthCubit>().signOutWithGoogle();
+                          }
+                        }
+                      },
+                      title: GFont.out(
+                        title: "Log out",
+                        fontWeight: FontWeight.bold,
+                        color: Palette.alertColor,
+                        fontSize: 18,
+                        textAlign: TextAlign.start
+                      ),
+                    );
                   },
-                  title: GFont.out(
-                      title: "Log out",
-                      fontWeight: FontWeight.bold,
-                      color: Palette.alertColor,
-                      fontSize: 18,
-                      textAlign: TextAlign.start),
                 )
               ]
             ),
@@ -217,8 +231,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Palette.whiteColor,
         toolbarHeight: MQuery.height(0.07, context),
         leading: Builder(
-          builder: (context) => // Ensure Scaffold is in context
-              IconButton(
+          builder: (context) => IconButton(
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
@@ -226,325 +239,336 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          BlocBuilder<AuthCubit, AuthState>(
-            builder: (context, state) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(child: ProfilePage(), type: PageTransitionType.rightToLeftWithFade)
-                  );
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(right: MQuery.width(0.02, context)),
-                  child: Container(
-                    child: state is AuthSuccess
-                    ? Image.network(state.user.photoURL)
-                    : SizedBox(),
-                    clipBehavior: Clip.antiAlias,
-                    margin: EdgeInsets.only(
-                      top: MQuery.height(0.0125, context),
-                      bottom: MQuery.height(0.0125, context)
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Palette.pinkAccent
-                    ),
-                  )
-                ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                PageTransition(child: ProfilePage(), type: PageTransitionType.rightToLeftWithFade)
               );
             },
+            child: Padding(
+              padding: EdgeInsets.only(right: MQuery.width(0.02, context)),
+              child: Container(
+                child: 
+                BlocBuilder<AuthCubit, AuthState>(
+                  builder: (context, state) {
+                    if(state is AuthSuccess){
+                      return Image.network(state.user.profileURL ?? "");
+                    } else {
+                      return SizedBox();
+                    }
+                  },
+                ),
+                clipBehavior: Clip.antiAlias,
+                margin: EdgeInsets.only(
+                  top: MQuery.height(0.0125, context),
+                  bottom: MQuery.height(0.0125, context)
+                ),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Palette.pinkAccent
+                ),
+              )
+            ),
           )
         ],
       ),
       extendBody: true,
-      body: Column(
-        children: [
-          Expanded(
-            flex: 6,
-            child: selectedPage == "Rent"
-            ? Center(
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.center,
-                  children: [
-                    Positioned(
-                      bottom: 20,
-                      child: Container(
-                        width: 200,
-                        height: 200,
-                        child: Image.asset("assets/QR.png")
-                      )
-                    ),
-                    LoopAnimation<TimelineValue<AniProps>>(
-                      tween: _tweenRent, // Pass in tween
-                      duration:
-                          _tweenRent.duration, // Obtain duration
-                      builder: (context, child, value) {
-                        return Transform.translate(
-                          offset: Offset(value.get(AniProps.x),
-                              value.get(AniProps.y)),
+      body: BlocConsumer<AuthCubit, AuthState>(
+        builder: (context, state){
+          return Column(
+            children: [
+              Expanded(
+                flex: 6,
+                child: selectedPage == "Rent"
+                ? Center(
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      alignment: Alignment.center,
+                      children: [
+                        Positioned(
+                          bottom: 20,
                           child: Container(
                             width: 200,
                             height: 200,
-                            child: Image.asset("assets/HP.png"),
-                          ),
-                        );
-                      },
+                            child: Image.asset("assets/QR.png")
+                          )
+                        ),
+                        LoopAnimation<TimelineValue<AniProps>>(
+                          tween: _tweenRent, // Pass in tween
+                          duration:
+                              _tweenRent.duration, // Obtain duration
+                          builder: (context, child, value) {
+                            return Transform.translate(
+                              offset: Offset(value.get(AniProps.x),
+                                  value.get(AniProps.y)),
+                              child: Container(
+                                width: 200,
+                                height: 200,
+                                child: Image.asset("assets/HP.png"),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )
-            : selectedPage == "Return"
-              ? Padding(
-                  padding: EdgeInsets.only(bottom: 5),
-                  child: LoopAnimation<TimelineValue<AniProps>>(
-                    tween: _tweenReturn, // Pass in tween
-                    duration: _tweenReturn.duration, // Obtain duration
-                    builder: (context, child, value) {
-                      return Transform.translate(
-                        offset: Offset(
-                          value.get(AniProps.x),
-                          value.get(AniProps.y)
-                        ),
-                        child: Container(
-                          width: 200,
-                          height: 200,
-                          child: Image.asset("assets/return_anim.png"),
-                        ),
-                      );
-                    },
-                  ),
-                )
-              : Padding(
-                  padding: EdgeInsets.only(bottom: 5),
-                  child: LoopAnimation<TimelineValue<AniProps>>(
-                    tween: _tweenReturn, // Pass in tween
-                    duration: _tweenReturn.duration, // Obtain duration
-                    builder: (context, child, value) {
-                      return Stack(
-                        clipBehavior: Clip.none,
-                        alignment: Alignment.center,
-                        children: [
-                          LoopAnimation<TimelineValue<AniProps>>(
-                            tween: _tweenWithdraw, // Pass in tween
-                            duration: _tweenWithdraw.duration, // Obtain duration
-                            builder: (context, child, value) {
-                              return Transform.translate(
-                                offset: Offset(
-                                  value.get(AniProps.x),
-                                  value.get(AniProps.y)
-                                ),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 20.0),
-                                      child: Image.asset("assets/pack_withdraw.png"),
-                                    ),
-                                    SizedBox(
-                                      width: MQuery.width(0.025, context)),
-                                    LoopAnimation<TimelineValue<AniProps>>(
-                                      tween:_tweenWithdraw, // Pass in tween
-                                      duration: _tweenWithdraw.duration,
-                                      builder: (context, child, value) {
-                                      return Transform.rotate(
-                                        angle: value.get(AniProps.r),
-                                        child: Image.asset("assets/coin_withdraw.png")
-                                      );
-                                    }) // Obtain durationTransform.rotate(
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                          Positioned(
-                            bottom: 120,
+                  )
+                : selectedPage == "Return"
+                  ? Padding(
+                      padding: EdgeInsets.only(bottom: 5),
+                      child: LoopAnimation<TimelineValue<AniProps>>(
+                        tween: _tweenReturn, // Pass in tween
+                        duration: _tweenReturn.duration, // Obtain duration
+                        builder: (context, child, value) {
+                          return Transform.translate(
+                            offset: Offset(
+                              value.get(AniProps.x),
+                              value.get(AniProps.y)
+                            ),
                             child: Container(
                               width: 200,
                               height: 200,
-                              child: Image.asset("assets/phone_variant.png")
-                            )
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                )
-                ),
-        Expanded(
-          flex: 5,
-          child: Stack(clipBehavior: Clip.none, children: [
-            Container(
-              padding: EdgeInsets.all(MQuery.height(0.04, context)),
-              decoration: BoxDecoration(
-                color: Palette.greenShade,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(50),
-                  topRight: Radius.circular(50)
-                )
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: MQuery.height(0.01, context)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            PageTransition(child: HistoryPage(), type: PageTransitionType.rightToLeftWithFade)
+                              child: Image.asset("assets/return_anim.png"),
+                            ),
                           );
                         },
-                        child: Icon(PackMe.history)
                       ),
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            PageTransition(child: HelpPage(), type: PageTransitionType.rightToLeftWithFade)
-                          );
-                        }, child: Icon(PackMe.help)
-                      )
-                    ],
-                  ),
-                  SizedBox(height: MQuery.height(0.025, context)),
-                  selectedPage == "Withdraw"
-                      ? FadeInUp(
-                          child: Column(
+                    )
+                  : Padding(
+                      padding: EdgeInsets.only(bottom: 5),
+                      child: LoopAnimation<TimelineValue<AniProps>>(
+                        tween: _tweenReturn, // Pass in tween
+                        duration: _tweenReturn.duration, // Obtain duration
+                        builder: (context, child, value) {
+                          return Stack(
+                            clipBehavior: Clip.none,
+                            alignment: Alignment.center,
                             children: [
-                              GFont.out(
-                                title: formatCurrency.format(215540).substring(0, formatCurrency.format(215540).length -3),
-                                fontSize: 30,
-                                fontWeight: FontWeight.w800
+                              LoopAnimation<TimelineValue<AniProps>>(
+                                tween: _tweenWithdraw, // Pass in tween
+                                duration: _tweenWithdraw.duration, // Obtain duration
+                                builder: (context, child, value) {
+                                  return Transform.translate(
+                                    offset: Offset(
+                                      value.get(AniProps.x),
+                                      value.get(AniProps.y)
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 20.0),
+                                          child: Image.asset("assets/pack_withdraw.png"),
+                                        ),
+                                        SizedBox(
+                                          width: MQuery.width(0.025, context)),
+                                        LoopAnimation<TimelineValue<AniProps>>(
+                                          tween:_tweenWithdraw, // Pass in tween
+                                          duration: _tweenWithdraw.duration,
+                                          builder: (context, child, value) {
+                                          return Transform.rotate(
+                                            angle: value.get(AniProps.r),
+                                            child: Image.asset("assets/coin_withdraw.png")
+                                          );
+                                        }) // Obtain durationTransform.rotate(
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
-                              GFont.out(
-                                title: "yang dapat kamu cairkan\nke e-money atau rekening kamu!",
-                                fontSize: 20,
-                                fontWeight: FontWeight.normal
-                              )
+                              Positioned(
+                                bottom: 120,
+                                child: Container(
+                                  width: 200,
+                                  height: 200,
+                                  child: Image.asset("assets/phone_variant.png")
+                                )
+                              ),
                             ],
+                          );
+                        },
+                      ),
+                    )
+                    ),
+            Expanded(
+              flex: 5,
+              child: Stack(clipBehavior: Clip.none, children: [
+                Container(
+                  padding: EdgeInsets.all(MQuery.height(0.04, context)),
+                  decoration: BoxDecoration(
+                    color: Palette.greenShade,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50)
+                    )
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(height: MQuery.height(0.01, context)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                PageTransition(child: HistoryPage(), type: PageTransitionType.rightToLeftWithFade)
+                              );
+                            },
+                            child: Icon(PackMe.history)
                           ),
-                        )
-                      : selectedPage == "Rent"
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                PageTransition(child: HelpPage(), type: PageTransitionType.rightToLeftWithFade)
+                              );
+                            }, child: Icon(PackMe.help)
+                          )
+                        ],
+                      ),
+                      SizedBox(height: MQuery.height(0.025, context)),
+                      selectedPage == "Withdraw"
                           ? FadeInUp(
                               child: Column(
                                 children: [
                                   GFont.out(
-                                      title: "Scan QR",
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w800),
-                                  GFont.out(
-                                      title:
-                                          "di merchant / vendor\nuntuk mulai pinjam packs",
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.normal)
-                                ],
-                              ),
-                            )
-                          : selectedPage == "Return"
-                          ? FadeInUp(
-                              child: Column(
-                                children: [
-                                  GFont.out(
-                                    title: "10 packs",
+                                    title: formatCurrency.format(215000).substring(0, formatCurrency.format(215000).length -3),
                                     fontSize: 30,
-                                    fontWeight: FontWeight.w800),
+                                    fontWeight: FontWeight.w800
+                                  ),
                                   GFont.out(
-                                    title: "yang dapat kamu kembalikan\ndan dapatkan bonusnya!",
+                                    title: "yang dapat kamu cairkan\nke e-money atau rekening kamu!",
                                     fontSize: 20,
                                     fontWeight: FontWeight.normal
                                   )
                                 ],
                               ),
                             )
-                          : SizedBox()
-                ],
-              ),
-            ),
-            Positioned(
-              left: selectedPage == "Withdraw"
-              ? (MQuery.width(0.5, context) / 2) - 45
-              : selectedPage == "Rent"
-              ? (MQuery.width(0.5, context) / 4)
-              : selectedPage == "Return"
-              ? (MQuery.width(0.5, context) / 2) - 45
-              : 0,
-              top: -40,
-              child: InkWell(
-                onTap: () {
-                  if(selectedPage == "Withdraw"){
-                    Navigator.push(
-                      context,
-                      PageTransition(child: WithdrawPage(), type: PageTransitionType.rightToLeftWithFade)
-                    );
-                  } else if (selectedPage == "Rent"){
-                    Navigator.push(
-                      context,
-                      PageTransition(child: QRCodeScanner(), type: PageTransitionType.rightToLeftWithFade)
-                    );
-                  } else if (selectedPage == "Return"){
-                    Navigator.push(
-                      context,
-                      PageTransition(child: ReturnMethodPage(), type: PageTransitionType.rightToLeftWithFade)
-                    );
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Palette.pinkAccent,
-                    borderRadius: BorderRadius.all(Radius.circular(50))
-                  ),
-                  height: 75,
-                  width: 75,
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(right: selectedPage == "Withdraw" ? 3 : 0),
-                      child: Icon(
-                        selectedPage == "Withdraw"
-                        ? PackMe.withdraw
-                        : PackMe.qr,
-                        size: selectedPage == "Withdraw" ? 28 : 28,
-                        color: Palette.whiteColor
-                      ),
-                    ),
+                          : selectedPage == "Rent"
+                              ? FadeInUp(
+                                  child: Column(
+                                    children: [
+                                      GFont.out(
+                                          title: "Scan QR",
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.w800),
+                                      GFont.out(
+                                          title:
+                                              "di merchant / vendor\nuntuk mulai pinjam packs",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.normal)
+                                    ],
+                                  ),
+                                )
+                              : selectedPage == "Return"
+                              ? FadeInUp(
+                                  child: Column(
+                                    children: [
+                                      GFont.out(
+                                        title: "10 packs",
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w800),
+                                      GFont.out(
+                                        title: "yang dapat kamu kembalikan\ndan dapatkan bonusnya!",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.normal
+                                      )
+                                    ],
+                                  ),
+                                )
+                              : SizedBox()
+                    ],
                   ),
                 ),
-              ),
-            ),
-            selectedPage == "Rent"
-            ? Positioned(
-                right: (MQuery.width(0.5, context) / 4),
-                top: -40,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      PageTransition(child: RentCodePage(), type: PageTransitionType.rightToLeftWithFade)
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
+                Positioned(
+                  left: selectedPage == "Withdraw"
+                  ? (MQuery.width(0.5, context) / 2) - 45
+                  : selectedPage == "Rent"
+                  ? (MQuery.width(0.5, context) / 4)
+                  : selectedPage == "Return"
+                  ? (MQuery.width(0.5, context) / 2) - 45
+                  : 0,
+                  top: -40,
+                  child: InkWell(
+                    onTap: () {
+                      if(selectedPage == "Withdraw"){
+                        Navigator.push(
+                          context,
+                          PageTransition(child: WithdrawPage(), type: PageTransitionType.rightToLeftWithFade)
+                        );
+                      } else if (selectedPage == "Rent"){
+                        Navigator.push(
+                          context,
+                          PageTransition(child: QRCodeScanner(), type: PageTransitionType.rightToLeftWithFade)
+                        );
+                      } else if (selectedPage == "Return"){
+                        Navigator.push(
+                          context,
+                          PageTransition(child: ReturnMethodPage(), type: PageTransitionType.rightToLeftWithFade)
+                        );
+                      }
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
                         color: Palette.pinkAccent,
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(50))),
-                    height: 75,
-                    width: 75,
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: Icon(PackMe.code,
-                            size: 22, color: Palette.whiteColor),
+                        borderRadius: BorderRadius.all(Radius.circular(50))
+                      ),
+                      height: 75,
+                      width: 75,
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: selectedPage == "Withdraw" ? 3 : 0),
+                          child: Icon(
+                            selectedPage == "Withdraw"
+                            ? PackMe.withdraw
+                            : PackMe.qr,
+                            size: selectedPage == "Withdraw" ? 28 : 28,
+                            color: Palette.whiteColor
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              )
-            : SizedBox()
-          ]),
-        )
-      ]),
+                selectedPage == "Rent"
+                ? Positioned(
+                    right: (MQuery.width(0.5, context) / 4),
+                    top: -40,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(child: RentCodePage(), type: PageTransitionType.rightToLeftWithFade)
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Palette.pinkAccent,
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(50))),
+                        height: 75,
+                        width: 75,
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 8),
+                            child: Icon(PackMe.code,
+                                size: 22, color: Palette.whiteColor),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : SizedBox()
+              ]),
+            )
+          ],
+        );
+        },
+        listener: (context, state){
+          print(state);
+        }
+      ),
       bottomNavigationBar: FloatingNavbar(
         backgroundColor: Colors.white,
         padding: EdgeInsets.symmetric(vertical: MQuery.height(0.015, context)),

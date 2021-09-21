@@ -41,7 +41,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                   child: TextButton(
                     child: GFont.out(title: "Lewati", fontSize: 16),
                     onPressed: () async {
-                      await context.read<AuthCubit>().completeOnboarding();
+                      context.read<AuthCubit>().completeOnboarding();
                     },
                   ),
                 ),
@@ -84,7 +84,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                             : Palette.pinkAccent,
                           method: () async {
                             if(currentPage == splashData.length - 1){
-                              await context.read<AuthCubit>().completeOnboarding();
+                              context.read<AuthCubit>().completeOnboarding();
                             } else {
                               _controller.nextPage(
                                 duration: Duration(milliseconds: 250),

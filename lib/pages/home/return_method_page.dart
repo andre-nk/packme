@@ -24,7 +24,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
             child: Icon(PackMe.qr, color: Colors.white),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onPressed: (){
-            
+              
             },
           ),
         ),
@@ -40,6 +40,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
+            Navigator.pop(context);
           },
           icon: Icon(
             CupertinoIcons.chevron_left,
@@ -69,7 +70,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                     ),
                     child: Stack(
                       children: [
-                        Image.network("https://blog-media.lifepal.co.id/wp-content/uploads/2018/02/5-Profesi-Baru-yang-Bisa-Dilirik.jpg"),
+                        Image.asset("assets/driver.jpg"),
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Container(
@@ -123,7 +124,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                     ),
                     child: Stack(
                       children: [
-                        Image.network("https://media-cdn.tripadvisor.com/media/photo-s/0d/5c/06/89/information-counter-ground.jpg"),
+                        Image.asset("assets/packme_point.jpg"),
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Container(
@@ -148,7 +149,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                                 SizedBox(height: MQuery.height(0.01, context)),
                                 GFont.out(
                                   title: "Kembalikan kemasan PackMe di berbagai PackMe Point terdekat dari Anda tanpa biaya operasional",
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.normal,
                                   textAlign: TextAlign.start
                                 ),

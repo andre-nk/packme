@@ -7,31 +7,7 @@ class ResetPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
 
-    return BlocListener<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if(state is PasswordResetSent){
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Palette.successColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10))
-              ),
-              behavior: SnackBarBehavior.floating,
-              content: Container(
-                height: MQuery.height(0.03, context),
-                child: Center(
-                  child: GFont.out(
-                    title: "E-mail penggantian password sudah dikirim ke akunmu!",
-                    fontSize: 18,
-                    color: Palette.whiteColor
-                  )
-                ),
-              ),
-            )
-          );
-        }
-      },
-      child: BackFramePage(
+    return BackFramePage(
         child: Padding(
           padding: EdgeInsets.only(
               left: MQuery.width(0.05, context),
@@ -80,24 +56,26 @@ class ResetPasswordPage extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                   method: () async {
                     if (emailController.text != "") {
-                      context
-                          .read<AuthCubit>()
-                          .resetPassword(emailController.text.trim());
+                      // context
+                      //     .read<AuthCubit>()
+                      //     .resetPassword(emailController.text.trim());
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: Palette.alertColor,
                         shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
                         behavior: SnackBarBehavior.floating,
                         content: Container(
-                            height: MQuery.height(0.03, context),
-                            child: Center(
-                              child: GFont.out(
-                                  title: "Isi e-mail kamu terlebih dahulu!",
-                                  fontSize: 18,
-                                  color: Palette.whiteColor),
-                            )),
+                          height: MQuery.height(0.03, context),
+                          child: Center(
+                            child: GFont.out(
+                              title: "Isi e-mail kamu terlebih dahulu!",
+                              fontSize: 18,
+                              color: Palette.whiteColor
+                            ),
+                          )
+                        ),
                       ));
                     }
                   },
@@ -107,7 +85,29 @@ class ResetPasswordPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
+      // listener: (context, state) {
+      //   if(state is PasswordResetSent){
+      //     ScaffoldMessenger.of(context).showSnackBar(
+      //       SnackBar(
+      //         backgroundColor: Palette.successColor,
+      //         shape: RoundedRectangleBorder(
+      //           borderRadius: BorderRadius.all(Radius.circular(10))
+      //         ),
+      //         behavior: SnackBarBehavior.floating,
+      //         content: Container(
+      //           height: MQuery.height(0.03, context),
+      //           child: Center(
+      //             child: GFont.out(
+      //               title: "E-mail penggantian password sudah dikirim ke akunmu!",
+      //               fontSize: 18,
+      //               color: Palette.whiteColor
+      //             )
+      //           ),
+      //         ),
+      //       )
+      //     );
+      //   }
+      // },
   }
 }

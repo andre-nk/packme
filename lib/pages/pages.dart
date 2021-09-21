@@ -4,7 +4,6 @@ import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.da
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,7 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:pack_me/config/configs.dart';
 import 'package:pack_me/config/pack_me_icons.dart';
-import 'package:pack_me/cubit/authentication_cubit.dart';
+import 'package:pack_me/cubit/auth_cubit.dart';
 import 'package:pack_me/widgets/default_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -21,6 +20,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'authentication/cta_auth_page.dart';
 part 'authentication/sign_up_email.dart';

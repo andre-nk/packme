@@ -114,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 ListTile(
                   onTap: (){
-                    context.read<AuthCubit>().signOut();
+                    // context.read<AuthCubit>().signOut();
                   },
                   title: GFont.out(
                     title: "Log out",
