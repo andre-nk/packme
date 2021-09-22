@@ -7,6 +7,7 @@ class UserModel extends Equatable{
   final String name;
   final String email;
   final int balance;
+  final String? address;
   final String? profileURL;
 
   UserModel({
@@ -15,6 +16,7 @@ class UserModel extends Equatable{
     required this.name,
     required this.email,
     this.profileURL,
+    this.address,
     this.balance = 215000
   });
 
@@ -25,7 +27,8 @@ class UserModel extends Equatable{
       name: json["name"] as String,
       email: json["email"] as String,
       profileURL: (json["profileURL"] ?? "") as String,
-      balance: (json["balance"] ?? 215000) as int
+      balance: (json["balance"] ?? 215000) as int,
+      address: (json["address"] ?? "") as String
     );
   }
 
@@ -36,10 +39,11 @@ class UserModel extends Equatable{
       "email": instance.email,
       "profileURL": instance.profileURL,
       "balance": instance.balance,
-      "provider": instance.provider
+      "provider": instance.provider,
+      "address": instance.address
     };
   }
 
   @override
-  List<Object?> get props => [id, provider, name, email, balance, profileURL];
+  List<Object?> get props => [id, provider, name, email, balance, profileURL, address];
 }

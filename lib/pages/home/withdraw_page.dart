@@ -16,9 +16,9 @@ class _WithdrawPageState extends State<WithdrawPage> {
   TextEditingController creditCardController4 = TextEditingController();
   List<String> paymentMethods = [
     "Credit Card",
-    "OVO",
-    "GoPay",
-    "DANA"
+    "ovo",
+    "gopay",
+    "dana"
   ];
   int selectedMethod = 0;
 
@@ -131,15 +131,22 @@ class _WithdrawPageState extends State<WithdrawPage> {
                                     selectedMethod = index;
                                   });
                                 },
-                                child: GFont.out(
-                                  title: paymentMethods[index],
-                                  fontSize: 16,
-                                  color: selectedMethod == index ? Colors.white : Colors.black,
-                                  fontWeight: selectedMethod == index ? FontWeight.bold : FontWeight.normal
-                                ),
+                                child: index == 0
+                                ? GFont.out(
+                                    title: paymentMethods[index],
+                                    fontSize: 16,
+                                    color: selectedMethod == index ? Colors.white : Colors.black,
+                                    fontWeight: selectedMethod == index ? FontWeight.bold : FontWeight.normal
+                                  )
+                                : Image.asset("assets/${paymentMethods[index]}.png", fit: BoxFit.fitHeight, scale: index == 3 ? 1.5 : null),
                                 style: ElevatedButton.styleFrom(
                                   elevation: 0,
-                                  primary:  selectedMethod == index ? Palette.greenAccent : Colors.grey[200],
+                                  padding: index == 1
+                                  ? EdgeInsets.symmetric(vertical: 15, horizontal: 15)
+                                  : index == 2
+                                    ? EdgeInsets.symmetric(vertical: 5, horizontal: 15)
+                                    : null,
+                                  primary:  selectedMethod == index ? Palette.greenAccent : Colors.grey[100],
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(10))
                                   )

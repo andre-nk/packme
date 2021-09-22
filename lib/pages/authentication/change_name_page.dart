@@ -1,7 +1,7 @@
 part of "../pages.dart";
 
-class ResetPasswordPage extends StatelessWidget {
-  const ResetPasswordPage({Key? key}) : super(key: key);
+class ChangeNamePage extends StatelessWidget {
+  const ChangeNamePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ResetPasswordPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GFont.out(
-                  title: "Masukkan e-mail kamu!",
+                  title: "Masukkan nama baru kamu",
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
@@ -38,9 +38,9 @@ class ResetPasswordPage extends StatelessWidget {
                       borderSide:
                           BorderSide(color: Palette.greenWidget, width: 3.0),
                     ),
-                    hintText: "E-mail",
+                    hintText: "Nama baru",
                     hintStyle: GFont.style(color: Colors.grey),
-                    labelText: "E-mail",
+                    labelText: "Nama baru",
                     labelStyle: GFont.style(fontSize: 18),
                   ),
                   style: GFont.style(height: 2, fontSize: 18),
@@ -54,13 +54,17 @@ class ResetPasswordPage extends StatelessWidget {
                   height: MQuery.height(0.075, context),
                   child: DefaultButton(
                     title: GFont.out(
-                        title: "Kirim link ganti password",
-                        fontSize: 20,
-                        color: Palette.whiteColor,
-                        fontWeight: FontWeight.bold),
+                      title: "Ganti nama",
+                      fontSize: 20,
+                      color: Palette.whiteColor,
+                      fontWeight: FontWeight.bold
+                    ),
                     method: () async {
-                      if (emailController.text != "") {
-                        context.read<AuthCubit>().resetPassword(emailController.text.trim());
+                      if (emailController.text != "" && state is AuthSuccess){
+                        context.read<AuthCubit>().changeDisplayName(
+                          emailController.text.trim(),
+                          state.user
+                        );
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -73,7 +77,7 @@ class ResetPasswordPage extends StatelessWidget {
                               height: MQuery.height(0.03, context),
                               child: Center(
                                 child: GFont.out(
-                                  title: "E-mail pengganti kata sandi sudah dikirim ke akunmu!",
+                                  title: "Nama berhasil diganti",
                                   fontSize: 18,
                                   color: Palette.whiteColor
                                 )
@@ -92,10 +96,12 @@ class ResetPasswordPage extends StatelessWidget {
                             height: MQuery.height(0.03, context),
                             child: Center(
                               child: GFont.out(
-                                  title: "Isi e-mail kamu terlebih dahulu!",
-                                  fontSize: 18,
-                                  color: Palette.whiteColor),
-                            )),
+                                title: "Isi e-mail kamu terlebih dahulu!",
+                                fontSize: 18,
+                                color: Palette.whiteColor
+                              ),
+                            )
+                          ),
                         ));
                       }
                     },

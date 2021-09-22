@@ -246,29 +246,35 @@ class _HomePageState extends State<HomePage> {
                 PageTransition(child: ProfilePage(), type: PageTransitionType.rightToLeftWithFade)
               );
             },
-            child: Padding(
-              padding: EdgeInsets.only(right: MQuery.width(0.02, context)),
-              child: Container(
-                child: 
-                BlocBuilder<AuthCubit, AuthState>(
-                  builder: (context, state) {
-                    if(state is AuthSuccess){
-                      return Image.network(state.user.profileURL ?? "");
-                    } else {
-                      return SizedBox();
-                    }
-                  },
-                ),
-                clipBehavior: Clip.antiAlias,
-                margin: EdgeInsets.only(
-                  top: MQuery.height(0.0125, context),
-                  bottom: MQuery.height(0.0125, context)
-                ),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Palette.pinkAccent
-                ),
-              )
+            child: Container(
+              child: BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  if(state is AuthSuccess && state.user.profileURL != ""){
+                    print(state.user.profileURL);
+                    return CircleAvatar(
+                      radius: MQuery.height(0.035, context),
+                      backgroundColor: Palette.greenShade,
+                      backgroundImage: NetworkImage(
+                        state.user.profileURL ?? ""
+                      ),
+                    );
+                  } else {
+                    return CircleAvatar(
+                      radius: MQuery.height(0.035, context),
+                      backgroundColor: Palette.pinkShade
+                    );
+                  }
+                },
+              ),
+              clipBehavior: Clip.antiAlias,
+              margin: EdgeInsets.only(
+                top: MQuery.height(0.02, context),
+                right: MQuery.height(0.02, context),
+              ),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Palette.pinkAccent
+              ),
             ),
           )
         ],

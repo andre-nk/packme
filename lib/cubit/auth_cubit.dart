@@ -83,13 +83,10 @@ class AuthCubit extends Cubit<AuthState> with HydratedMixin {
 
   void resetPassword(String email) async {
     try {
-      emit(AuthLoading());
-
       if(email.indexOf("@") < 0 || email.isEmpty){
         emit(AuthFailed("Please enter a proper e-mail address"));
       } else {
         await AuthServices().resetPassword(email);
-        emit(PasswordResetSent());
       }
     } catch (e) {
       emit(AuthFailed(e.toString()));
@@ -104,40 +101,25 @@ class AuthCubit extends Cubit<AuthState> with HydratedMixin {
     }
   }
 
-  // void getUserById(String id) async {
-  //   try {
-  //     emit(AuthLoading());
-  //     UserModel user = await UserService().getUserById(id);
-  //     emit(AuthSuccess(user));
-  //   } catch (e) {
-  //     emit(AuthFailed(e.toString()));
-  //   }
-  // }
+  void changeDisplayName(String name, UserModel user) async {
+    try {
+      emit(AuthLoading());
+      UserModel _user = await AuthServices().changeDisplayName(name, user);
+      emit(AuthSuccess(_user));
+    } catch (e) {
+      emit(AuthFailed(e.toString()));
+    }
+  }
 
-  // void changeDisplayName(String name) async {
-  //   try {
-  //     emit(AuthLoading());
-  //     UserModel user = await UserService().changeDisplayName(name);
-  //     emit(AuthSuccess(user));
-  //   } catch (e) {
-  //     emit(AuthFailed(e.toString()));
-  //   }
-  // }
-
-  // void changeProfilePicture(ImageSource source) async {
-  //   try {
-  //     emit(AuthLoading());
-  //     XFile? _result = await ImageService().pickImage(source);
-  //     if(_result != null){
-  //       UserModel user = await UserService().changeProfilePicture(_result);
-  //       emit(AuthSuccess(user));
-  //     } else {
-  //       emit(AuthFailed("You've cancel the image picking process"));
-  //     }
-  //   } catch (e) {
-  //     emit(AuthFailed(e.toString()));
-  //   }
-  // }
+  void changeAddress(String address, UserModel user) async {
+    try {
+      emit(AuthLoading());
+      UserModel _user = await AuthServices().changeAddress(address, user);
+      emit(AuthSuccess(_user));
+    } catch (e) {
+      emit(AuthFailed(e.toString()));
+    }
+  }
 
   @override
   AuthState? fromJson(Map<String, dynamic> json) {

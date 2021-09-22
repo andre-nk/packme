@@ -29,7 +29,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
               child: Container(
                 height: MQuery.height(0.775, context),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     GFont.out(
                       title: "Daftar pakai E-mail",
@@ -136,7 +136,7 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
                           fontWeight: FontWeight.bold
                         ),
                         method: (){
-                          context.read<AuthCubit>().signIn(email: emailController.text, password: pass1Controller.text);
+                          context.read<AuthCubit>().signUp(name: nameController.text, email: emailController.text, password: pass1Controller.text);
                         },
                         color: Palette.pinkAccent,
                       ),

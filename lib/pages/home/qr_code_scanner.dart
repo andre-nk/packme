@@ -10,11 +10,16 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
-  // In order to get hot reload to work we need to pause the camera if the platform
-  // is android, or resume the camera if the platform is iOS.
-
   @override
   Widget build(BuildContext context) {
+
+    if(result != null){
+      Navigator.push(
+        context,
+        PageTransition(child: RentPackConfirmation(), type: PageTransitionType.rightToLeftWithFade)
+      );
+    }
+
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
@@ -61,7 +66,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
       body: Stack(
         children: <Widget>[
           Container(
-            height: 500,
+            height: double.infinity,
             child: _buildQrView(context)
           ),
         ],

@@ -13,8 +13,6 @@ class AuthLoading extends AuthState {}
 
 class NotAuthenticated extends AuthState {}
 
-class PasswordResetSent extends AuthState {}
-
 class OnboardingFailed extends AuthState {}
 
 class OnboardingSuccess extends AuthState {}

@@ -14,7 +14,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return BackFramePage(
-      child: BlocConsumer(
+      child: BlocConsumer<AuthCubit, AuthState>(
       builder: (context, state){
         return Padding(
           padding: EdgeInsets.only(

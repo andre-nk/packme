@@ -15,7 +15,9 @@ class AuthServices{
         id: userCredential.user!.uid,
         email: email,
         name: name,
-        provider: "e-mail"
+        provider: "e-mail",
+        profileURL: "",
+        address: ""
       );
       _auth.currentUser!.updateDisplayName(name);
       // await UserService().createUser(user);
@@ -36,7 +38,8 @@ class AuthServices{
         email: email,
         name: userCredential.user!.displayName ?? "",
         profileURL: userCredential.user!.photoURL ?? "",
-        provider: 'email'
+        provider: 'email',
+        address: ""
       );
       return user;
     } catch (e) {
@@ -58,10 +61,10 @@ class AuthServices{
         email: userCredential.user!.email ?? "",
         name: userCredential.user!.displayName ?? "",
         profileURL: userCredential.user!.photoURL ?? "",
-        provider: 'google'
+        provider: 'google',
+        address: ""
       );
-      
-      // await UserService().createUser(user);
+
       return user;
     } catch (e) {
       throw e;
@@ -88,6 +91,37 @@ class AuthServices{
     try {
       await _googleAuth.disconnect();
       await _auth.signOut();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<UserModel> changeDisplayName(String name, UserModel user) async {
+    try {
+      await FirebaseAuth.instance.currentUser!.updateDisplayName(name);
+      return UserModel(
+        id: user.id,
+        provider: user.provider,
+        name: name, 
+        email: user.email,
+        profileURL: user.profileURL,
+        address: user.address
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<UserModel> changeAddress(String address, UserModel user) async {
+    try {
+      return UserModel(
+        id: user.id,
+        provider: user.provider,
+        name: user.name, 
+        email: user.email,
+        profileURL: user.profileURL,
+        address: address
+      );
     } catch (e) {
       throw e;
     }
