@@ -82,6 +82,14 @@ class SuccessStatePage extends StatelessWidget {
               child: DefaultButton(
                 color: Palette.pinkAccent,
                 method: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    PageTransition(
+                      child: HomePage(),
+                      type: PageTransitionType.rightToLeftWithFade
+                    ),
+                    (route) => false
+                  );
                 },
                 title: GFont.out(
                   title: this.buttonMessage ?? "Coba lagi",

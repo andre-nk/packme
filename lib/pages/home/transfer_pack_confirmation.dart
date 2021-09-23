@@ -1,7 +1,10 @@
 part of "../pages.dart";
 
 class TransferConfirmationPage extends StatefulWidget {
-  const TransferConfirmationPage({ Key? key }) : super(key: key);
+
+  final String name;
+  final String photoPath;
+  const TransferConfirmationPage({ Key? key, required this.name, required this.photoPath }) : super(key: key);
 
   @override
   _TransferConfirmationPage createState() => _TransferConfirmationPage();
@@ -14,33 +17,14 @@ class _TransferConfirmationPage extends State<TransferConfirmationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: Container(
-      //   height: MQuery.height(0.1, context),
-      //   margin: EdgeInsets.only(
-      //     top: MQuery.height(0.025, context)
-      //   ),
-      //   padding: EdgeInsets.only(
-      //     bottom: MQuery.height(0.025, context)
-      //   ),
-      //   child: FittedBox(
-      //     child: FloatingActionButton(
-      //       backgroundColor: Palette.pinkAccent,
-      //       elevation: 5,
-      //       child: Icon(PackMe.qr, color: Colors.white),
-      //       materialTapTargetSize: MaterialTapTargetSize.padded,
-      //       onPressed: (){
-      //         Get.Get.to(() => QRCodePage(), transition: Get.Transition.cupertino);
-      //       },
-      //     ),
-      //   ),
-      // ),
+      backgroundColor: Palette.whiteColor,
       appBar: AppBar(
         backgroundColor: Palette.whiteColor,
         toolbarHeight: MQuery.height(0.07, context), 
         elevation: 0,
         leading: IconButton(
           onPressed: (){
+            Navigator.pop(context);
           },
           icon: Icon(
             CupertinoIcons.chevron_left,
@@ -79,13 +63,31 @@ class _TransferConfirmationPage extends State<TransferConfirmationPage> {
                       children: [
                         ListTile(
                           horizontalTitleGap: MQuery.width(0.02, context),
-                          leading: Container(
-                            height: MQuery.height(0.05, context),
-                            width: MQuery.height(0.05, context),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              color: Palette.pinkAccent
-                            ),
+                          leading: BlocBuilder<AuthCubit, AuthState>(
+                            builder: (context, state) {
+                              if(state is AuthSuccess){
+                                return Container(
+                                  clipBehavior: Clip.antiAlias,
+                                  height: MQuery.height(0.05, context),
+                                  width: MQuery.height(0.05, context),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    color: Palette.pinkAccent
+                                  ),
+                                  child: Image.network(state.user.profileURL ?? "")
+                                );
+                              } else {
+                                return Container(
+                                  clipBehavior: Clip.antiAlias,
+                                  height: MQuery.height(0.05, context),
+                                  width: MQuery.height(0.05, context),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    color: Palette.pinkAccent
+                                  ),
+                                );
+                              }
+                            },
                           ),
                           title: GFont.out(
                             title: "Andreas Notokusumo",
@@ -116,15 +118,20 @@ class _TransferConfirmationPage extends State<TransferConfirmationPage> {
                         ListTile(
                           horizontalTitleGap: MQuery.width(0.02, context),
                           leading: Container(
+                            clipBehavior: Clip.antiAlias,
                             height: MQuery.height(0.05, context),
                             width: MQuery.height(0.05, context),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(Radius.circular(10)),
                               color: Palette.pinkAccent
                             ),
+                            child: Image.asset(
+                              widget.photoPath,
+                              fit: BoxFit.fill
+                            )
                           ),
                           title: GFont.out(
-                            title: "Irina",
+                            title: widget.name,
                             fontSize: 16,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start,
@@ -268,7 +275,19 @@ class _TransferConfirmationPage extends State<TransferConfirmationPage> {
                         ),
                       ),
                       onPressed: (){
-                       
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          PageTransition(
+                            child: SuccessStatePage(
+                              title: "Yeay! Berhasil!",
+                              description: "Kemasan kamu telah berhasil ditransfer ke teman kamu!",
+                              buttonMessage: "Kembali ke Beranda",
+                              image: "assets/success_box.png",
+                            ),
+                            type: PageTransitionType.rightToLeftWithFade
+                          ),
+                          (route) => false
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Palette.pinkAccent,

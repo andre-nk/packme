@@ -10,7 +10,7 @@ class TransferPage extends StatefulWidget {
 class _TransferPageState extends State<TransferPage> {
 
   TextEditingController _searchController = TextEditingController();
-  int length = 4;
+  int length = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,7 @@ class _TransferPageState extends State<TransferPage> {
             child: Icon(PackMe.qr, color: Colors.white),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onPressed: (){
+              Navigator.push(context, PageTransition(child: QRCodePage(), type: PageTransitionType.rightToLeftWithFade));
             },
           ),
         ),
@@ -111,9 +112,17 @@ class _TransferPageState extends State<TransferPage> {
                       children: [
                         GestureDetector(
                           onTap: (){
-                            setState(() {
-                              length++;
-                            });
+                            Navigator.push(
+                              context,
+                              PageTransition(child: TransferConfirmationPage(
+                                name: index == 0
+                                ? "Alex"
+                                : "Irina",
+                                photoPath: index == 0
+                                ? "assets/alex.jpg"
+                                : "assets/irina.jpg",
+                              ), type: PageTransitionType.rightToLeftWithFade)
+                            );
                           },
                           child: ListTile(
                             horizontalTitleGap: MQuery.width(0.025, context),
@@ -122,15 +131,22 @@ class _TransferPageState extends State<TransferPage> {
                               vertical: MQuery.height(0.01, context)
                             ),
                             leading: Container(
+                              clipBehavior: Clip.antiAlias,
                               height: MQuery.height(0.05, context),
                               width: MQuery.height(0.05, context),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                                 color: Palette.pinkAccent
                               ),
+                              child: Image.asset(
+                                index == 0
+                                ? "assets/alex.jpg"
+                                : "assets/irina.jpg",
+                                fit: BoxFit.fill
+                              )
                             ),
                             title: GFont.out(
-                              title: "Irina",
+                              title: index == 0 ? "Alex" : "Irina",
                               fontSize: 18,
                               color: Palette.blackColor,
                               textAlign: TextAlign.start

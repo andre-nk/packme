@@ -7,6 +7,7 @@ class UserModel extends Equatable{
   final String name;
   final String email;
   final int balance;
+  final bool isEmailVerified;
   final String? address;
   final String? profileURL;
 
@@ -15,6 +16,7 @@ class UserModel extends Equatable{
     required this.provider,
     required this.name,
     required this.email,
+    required this.isEmailVerified,
     this.profileURL,
     this.address,
     this.balance = 215000
@@ -22,6 +24,7 @@ class UserModel extends Equatable{
 
   factory UserModel.fromJson(Map<String, dynamic> json){
     return UserModel(
+      isEmailVerified: json["isEmailVerified"] as bool,
       id: json["id"] as String,
       provider: json["provider"] as String,
       name: json["name"] as String,
@@ -40,10 +43,11 @@ class UserModel extends Equatable{
       "profileURL": instance.profileURL,
       "balance": instance.balance,
       "provider": instance.provider,
-      "address": instance.address
+      "address": instance.address,
+      "isEmailVerified": instance.isEmailVerified
     };
   }
 
   @override
-  List<Object?> get props => [id, provider, name, email, balance, profileURL, address];
+  List<Object?> get props => [isEmailVerified, id, provider, name, email, balance, profileURL, address];
 }

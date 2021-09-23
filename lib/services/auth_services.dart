@@ -12,6 +12,7 @@ class AuthServices{
     try{
       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       UserModel user = UserModel(
+        isEmailVerified: userCredential.user!.emailVerified,
         id: userCredential.user!.uid,
         email: email,
         name: name,
@@ -34,6 +35,7 @@ class AuthServices{
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
       UserModel user = UserModel(
+        isEmailVerified: userCredential.user!.emailVerified,
         id: userCredential.user!.uid,
         email: email,
         name: userCredential.user!.displayName ?? "",
@@ -57,6 +59,7 @@ class AuthServices{
 
       UserCredential userCredential = await _auth.signInWithCredential(credentials);
       UserModel user = UserModel(
+        isEmailVerified: userCredential.user!.emailVerified,
         id: userCredential.user!.uid,
         email: userCredential.user!.email ?? "",
         name: userCredential.user!.displayName ?? "",
@@ -100,6 +103,7 @@ class AuthServices{
     try {
       await FirebaseAuth.instance.currentUser!.updateDisplayName(name);
       return UserModel(
+        isEmailVerified: user.isEmailVerified,
         id: user.id,
         provider: user.provider,
         name: name, 
@@ -115,6 +119,7 @@ class AuthServices{
   Future<UserModel> changeAddress(String address, UserModel user) async {
     try {
       return UserModel(
+        isEmailVerified: user.isEmailVerified,
         id: user.id,
         provider: user.provider,
         name: user.name, 
@@ -122,6 +127,14 @@ class AuthServices{
         profileURL: user.profileURL,
         address: address
       );
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> verifyEmail() async {
+    try {
+      await _auth.currentUser!.sendEmailVerification();
     } catch (e) {
       throw e;
     }

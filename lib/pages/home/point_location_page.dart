@@ -12,8 +12,15 @@ class _PointLocationPageState extends State<PointLocationPage> {
   Widget build(BuildContext context) {
 
     TextEditingController _searchController = TextEditingController();
+    List<String> locations = [
+      "Grand Indonesia",
+      "Central Park, Jakarta Utara",
+      "Mangga Dua",
+      "Emporium Mall, Jakarta Utara"
+    ];
 
     return Scaffold(
+      backgroundColor: Palette.whiteColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
         height: MQuery.height(0.1, context),
@@ -27,7 +34,9 @@ class _PointLocationPageState extends State<PointLocationPage> {
             child: Icon(PackMe.qr, color: Colors.white),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onPressed: (){
-             
+              Navigator.push(context, 
+                PageTransition(child: QRCodeScanner(), type: PageTransitionType.rightToLeftWithFade)
+              );
             },
           ),
         ),
@@ -43,7 +52,7 @@ class _PointLocationPageState extends State<PointLocationPage> {
         elevation: 0,
         leading: IconButton(
           onPressed: (){
-           
+            Navigator.pop(context);
           },
           icon: Icon(
             CupertinoIcons.chevron_left,
@@ -93,7 +102,7 @@ class _PointLocationPageState extends State<PointLocationPage> {
                         fontSize: 18,
                         color: Palette.blackColor.withOpacity(0.4)
                       ),
-                      hintText: "Cari kontak...",
+                      hintText: "Cari lokasi PackMe Point...",
                       contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       border: InputBorder.none
                     ),
@@ -114,16 +123,8 @@ class _PointLocationPageState extends State<PointLocationPage> {
                             horizontal: MQuery.width(0.015, context),
                             vertical: MQuery.height(0.01, context)
                           ),
-                          leading: Container(
-                            height: MQuery.height(0.05, context),
-                            width: MQuery.height(0.05, context),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              color: Palette.pinkAccent
-                            ),
-                          ),
                           title: GFont.out(
-                            title: "Central Park Jakarta Utara",
+                            title: locations[index],
                             fontSize: 18,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start

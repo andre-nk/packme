@@ -17,6 +17,8 @@ class OnboardingFailed extends AuthState {}
 
 class OnboardingSuccess extends AuthState {}
 
+class VerifyEmailSent extends AuthState {}
+
 class AuthSuccess extends AuthState {
   final UserModel user;
   AuthSuccess(this.user);

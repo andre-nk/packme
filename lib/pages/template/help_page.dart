@@ -37,7 +37,7 @@ class _HelpPageState extends State<HelpPage> with SingleTickerProviderStateMixin
               SizedBox(height: MQuery.height(0.075, context)),
               AnimatedContainer(
                 duration: Duration(milliseconds: 250),
-                height: isOpened ? MQuery.height(0.8, context) : MQuery.height(0.075, context),
+                height: isOpened ? MQuery.height(0.35, context) : MQuery.height(0.075, context),
                 width: MQuery.width(0.45, context),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(
@@ -47,34 +47,39 @@ class _HelpPageState extends State<HelpPage> with SingleTickerProviderStateMixin
                     color: HexColor("000000").withOpacity(0.25),
                   ),
                 ),
-                child: ExpansionTile(
-                  iconColor: Palette.greenAccent,
-                  expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                  expandedAlignment: Alignment.centerLeft,
-                  title: GFont.out(
-                    textAlign: TextAlign.start,
-                    title: "Lupa kata sandi?",
-                    fontSize: 18
+                child: Theme(
+                  data: ThemeData(
+                    dividerColor: Colors.transparent
                   ),
-                  childrenPadding: EdgeInsets.all(MQuery.height(0.02, context)),
-                  children: [
-                    GFont.out(
-                      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sem lacus. Sed turpis nunc, malesuada sed venenatis ac, congue sed metus. Aliquam at dui elit. Pellentesque aliquam posuere nulla, in maximus eros iaculis sed. Duis quis lacus venenatis, auctor quam in, maximus est. Fusce euismod purus tortor, nec dignissim arcu dignissim ac. Pellentesque tincidunt in lorem sit amet iaculis. Morbi scelerisque eros sed tristique lobortis. Vivamus quis suscipit enim, iaculis sodales justo. Vivamus imperdiet lacinia mi a pulvinar. Donec condimentum placerat erat sed placerat. Nulla facilisi. Integer rhoncus diam velit, at pellentesque orci gravida et. Vestibulum et ultricies odio. Mauris gravida pretium tortor nec dapibus. Sed id pulvinar neque. Nullam ex odio, consequat non augue ut, vestibulum tincidunt sapien. In sit amet scelerisque risus. Mauris quis turpis ipsum. Integer aliquet vehicula augue, at rhoncus libero luctus at. Nunc vitae nibh justo. Nullam suscipit finibus quam pulvinar tincidunt. Cras rutrum scelerisque molestie. Nam sed sagittis ipsum, sed pharetra erat. Morbi ut odio a nisl pulvinar condimentum ac vel mi. Aliquam eget commodo eros, a sollicitudin eros. Cras libero eros, tempus ac congue sed, vulputate eu nisi. Curabitur a justo bibendum, sodales quam vel, luctus orci. Nulla vel malesuada tellus, vel mattis mi. Cras cursus purus eu rhoncus sollicitudin.",
+                  child: ExpansionTile(
+                    iconColor: Palette.greenAccent,
+                    expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                    expandedAlignment: Alignment.centerLeft,
+                    title: GFont.out(
                       textAlign: TextAlign.start,
-                      fontSize: 14,
-                    )
-                  ],
-                  onExpansionChanged: (val){
-                    setState(() {
-                      isOpened = !isOpened;
-                    });
-                  },
+                      title: "Lupa kata sandi?",
+                      fontSize: 18
+                    ),
+                    childrenPadding: EdgeInsets.all(MQuery.height(0.02, context)),
+                    children: [
+                      GFont.out(
+                        title: "Kamu bisa mengubah kata sandi kamu di pengaturan (Klik foto profil kamu di Beranda) lalu tekan Ganti Kata Sandi. Kami akan mengirim link penggantian password yang aman dan mudah digunakan ke alamat e-mail akun ini. Silahkan buka linknya dan buat password baru. Jangan ragu untuk hubungi CS kami jika  terdapat masalah lebih lanjut",
+                        textAlign: TextAlign.start,
+                        fontSize: 16,
+                      )
+                    ],
+                    onExpansionChanged: (val){
+                      setState(() {
+                        isOpened = !isOpened;
+                      });
+                    },
+                  ),
                 )
               ),
               SizedBox(height: MQuery.height(0.02, context)),
               AnimatedContainer(
                 duration: Duration(milliseconds: 250),
-                height: isOpened2 ? MQuery.height(0.8, context) : MQuery.height(0.075, context),
+                height: isOpened2 ? MQuery.height(0.7, context) : MQuery.height(0.075, context),
                 width: MQuery.width(0.45, context),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(
@@ -84,41 +89,33 @@ class _HelpPageState extends State<HelpPage> with SingleTickerProviderStateMixin
                     color: HexColor("000000").withOpacity(0.25),
                   ),
                 ),
-                child: ExpansionTile(
-                  iconColor: Palette.greenAccent,
-                  expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                  expandedAlignment: Alignment.centerLeft,
-                  title: GFont.out(
-                    textAlign: TextAlign.start,
-                    title: "Gabung kami sebagai MitraPRO",
-                    fontSize: 18
+                child: Theme(
+                  data: ThemeData(
+                    dividerColor: Colors.transparent
                   ),
-                  childrenPadding: EdgeInsets.all(MQuery.height(0.02, context)),
-                  children: [
-                    GFont.out(
-                      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel sem lacus. Sed turpis nunc, malesuada sed venenatis ac, congue sed metus. Aliquam at dui elit. Pellentesque aliquam posuere nulla, in maximus eros iaculis sed. Duis quis lacus venenatis, auctor quam in, maximus est. Fusce euismod purus tortor, nec dignissim arcu dignissim ac. Pellentesque tincidunt in lorem sit amet iaculis. Morbi scelerisque eros sed tristique lobortis. Vivamus quis suscipit enim, iaculis sodales justo. Vivamus imperdiet lacinia mi a pulvinar. Donec condimentum placerat erat sed placerat. Nulla facilisi. Integer rhoncus diam velit, at pellentesque orci gravida et. Vestibulum et ultricies odio. Mauris gravida pretium tortor nec dapibus. Sed id pulvinar neque. Nullam ex odio, consequat non augue ut, vestibulum tincidunt sapien. In sit amet scelerisque risus. Mauris quis turpis ipsum. Integer aliquet vehicula augue, at rhoncus libero luctus at. Nunc vitae nibh justo. Nullam suscipit finibus quam pulvinar tincidunt. Cras rutrum scelerisque molestie. Nam sed sagittis ipsum, sed pharetra erat. Morbi ut odio a nisl pulvinar condimentum ac vel mi. Aliquam eget commodo eros, a sollicitudin eros. Cras libero eros, tempus ac congue sed, vulputate eu nisi. Curabitur a justo bibendum, sodales quam vel, luctus orci. Nulla vel malesuada tellus, vel mattis mi. Cras cursus purus eu rhoncus sollicitudin.",
+                  child: ExpansionTile(
+                    iconColor: Palette.greenAccent,
+                    expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                    expandedAlignment: Alignment.centerLeft,
+                    title: GFont.out(
                       textAlign: TextAlign.start,
-                      fontSize: 14,
+                      title: "Gabung kami sebagai MitraPRO",
+                      fontSize: 18
                     ),
-                    SizedBox(height: MQuery.height(0.025, context)),
-                    GestureDetector(
-                      onTap: (){
-                      },
-                      child: Center(
-                        child: GFont.out(
-                          title: "Isi formulir pendaftaran disini",
-                          textAlign: TextAlign.start,
-                          color: Colors.blue,
-                          fontSize: 16,
-                        ),
+                    childrenPadding: EdgeInsets.all(MQuery.height(0.02, context)),
+                    children: [
+                      GFont.out(
+                        title: "MitraPRO adalah program khusus dari PackMe bagi kamu yang merupakan owner dari bisnis kuliner sampai ekspedisi (online shop). Kami, PackMe menyediakan kemasan plastik reusable yang berkualitas tinggi, murah dan dapat didesain sesuai kebutuhan kamu. MitraPRO dapat memberikan beberapa keuntungan dari pemesanan kemasan plastik kami secara biasa. Sebut saja, biaya yang jauh lebih murah secara berkala yaitu mencapai 60% lebih murah dari kemasan komersial, proses pemasokan kemasan yang lebih diprioritaskan hingga kesempatan mengiklankan usaha kamu secara gratis sebanyak 2x dalam satu bulan dalam aplikasi dan kemasan-kemasan PackMe. Tunggu apa lagi? Gabung dengan kami melalui Side Bar (pojok kiri atas dari Beranda) lalu klik 'Gabung Kami'. Kamu bisa membaca lebih lanjut tentang S&K MitraPRO serta formulir pendaftaran lengkapnya disana",
+                        textAlign: TextAlign.start,
+                        fontSize: 16,
                       ),
-                    )
-                  ],
-                  onExpansionChanged: (val){
-                    setState(() {
-                      isOpened2 = !isOpened2;
-                    });
-                  },
+                    ],
+                    onExpansionChanged: (val){
+                      setState(() {
+                        isOpened2 = !isOpened2;
+                      });
+                    },
+                  ),
                 )
               ),
               SizedBox(height: MQuery.height(0.05, context)),

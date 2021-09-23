@@ -59,7 +59,9 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                 flex: 10,
                 child: GestureDetector(
                   onTap: (){
-                 
+                    Navigator.push(context, 
+                      PageTransition(child: MapPage(), type: PageTransitionType.rightToLeftWithFade)
+                    );
                   },
                   child: Container(
                     clipBehavior: Clip.antiAlias,
@@ -89,13 +91,13 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                               children: [
                                 GFont.out(
                                   title: "Driver Pick-up",
-                                  fontSize: 18,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold
                                 ),
                                 SizedBox(height: MQuery.height(0.01, context)),
                                 GFont.out(
                                   title: "Driver PackMe atau mitra akan menjemput kemasan yang akan Anda kembalikan di lokasi permintaan",
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.normal,
                                   textAlign: TextAlign.start
                                 ),
@@ -113,7 +115,9 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                 flex: 10,
                 child:  GestureDetector(
                   onTap: (){
-                    Navigator.pop(context);
+                    Navigator.push(context, 
+                      PageTransition(child: PointLocationPage(), type: PageTransitionType.rightToLeftWithFade)
+                    );
                   },
                   child: Container(
                     clipBehavior: Clip.antiAlias,
@@ -129,7 +133,7 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                           alignment: Alignment.bottomCenter,
                           child: Container(
                             width: double.infinity,
-                            height: 120,
+                            height: 140,
                             padding: EdgeInsets.all(MQuery.height(0.02, context)),
                             decoration: BoxDecoration(
                               color: Palette.greenShade,
@@ -143,13 +147,13 @@ class _ReturnMethodPageState extends State<ReturnMethodPage> {
                               children: [
                                 GFont.out(
                                   title: "Drop-off Point",
-                                  fontSize: 18,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold
                                 ),
                                 SizedBox(height: MQuery.height(0.01, context)),
                                 GFont.out(
                                   title: "Kembalikan kemasan PackMe di berbagai PackMe Point terdekat dari Anda tanpa biaya operasional",
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.normal,
                                   textAlign: TextAlign.start
                                 ),

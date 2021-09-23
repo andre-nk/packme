@@ -13,17 +13,17 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         backgroundColor: Palette.whiteColor,
         appBar: AppBar(
-            backgroundColor: Palette.whiteColor,
-            toolbarHeight: MQuery.height(0.07, context),
-            title: GFont.out(
-                title: "Profil", fontSize: 22, fontWeight: FontWeight.bold),
-            elevation: 0,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(CupertinoIcons.chevron_left, color: Palette.blackColor),
-            )),
+          backgroundColor: Palette.whiteColor,
+          toolbarHeight: MQuery.height(0.07, context),
+          title: GFont.out(title: "Profil", fontSize: 22, fontWeight: FontWeight.bold),
+          elevation: 0,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(CupertinoIcons.chevron_left, color: Palette.blackColor),
+          )
+        ),
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if(state is NotAuthenticated){
@@ -31,6 +31,26 @@ class _ProfilePageState extends State<ProfilePage> {
                 context,
                 PageTransition(child: CTAAuthPage(), type: PageTransitionType.rightToLeftWithFade),
                 (route) => false
+              );
+            } else if (state is VerifyEmailSent){
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Palette.successColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                  content: Container(
+                    height: MQuery.height(0.03, context),
+                    child: Center(
+                      child: GFont.out(
+                        title: "Email verifikasi berhasil dikirim!",
+                        fontSize: 18,
+                        color: Palette.whiteColor
+                      )
+                    ),
+                  ),
+                )
               );
             }
           },
@@ -62,28 +82,33 @@ class _ProfilePageState extends State<ProfilePage> {
                         title: state.user.email,
                         fontSize: 16,
                       ),
-                      // if (user.emailVerified)
-                      //   SizedBox()
-                      // else
-                      //   Column(
-                      //     children: [
-                      //       SizedBox(height: MQuery.height(0.02, context)),
-                      //       Container(
-                      //         height: MQuery.height(0.04, context),
-                      //         width: MQuery.width(0.7, context),
-                      //         decoration: BoxDecoration(
-                      //             color: Palette.alertColor,
-                      //             borderRadius:
-                      //                 BorderRadius.all(Radius.circular(50))),
-                      //         child: Center(
-                      //           child: GFont.out(
-                      //               title:
-                      //                   "Verifikasi nomor telepon dan e-mail dulu yuk!",
-                      //               color: Palette.whiteColor),
-                      //         ),
-                      //       )
-                      //     ],
-                      //   ),
+                      if (state.user.isEmailVerified)
+                        SizedBox()
+                      else
+                        Column(
+                          children: [
+                            SizedBox(height: MQuery.height(0.02, context)),
+                            GestureDetector(
+                              onTap: (){
+                                context.read<AuthCubit>().verifyEmail();
+                              },
+                              child: Container(
+                                height: MQuery.height(0.04, context),
+                                width: MQuery.width(0.7, context),
+                                decoration: BoxDecoration(
+                                  color: Palette.alertColor,
+                                  borderRadius: BorderRadius.all(Radius.circular(50))
+                                ),
+                                child: Center(
+                                  child: GFont.out(
+                                    title: "Verifikasi e-mail kamu dulu yuk!",
+                                    color: Palette.whiteColor
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       SizedBox(height: MQuery.height(0.025, context)),
                       ListTile(
                         onTap: (){
@@ -178,6 +203,21 @@ class _ProfilePageState extends State<ProfilePage> {
                         contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
                         title: GFont.out(
                           title: "Alamat",
+                          textAlign: TextAlign.start,
+                        ),
+                        trailing: Icon(
+                          CupertinoIcons.chevron_forward,
+                          color: Palette.blackColor,
+                          size: 20,
+                        )
+                      ),
+                      ListTile(
+                        onTap: (){
+                          Navigator.push(context, PageTransition(child: QRCodePage(), type: PageTransitionType.rightToLeftWithFade));
+                        },
+                        contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+                        title: GFont.out(
+                          title: "QR Code",
                           textAlign: TextAlign.start,
                         ),
                         trailing: Icon(

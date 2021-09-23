@@ -121,6 +121,16 @@ class AuthCubit extends Cubit<AuthState> with HydratedMixin {
     }
   }
 
+  void verifyEmail() async {
+    try {
+      emit(AuthLoading());
+      await AuthServices().verifyEmail();
+      emit(VerifyEmailSent());
+    } catch (e) {
+      emit(AuthFailed(e.toString()));
+    }
+  }
+
   @override
   AuthState? fromJson(Map<String, dynamic> json) {
     try {

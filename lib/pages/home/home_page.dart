@@ -254,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                     return CircleAvatar(
                       radius: MQuery.height(0.035, context),
                       backgroundColor: Palette.greenShade,
-                      backgroundImage: NetworkImage(
+                      child: Image.network(
                         state.user.profileURL ?? ""
                       ),
                     );

@@ -35,8 +35,20 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
 
-    Future.delayed(15.seconds, (){
-      
+    Future.delayed(33.seconds, (){
+      Navigator.pushAndRemoveUntil(
+        context,
+        PageTransition(
+          child: SuccessStatePage(
+            title: "Yeay! Berhasil!",
+            description: "Terimakasih telah mengembalikan kemasan PackMe, Tunggu bonus uang dari PackMe dan jangan lupa untuk pakai kemasan PackMe lagi ya!",
+            buttonMessage: "Kembali ke Beranda",
+            image: "assets/success_box.png",
+          ),
+          type: PageTransitionType.rightToLeftWithFade
+        ),
+        (route) => false
+      );
     });
 
     return Scaffold(
@@ -69,6 +81,9 @@ class _MapPageState extends State<MapPage> {
                 leading: CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.blue,
+                  backgroundImage: AssetImage(
+                    "assets/driver_avatar.jpg"
+                  )
                 ),
                 title: Padding(
                   padding: const EdgeInsets.only(bottom: 2.0),
@@ -236,26 +251,30 @@ class _MapPageState extends State<MapPage> {
             ]
           ),
         ),
-        body: Positioned.fill(
-          child: FutureBuilder<Position>(
-            future: _determinePosition(),
-            builder: (context, snapshot) {
-              return snapshot.hasData
-              ? FlutterMap(
-                  options: MapOptions(
-                    center: LatLng(snapshot.data!.latitude, snapshot.data!.longitude),
-                    zoom: 13.0,
-                  ),
-                  layers: [
-                    TileLayerOptions(
-                      urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                      subdomains: ['a', 'b', 'c']
-                    ),
-                  ],
-                )
-              : SizedBox();
-            }
-          ),
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: FutureBuilder<Position>(
+                future: _determinePosition(),
+                builder: (context, snapshot) {
+                  return snapshot.hasData
+                  ? FlutterMap(
+                      options: MapOptions(
+                        center: LatLng(snapshot.data!.latitude, snapshot.data!.longitude),
+                        zoom: 13.0,
+                      ),
+                      layers: [
+                        TileLayerOptions(
+                          urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                          subdomains: ['a', 'b', 'c']
+                        ),
+                      ],
+                    )
+                  : SizedBox();
+                }
+              ),
+            ),
+          ],
         ),
       ),
     );
