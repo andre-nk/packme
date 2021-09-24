@@ -267,9 +267,8 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               clipBehavior: Clip.antiAlias,
-              margin: EdgeInsets.only(
-                top: MQuery.height(0.02, context),
-                right: MQuery.height(0.02, context),
+              margin: EdgeInsets.all(
+                MQuery.height(0.0125, context),
               ),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -282,159 +281,248 @@ class _HomePageState extends State<HomePage> {
       extendBody: true,
       body: BlocConsumer<AuthCubit, AuthState>(
         builder: (context, state){
-          return Column(
+          return Stack(
             children: [
-              Expanded(
-                flex: 6,
+              Positioned.fill(
+                bottom: 280,
                 child: selectedPage == "Rent"
-                ? Center(
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      alignment: Alignment.center,
-                      children: [
-                        Positioned(
-                          bottom: 20,
-                          child: Container(
-                            width: 200,
-                            height: 200,
-                            child: Image.asset("assets/QR.png")
-                          )
-                        ),
-                        LoopAnimation<TimelineValue<AniProps>>(
-                          tween: _tweenRent, // Pass in tween
-                          duration:
-                              _tweenRent.duration, // Obtain duration
-                          builder: (context, child, value) {
-                            return Transform.translate(
-                              offset: Offset(value.get(AniProps.x),
-                                  value.get(AniProps.y)),
-                              child: Container(
-                                width: 200,
-                                height: 200,
-                                child: Image.asset("assets/HP.png"),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  )
-                : selectedPage == "Return"
-                  ? Padding(
-                      padding: EdgeInsets.only(bottom: 5),
-                      child: LoopAnimation<TimelineValue<AniProps>>(
-                        tween: _tweenReturn, // Pass in tween
-                        duration: _tweenReturn.duration, // Obtain duration
-                        builder: (context, child, value) {
-                          return Transform.translate(
-                            offset: Offset(
-                              value.get(AniProps.x),
-                              value.get(AniProps.y)
-                            ),
-                            child: Container(
-                              width: 200,
-                              height: 200,
-                              child: Image.asset("assets/return_anim.png"),
-                            ),
-                          );
-                        },
+                ? Container(
+                    height: double.infinity,
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        viewportFraction: 1,
+                        aspectRatio: 1/1.5
                       ),
-                    )
-                  : Padding(
-                      padding: EdgeInsets.only(bottom: 5),
-                      child: LoopAnimation<TimelineValue<AniProps>>(
-                        tween: _tweenReturn, // Pass in tween
-                        duration: _tweenReturn.duration, // Obtain duration
-                        builder: (context, child, value) {
-                          return Stack(
+                      items: [
+                        Center(
+                          child: Stack(
                             clipBehavior: Clip.none,
                             alignment: Alignment.center,
                             children: [
+                              Positioned(
+                                bottom: 20,
+                                child: Container(
+                                  width: 200,
+                                  height: 200,
+                                  child: Image.asset("assets/QR.png")
+                                )
+                              ),
                               LoopAnimation<TimelineValue<AniProps>>(
-                                tween: _tweenWithdraw, // Pass in tween
-                                duration: _tweenWithdraw.duration, // Obtain duration
+                                tween: _tweenRent, // Pass in tween
+                                duration:
+                                    _tweenRent.duration, // Obtain duration
                                 builder: (context, child, value) {
                                   return Transform.translate(
-                                    offset: Offset(
-                                      value.get(AniProps.x),
-                                      value.get(AniProps.y)
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 20.0),
-                                          child: Image.asset("assets/pack_withdraw.png"),
-                                        ),
-                                        SizedBox(
-                                          width: MQuery.width(0.025, context)),
-                                        LoopAnimation<TimelineValue<AniProps>>(
-                                          tween:_tweenWithdraw, // Pass in tween
-                                          duration: _tweenWithdraw.duration,
-                                          builder: (context, child, value) {
-                                          return Transform.rotate(
-                                            angle: value.get(AniProps.r),
-                                            child: Image.asset("assets/coin_withdraw.png")
-                                          );
-                                        }) // Obtain durationTransform.rotate(
-                                      ],
+                                    offset: Offset(value.get(AniProps.x),
+                                        value.get(AniProps.y)),
+                                    child: Container(
+                                      width: 200,
+                                      height: 200,
+                                      child: Image.asset("assets/HP.png"),
                                     ),
                                   );
                                 },
                               ),
-                              Positioned(
-                                bottom: 120,
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage("assets/kfc_ads.jpg")
+                            )
+                          )
+                        ),
+                        Container(
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage("assets/wendy_ads.jpg")
+                            )
+                          )
+                        )
+                      ]
+                    ),
+                )
+                : selectedPage == "Return"
+                ? Center(
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        viewportFraction: 1,
+                        aspectRatio: 1.15/1.25
+                      ),
+                      items: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: LoopAnimation<TimelineValue<AniProps>>(
+                            tween: _tweenReturn, // Pass in tween
+                            duration: _tweenReturn.duration, // Obtain duration
+                            builder: (context, child, value) {
+                              return Transform.translate(
+                                offset: Offset(
+                                  value.get(AniProps.x),
+                                  value.get(AniProps.y)
+                                ),
                                 child: Container(
                                   width: 200,
                                   height: 200,
-                                  child: Image.asset("assets/phone_variant.png")
-                                )
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    )
-                    ),
-            Expanded(
-              flex: 5,
-              child: Stack(clipBehavior: Clip.none, children: [
-                Container(
-                  padding: EdgeInsets.all(MQuery.height(0.04, context)),
-                  decoration: BoxDecoration(
-                    color: Palette.greenShade,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: MQuery.height(0.01, context)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                PageTransition(child: HistoryPage(), type: PageTransitionType.rightToLeftWithFade)
+                                  child: Image.asset("assets/return_anim.png"),
+                                ),
                               );
                             },
-                            child: Icon(PackMe.history)
                           ),
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                PageTransition(child: HelpPage(), type: PageTransitionType.rightToLeftWithFade)
-                              );
-                            }, child: Icon(PackMe.help)
+                        ),
+                        Container(
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage("assets/kfc_ads.jpg")
+                            )
                           )
-                        ],
+                        ),
+                        Container(
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage("assets/wendy_ads.jpg")
+                            )
+                          )
+                        )
+                      ]
+                    ),
+                  )
+                : CarouselSlider(
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      viewportFraction: 1,
+                      aspectRatio: 1/2
+                    ),
+                    items: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: LoopAnimation<TimelineValue<AniProps>>(
+                          tween: _tweenReturn, // Pass in tween
+                          duration: _tweenReturn.duration, // Obtain duration
+                          builder: (context, child, value) {
+                            return Stack(
+                              clipBehavior: Clip.none,
+                              alignment: Alignment.center,
+                              children: [
+                                LoopAnimation<TimelineValue<AniProps>>(
+                                  tween: _tweenWithdraw, // Pass in tween
+                                  duration: _tweenWithdraw.duration, // Obtain duration
+                                  builder: (context, child, value) {
+                                    return Transform.translate(
+                                      offset: Offset(
+                                        value.get(AniProps.x),
+                                        value.get(AniProps.y)
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 20.0),
+                                            child: Image.asset("assets/pack_withdraw.png"),
+                                          ),
+                                          SizedBox(
+                                            width: MQuery.width(0.025, context)),
+                                          LoopAnimation<TimelineValue<AniProps>>(
+                                            tween:_tweenWithdraw, // Pass in tween
+                                            duration: _tweenWithdraw.duration,
+                                            builder: (context, child, value) {
+                                            return Transform.rotate(
+                                              angle: value.get(AniProps.r),
+                                              child: Image.asset("assets/coin_withdraw.png")
+                                            );
+                                          }) // Obtain durationTransform.rotate(
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                                Positioned(
+                                  bottom: 120,
+                                  child: Container(
+                                    width: 200,
+                                    height: 200,
+                                    child: Image.asset("assets/phone_variant.png")
+                                  )
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ),
-                      SizedBox(height: MQuery.height(0.025, context)),
-                      selectedPage == "Withdraw"
+                      Container(
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage("assets/kfc_ads.jpg")
+                          )
+                        )
+                      ),
+                      Container(
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage("assets/wendy_ads.jpg")
+                          )
+                        )
+                      )
+                  ]
+                )
+              ),
+              Positioned.fill(
+                top: 410,
+                child: Container(
+                  height: 340,
+                  child: Stack(
+                    clipBehavior: Clip.none, children: [
+                    Container(
+                      padding: EdgeInsets.all(MQuery.height(0.04, context)),
+                      decoration: BoxDecoration(
+                        color: Palette.greenShade,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50)
+                        )
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(height: MQuery.height(0.01, context)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(child: HistoryPage(), type: PageTransitionType.rightToLeftWithFade)
+                                  );
+                                },
+                                child: Icon(PackMe.history)
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(child: HelpPage(), type: PageTransitionType.rightToLeftWithFade)
+                                  );
+                                }, child: Icon(PackMe.help)
+                              )
+                            ],
+                          ),
+                          SizedBox(height: MQuery.height(0.025, context)),
+                          selectedPage == "Withdraw"
                           ? FadeInUp(
                               child: Column(
                                 children: [
@@ -452,124 +540,126 @@ class _HomePageState extends State<HomePage> {
                               ),
                             )
                           : selectedPage == "Rent"
-                              ? FadeInUp(
-                                  child: Column(
-                                    children: [
-                                      GFont.out(
-                                          title: "Scan QR",
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.w800),
-                                      GFont.out(
-                                          title:
-                                              "di merchant / vendor\nuntuk mulai pinjam packs",
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.normal)
-                                    ],
-                                  ),
-                                )
-                              : selectedPage == "Return"
-                              ? FadeInUp(
-                                  child: Column(
-                                    children: [
-                                      GFont.out(
-                                        title: "10 packs",
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.w800),
-                                      GFont.out(
-                                        title: "yang dapat kamu kembalikan\ndan dapatkan bonusnya!",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.normal
-                                      )
-                                    ],
-                                  ),
-                                )
-                              : SizedBox()
-                    ],
-                  ),
-                ),
-                Positioned(
-                  left: selectedPage == "Withdraw"
-                  ? (MQuery.width(0.5, context) / 2) - 45
-                  : selectedPage == "Rent"
-                  ? (MQuery.width(0.5, context) / 4)
-                  : selectedPage == "Return"
-                  ? (MQuery.width(0.5, context) / 2) - 45
-                  : 0,
-                  top: -40,
-                  child: InkWell(
-                    onTap: () {
-                      if(selectedPage == "Withdraw"){
-                        Navigator.push(
-                          context,
-                          PageTransition(child: WithdrawPage(), type: PageTransitionType.rightToLeftWithFade)
-                        );
-                      } else if (selectedPage == "Rent"){
-                        Navigator.push(
-                          context,
-                          PageTransition(child: QRCodeScanner(), type: PageTransitionType.rightToLeftWithFade)
-                        );
-                      } else if (selectedPage == "Return"){
-                        Navigator.push(
-                          context,
-                          PageTransition(child: ReturnMethodPage(), type: PageTransitionType.rightToLeftWithFade)
-                        );
-                      }
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Palette.pinkAccent,
-                        borderRadius: BorderRadius.all(Radius.circular(50))
-                      ),
-                      height: 75,
-                      width: 75,
-                      child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: selectedPage == "Withdraw" ? 3 : 0),
-                          child: Icon(
-                            selectedPage == "Withdraw"
-                            ? PackMe.withdraw
-                            : PackMe.qr,
-                            size: selectedPage == "Withdraw" ? 28 : 28,
-                            color: Palette.whiteColor
-                          ),
-                        ),
+                            ? FadeInUp(
+                                child: Column(
+                                  children: [
+                                    GFont.out(
+                                      title: "Scan QR",
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w800
+                                    ),
+                                    GFont.out(
+                                      title: "di merchant / vendor\nuntuk mulai pinjam packs",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.normal
+                                    )
+                                  ],
+                                ),
+                              )
+                          : selectedPage == "Return"
+                          ? FadeInUp(
+                              child: Column(
+                                children: [
+                                  GFont.out(
+                                    title: "10 packs",
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w800),
+                                  GFont.out(
+                                    title: "yang dapat kamu kembalikan\ndan dapatkan bonusnya!",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.normal
+                                  )
+                                ],
+                              ),
+                            )
+                          : SizedBox()
+                        ],
                       ),
                     ),
-                  ),
-                ),
-                selectedPage == "Rent"
-                ? Positioned(
-                    right: (MQuery.width(0.5, context) / 4),
-                    top: -40,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(child: RentCodePage(), type: PageTransitionType.rightToLeftWithFade)
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
+                    Positioned(
+                      left: selectedPage == "Withdraw"
+                      ? (MQuery.width(0.5, context) / 2) - 45
+                      : selectedPage == "Rent"
+                      ? (MQuery.width(0.5, context) / 4)
+                      : selectedPage == "Return"
+                      ? (MQuery.width(0.5, context) / 2) - 45
+                      : 0,
+                      top: -40,
+                      child: InkWell(
+                        onTap: () {
+                          if(selectedPage == "Withdraw"){
+                            Navigator.push(
+                              context,
+                              PageTransition(child: WithdrawPage(), type: PageTransitionType.rightToLeftWithFade)
+                            );
+                          } else if (selectedPage == "Rent"){
+                            Navigator.push(
+                              context,
+                              PageTransition(child: QRCodeScanner(), type: PageTransitionType.rightToLeftWithFade)
+                            );
+                          } else if (selectedPage == "Return"){
+                            Navigator.push(
+                              context,
+                              PageTransition(child: ReturnMethodPage(), type: PageTransitionType.rightToLeftWithFade)
+                            );
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
                             color: Palette.pinkAccent,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(50))),
-                        height: 75,
-                        width: 75,
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 8),
-                            child: Icon(PackMe.code,
-                                size: 22, color: Palette.whiteColor),
+                            borderRadius: BorderRadius.all(Radius.circular(50))
+                          ),
+                          height: 75,
+                          width: 75,
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(right: selectedPage == "Withdraw" ? 3 : 0),
+                              child: Icon(
+                                selectedPage == "Withdraw"
+                                ? PackMe.withdraw
+                                : PackMe.qr,
+                                size: selectedPage == "Withdraw" ? 28 : 28,
+                                color: Palette.whiteColor
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  )
-                : SizedBox()
-              ]),
-            )
-          ],
-        );
+                    selectedPage == "Rent"
+                    ? Positioned(
+                        right: (MQuery.width(0.5, context) / 4),
+                        top: -40,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              PageTransition(child: RentCodePage(), type: PageTransitionType.rightToLeftWithFade)
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Palette.pinkAccent,
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(50))),
+                            height: 75,
+                            width: 75,
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 8),
+                                child: Icon(PackMe.code,
+                                    size: 22, color: Palette.whiteColor),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    : SizedBox()
+                  ]),
+                ),
+              )
+            ],
+          );
         },
         listener: (context, state){
           print(state);
