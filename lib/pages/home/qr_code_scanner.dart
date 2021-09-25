@@ -12,14 +12,6 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
 
   @override
   Widget build(BuildContext context) {
-
-    if(result != null){
-      Navigator.push(
-        context,
-        PageTransition(child: RentPackConfirmation(), type: PageTransitionType.rightToLeftWithFade)
-      );
-    }
-
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
@@ -96,9 +88,10 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
+      Navigator.push(
+        context,
+        PageTransition(child: RentPackConfirmation(), type: PageTransitionType.rightToLeftWithFade)
+      );
     });
   }
 

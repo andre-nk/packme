@@ -96,7 +96,7 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                             ),
                           ),
                           title: GFont.out(
-                            title: "14 Juni 2021 (tenggat kembali)",
+                            title: "10 Oktober 2021 (tenggat kembali)",
                             fontSize: 14,
                             color: Palette.blackColor,
                             textAlign: TextAlign.start,
@@ -285,7 +285,19 @@ class _RentPackConfirmationState extends State<RentPackConfirmation> {
                         ),
                       ),
                       onPressed: (){
-                        
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          PageTransition(
+                            child: SuccessStatePage(
+                              title: "Yeay! Berhasil!",
+                              description: "Terimakasih untuk meminjam kemasan kami! Jangan lupa untuk mengembalikannya dan dapatkan bonus uangnya ya!",
+                              buttonMessage: "Kembali ke Beranda",
+                              image: "assets/success_box.png",
+                            ),
+                            type: PageTransitionType.rightToLeftWithFade
+                          ),
+                          (route) => false
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Palette.pinkAccent,

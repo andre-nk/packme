@@ -316,7 +316,8 @@ class _WithdrawPageState extends State<WithdrawPage> {
                 ),
                 child: ElevatedButton(
                   onPressed: (){
-                    if(int.parse(withdrawController.text) > 215250){
+                    if(withdrawController.text != ""){
+                      if(int.parse(withdrawController.text) > 215250){
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           backgroundColor: Palette.alertColor,
@@ -333,6 +334,41 @@ class _WithdrawPageState extends State<WithdrawPage> {
                                 color: Palette.whiteColor
                               )
                             ),
+                          ),
+                        )
+                      );
+                      } else {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          PageTransition(
+                            child: SuccessStatePage(
+                              title: "Yeay! Berhasil!",
+                              description: "Saldo PackMe kamu telah dicairkan ke rekening / e-wallet. Jangan lupa pakai kemasan kami lagi ya!",
+                              buttonMessage: "Kembali ke Beranda",
+                              image: "assets/success_box.png",
+                            ),
+                            type: PageTransitionType.rightToLeftWithFade
+                          ),
+                          (route) => false
+                        );
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Palette.alertColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10))
+                          ),
+                          behavior: SnackBarBehavior.floating,
+                          content: Container(
+                            height: MQuery.height(0.03, context),
+                            child: Center(
+                              child: GFont.out(
+                                title: "Isi nominal penarikan dulu ya!",
+                                fontSize: 18,
+                                color: Palette.whiteColor
+                              ),
+                            )
                           ),
                         )
                       );

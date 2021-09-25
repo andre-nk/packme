@@ -35,7 +35,7 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
 
-    Future.delayed(33.seconds, (){
+    Future.delayed(15.seconds, (){
       Navigator.pushAndRemoveUntil(
         context,
         PageTransition(

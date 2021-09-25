@@ -22,9 +22,9 @@ class _MitraProRegistrationState extends State<MitraProRegistration> {
     return BackFramePage(
       child: Padding(
         padding: EdgeInsets.only(
-          left: MQuery.width(0.05, context),
+          left: MQuery.width(0.025, context),
           bottom: MQuery.width(0.05, context),
-          right: MQuery.width(0.05, context),
+          right: MQuery.width(0.025, context),
           top: MQuery.height(0.005, context)
         ),
         child: SingleChildScrollView(
@@ -207,11 +207,11 @@ class _MitraProRegistrationState extends State<MitraProRegistration> {
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Palette.greenWidget, width: 3.0),
                     ),
-                    hintText: "Kuota Kemasan yang Biasa Dipakai (per bulan)",
+                    hintText: "Jumlah penggunaan kemasan / bulan",
                     hintStyle: GFont.style(
                       color: Colors.grey
                     ),
-                    labelText: "Kuota Kemasan yang Biasa Dipakai (per bulan)",
+                    labelText: "Jumlah penggunaan kemasan / bulan",
                     labelStyle: GFont.style(fontSize: 18),
                   ),
                   style: GFont.style(
